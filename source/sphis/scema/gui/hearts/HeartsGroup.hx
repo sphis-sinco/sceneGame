@@ -1,14 +1,15 @@
 package sphis.scema.gui.hearts;
 
-import flixel.FlxSprite;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.math.FlxPoint;
 
 class HeartsGroup extends FlxTypedGroup<HeartIcon>
 {
-	public var health(default, set):Int;
+	var infoChanged:Bool = false;
 
-	function set_health(health:Int):Int
+	public var health:Int = 0;
+
+	public function setHealth(health:Int)
 	{
 		if (health > GuiConstants.MAX_HEALTH)
 			health = GuiConstants.MAX_HEALTH;
@@ -16,20 +17,15 @@ class HeartsGroup extends FlxTypedGroup<HeartIcon>
 		if (health < GuiConstants.MIN_HEALTH)
 			health = GuiConstants.MIN_HEALTH;
 
-		updateHealthIcons();
-
-		return health;
+		this.health = health;
+		this.infoChanged = true;
 	}
 
-	public var position(default, set):FlxPoint;
+	public var position(default, set):FlxPoint = new FlxPoint();
 
 	function set_position(position:FlxPoint):FlxPoint
 	{
-		for (heart in this.members)
-		{
-			heart.offset.x = position.x;
-			heart.offset.y = position.y;
-		}
+		this.infoChanged = true;
 
 		return position;
 	}
@@ -45,25 +41,49 @@ class HeartsGroup extends FlxTypedGroup<HeartIcon>
 			if (i % 2 == 0)
 			{
 				var heart:HeartIcon = new HeartIcon(EMPTY);
-				heart.x = (12 * i);
-				heart.ID = i;
-				add(heart);
+				heart.ID = i + 2;
+				this.add(heart);
 			}
 
 			i++;
 		}
 
 		this.position = position ?? new FlxPoint();
-		this.health = health;
+		setHealth(health);
+
+		this.infoChanged = true;
+	}
+
+	override function update(elapsed:Float)
+	{
+		super.update(elapsed);
+
+		if (this.infoChanged)
+			this.updateHealthIcons();
 	}
 
 	public function updateHealthIcons()
 	{
+		this.infoChanged = false;
+
 		for (heart in this.members)
 		{
-			if (health >= heart.ID)
+			if (heart == null)
+				continue;
+
+			heart.x = this.position.x + (12 * (heart.ID - 2));
+			heart.y = this.position.y;
+
+			#if HEART_DEBUG
+			trace(heart.ID + " : " + this.health);
+			trace(this.position.x);
+			trace((12 * (heart.ID - 2)));
+			trace(heart.getPosition());
+			#end
+
+			if (this.health >= heart.ID)
 				heart.updateState(FULL);
-			else if (health == heart.ID - 1)
+			else if (this.health == heart.ID - 1)
 				heart.updateState(HALF);
 			else
 				heart.updateState(EMPTY);
