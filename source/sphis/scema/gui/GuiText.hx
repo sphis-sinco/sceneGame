@@ -7,7 +7,7 @@ class GuiText
 {
 	public static function drawText(text:String, ?position:FlxPoint)
 	{
-		var text = new FlxText(position.x ?? 2, position.y ?? 2, 0, text, 12);
+		var text = new FlxText(position?.x ?? 2, position?.y ?? 2, 0, text, 12);
 		text.font = 'assets/fonts/Bitend DEMO.ttf';
 
 		return text;

@@ -16,8 +16,9 @@ class PlayState extends FlxState
 	{
 		super.create();
 
-		hearts = new HeartsGroup(20, new FlxPoint(2, FlxG.height - (16 + 2)));
+		hearts = new HeartsGroup(20, new FlxPoint(2, FlxG.height - (32 + 2)));
 		add(hearts);
+		hearts.updateHealthIcons();
 
 		add(GuiText.drawText('Scema ' + Application.current.meta.get("version")));
 	}

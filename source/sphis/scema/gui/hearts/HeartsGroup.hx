@@ -21,13 +21,12 @@ class HeartsGroup extends FlxTypedGroup<HeartIcon>
 		this.infoChanged = true;
 	}
 
-	public var position(default, set):FlxPoint = new FlxPoint();
+	public var position:FlxPoint = new FlxPoint();
 
-	function set_position(position:FlxPoint):FlxPoint
+	public function setPosition(position:FlxPoint)
 	{
+		this.position = position;
 		this.infoChanged = true;
-
-		return position;
 	}
 
 	override public function new(health:Int, ?position:FlxPoint)
@@ -48,7 +47,7 @@ class HeartsGroup extends FlxTypedGroup<HeartIcon>
 			i++;
 		}
 
-		this.position = position ?? new FlxPoint();
+		setPosition(position ?? new FlxPoint());
 		setHealth(health);
 
 		this.infoChanged = true;
@@ -71,12 +70,12 @@ class HeartsGroup extends FlxTypedGroup<HeartIcon>
 			if (heart == null)
 				continue;
 
-			heart.x = this.position.x + (12 * (heart.ID - 2));
-			heart.y = this.position.y;
+			heart.x = (this.position?.x ?? 2) + (12 * (heart.ID - 2));
+			heart.y = this.position?.y ?? 2;
 
 			#if HEART_DEBUG
 			trace(heart.ID + " : " + this.health);
-			trace(this.position.x);
+			trace(this.position?.x ?? 2);
 			trace((12 * (heart.ID - 2)));
 			trace(heart.getPosition());
 			#end
