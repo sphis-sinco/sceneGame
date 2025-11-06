@@ -45,7 +45,7 @@ class HeartsGroup extends FlxTypedGroup<HeartIcon>
 			if (i % 2 == 0)
 			{
 				var heart:HeartIcon = new HeartIcon(EMPTY);
-				heart.x = (16 * i);
+				heart.x = (12 * i);
 				heart.ID = i;
 				add(heart);
 			}
@@ -61,12 +61,12 @@ class HeartsGroup extends FlxTypedGroup<HeartIcon>
 	{
 		for (heart in this.members)
 		{
-			heart.updateState(EMPTY);
-
 			if (health >= heart.ID)
 				heart.updateState(FULL);
 			else if (health == heart.ID - 1)
 				heart.updateState(HALF);
+			else
+				heart.updateState(EMPTY);
 		}
 	}
 }

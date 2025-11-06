@@ -28,5 +28,8 @@ class HeartIcon extends FlxSprite
 			default:
 				'empty';
 		});
+
+		this.scale.set(2, 2);
+		this.updateHitbox();
 	}
 }
