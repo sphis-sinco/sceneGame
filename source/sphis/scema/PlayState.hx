@@ -14,6 +14,7 @@ class PlayState extends FlxState
 		super.create();
 
 		hearts = new HeartsGroup(20);
+		add(hearts);
 	}
 
 	override public function update(elapsed:Float)
