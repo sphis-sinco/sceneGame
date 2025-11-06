@@ -15,9 +15,6 @@ import openfl.filters.BitmapFilter;
 #if desktop
 import openfl.events.FocusEvent;
 #end
-#if FLX_DEBUG
-import flixel.system.debug.FlxDebugger;
-#end
 #if FLX_SOUND_TRAY
 import flixel.system.ui.FlxSoundTray;
 #end
@@ -62,13 +59,6 @@ class FlxGame extends Sprite
 	 * The sound tray display container.
 	 */
 	public var soundTray(default, null):FlxSoundTray;
-	#end
-
-	#if FLX_DEBUG
-	/**
-	 * The debugger overlay object.
-	 */
-	public var debugger(default, null):FlxDebugger;
 	#end
 
 	/**
@@ -306,12 +296,6 @@ class FlxGame extends Sprite
 
 		addChild(_inputContainer);
 
-		// Creating the debugger overlay
-		#if FLX_DEBUG
-		debugger = new FlxDebugger(FlxG.stage.stageWidth, FlxG.stage.stageHeight);
-		addChild(debugger);
-		#end
-
 		// No need for overlays on mobile.
 		#if !mobile
 		// Volume display tab
@@ -379,10 +363,6 @@ class FlxGame extends Sprite
 			_focusLostScreen.visible = false;
 		#end
 
-		#if FLX_DEBUG
-		debugger.stats.onFocus();
-		#end
-
 		stage.frameRate = FlxG.drawFramerate;
 		#if FLX_SOUND_SYSTEM
 		FlxG.sound.onFocus();
@@ -409,10 +389,6 @@ class FlxGame extends Sprite
 			_focusLostScreen.visible = true;
 		#end
 
-		#if FLX_DEBUG
-		debugger.stats.onFocusLost();
-		#end
-
 		stage.frameRate = focusLostFramerate;
 		#if FLX_SOUND_SYSTEM
 		FlxG.sound.onFocusLost();
@@ -437,10 +413,6 @@ class FlxGame extends Sprite
 
 		FlxG.cameras.resize();
 		FlxG.signals.gameResized.dispatch(width, height);
-
-		#if FLX_DEBUG
-		debugger.onResize(width, height);
-		#end
 
 		#if FLX_FOCUS_LOST_SCREEN
 		if (_focusLostScreen != null)
@@ -477,16 +449,6 @@ class FlxGame extends Sprite
 				}
 				else if (_nextState == null) // don't pause a state switch request
 				{
-					#if FLX_DEBUG
-					debugger.update();
-					// If the interactive debug is active, the screen must
-					// be rendered because the user might be doing changes
-					// to game objects (e.g. moving things around).
-					if (debugger.interaction.isActive())
-					{
-						draw();
-					}
-					#end
 					return;
 				}
 			}
@@ -512,11 +474,6 @@ class FlxGame extends Sprite
 			#end
 
 			draw();
-
-			#if FLX_DEBUG
-			debugger.stats.visibleObjects(FlxBasic.visibleCount);
-			debugger.update();
-			#end
 		}
 	}
 
@@ -590,10 +547,6 @@ class FlxGame extends Sprite
 		if (_gameJustStarted)
 			gameStart();
 
-		#if FLX_DEBUG
-		debugger.console.registerObject("state", _state);
-		#end
-
 		FlxG.signals.postStateSwitch.dispatch();
 	}
 
@@ -626,10 +579,6 @@ class FlxGame extends Sprite
 		#end
 
 		update();
-
-		#if FLX_DEBUG
-		debugger.stats.activeObjects(FlxBasic.activeCount);
-		#end
 	}
 
 	function handleReplayRequests():Void
@@ -641,21 +590,12 @@ class FlxGame extends Sprite
 			_recordingRequested = false;
 			_replay.create(FlxRandom.getRecordingSeed());
 			recording = true;
-
-			#if FLX_DEBUG
-			debugger.vcr.recording();
-			FlxG.log.notice("Starting new flixel gameplay record.");
-			#end
 		}
 		else if (_replayRequested)
 		{
 			_replayRequested = false;
 			_replay.rewind();
 			FlxG.random.initialSeed = _replay.seed;
-
-			#if FLX_DEBUG
-			debugger.vcr.playingReplay();
-			#end
 
 			replaying = true;
 		}
@@ -674,11 +614,6 @@ class FlxGame extends Sprite
 		if (_nextState != null)
 			switchState();
 
-		#if FLX_DEBUG
-		if (FlxG.debugger.visible)
-			ticks = getTicks();
-		#end
-
 		updateElapsed();
 
 		FlxG.signals.preUpdate.dispatch();
@@ -694,10 +629,6 @@ class FlxGame extends Sprite
 
 		FlxG.cameras.update(FlxG.elapsed);
 		FlxG.signals.postUpdate.dispatch();
-
-		#if FLX_DEBUG
-		debugger.stats.flixelUpdate(getTicks() - ticks);
-		#end
 
 		#if FLX_POINTER_INPUT
 		var len = FlxG.swipes.length;
@@ -763,10 +694,6 @@ class FlxGame extends Sprite
 					FlxG.vcr.replayCallback = null;
 				}
 			}
-
-			#if FLX_DEBUG
-			debugger.vcr.updateRuntime(_stepMS);
-			#end
 		}
 		else
 		{
@@ -780,10 +707,6 @@ class FlxGame extends Sprite
 		if (recording)
 		{
 			_replay.recordFrame();
-
-			#if FLX_DEBUG
-			debugger.vcr.updateRuntime(_stepMS);
-			#end
 		}
 		#end
 	}
@@ -795,11 +718,6 @@ class FlxGame extends Sprite
 	{
 		if (!_state.visible || !_state.exists)
 			return;
-
-		#if FLX_DEBUG
-		if (FlxG.debugger.visible)
-			ticks = getTicks();
-		#end
 
 		FlxG.signals.preDraw.dispatch();
 
@@ -822,19 +740,11 @@ class FlxGame extends Sprite
 		if (FlxG.renderTile)
 		{
 			FlxG.cameras.render();
-
-			#if FLX_DEBUG
-			debugger.stats.drawCalls(FlxDrawBaseItem.drawCalls);
-			#end
 		}
 
 		FlxG.cameras.unlock();
 
 		FlxG.signals.postDraw.dispatch();
-
-		#if FLX_DEBUG
-		debugger.stats.flixelDraw(getTicks() - ticks);
-		#end
 	}
 
 	inline function getTicks()
