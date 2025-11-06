@@ -2,7 +2,7 @@ package sphis.scema;
 
 import flixel.FlxState;
 
-class PlayState extends FlxState
+class InitState extends FlxState
 {
 	override public function create()
 	{
