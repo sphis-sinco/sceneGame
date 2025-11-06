@@ -2,7 +2,10 @@ package sphis.scema;
 
 import flixel.FlxG;
 import flixel.FlxState;
+import flixel.math.FlxPoint;
+import lime.app.Application;
 import sphis.scema.gui.GuiConstants;
+import sphis.scema.gui.GuiText;
 import sphis.scema.gui.hearts.HeartsGroup;
 
 class PlayState extends FlxState
@@ -13,8 +16,10 @@ class PlayState extends FlxState
 	{
 		super.create();
 
-		hearts = new HeartsGroup(20);
+		hearts = new HeartsGroup(20, new FlxPoint(2, FlxG.height - (16 + 2)));
 		add(hearts);
+
+		add(GuiText.drawText('Scema ' + Application.current.meta.get("version")));
 	}
 
 	override public function update(elapsed:Float)
