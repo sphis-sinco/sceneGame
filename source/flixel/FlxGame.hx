@@ -25,6 +25,9 @@ import flixel.system.ui.FlxFocusLostScreen;
 import flixel.math.FlxRandom;
 import flixel.system.replay.FlxReplay;
 #end
+#if FLX_DEBUG
+import flixel.system.debug.FlxDebugger;
+#end
 
 /**
  * `FlxGame` is the heart of all Flixel games, and contains a bunch of basic game loops and things.
@@ -35,6 +38,13 @@ import flixel.system.replay.FlxReplay;
 @:allow(flixel.FlxG)
 class FlxGame extends Sprite
 {
+	#if FLX_DEBUG
+	/**
+	 * The debugger overlay object.
+	 */
+	public var debugger(default, null):FlxDebugger;
+	#end
+
 	/**
 	 * Framerate to use on focus lost. Default is `10`.
 	 */
