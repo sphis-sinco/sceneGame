@@ -17,14 +17,14 @@ class PlayState extends GuiState
 
 	override public function create()
 	{
-		super.create();
-
 		props = new SlideProps(slide_path);
 		add(props);
 
 		hearts = new HeartsGroup(20, new FlxPoint(2, FlxG.height - (32 + 2)));
 		add(hearts);
 		hearts.updateHealthIcons();
+
+		super.create();
 	}
 
 	override public function update(elapsed:Float)
