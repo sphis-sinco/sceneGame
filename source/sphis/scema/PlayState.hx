@@ -25,8 +25,8 @@ class PlayState extends FlxState
 
 		var gb = new GuiButton({
 			position: new FlxPoint(),
-			width_scale_addition: 0,
-			height_scale_addition: 0
+			width_scale_addition: 1,
+			height_scale_addition: 1
 		});
 
 		gb.screenCenter();
