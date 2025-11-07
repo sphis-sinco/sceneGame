@@ -58,39 +58,15 @@ class GuiState extends FlxState
 
 	public static var GUI_STATE_SORT_VALS = [];
 
-	function getDebugInfoSort(entry_1:String, entry_2:String):Int
+	public function getDesiredDebugInfoOrder():Array<String>
 	{
-		var entry_1_value = 0;
-		var entry_2_value = 0;
+		return ["scema", "lb_1", "component_count"];
+	}
 
-		var checkForStart = function(prefix:String, ?addition:Int)
-		{
-			if (entry_1.startsWith(prefix))
-				entry_1_value += 1 + addition;
-			if (entry_2.startsWith(prefix))
-				entry_2_value += 1 + addition;
-		};
-
-		var checkFor = function(value:String, ?addition:Int)
-		{
-			if (entry_1 == value)
-				entry_1_value += 1 + addition;
-			if (entry_2 == value)
-				entry_2_value += 1 + addition;
-		};
-
-		var checkForEnd = function(suffix:String, ?addition:Int)
-		{
-			if (entry_1.endsWith(suffix))
-				entry_1_value += 1 + addition;
-			if (entry_2.endsWith(suffix))
-				entry_2_value += 1 + addition;
-		};
-
-		checkFor("scema", 10);
-		checkFor("lb_1", 9);
-		checkFor("component_count", 8);
-		checkFor("lb_2", 7);
+	public function getDebugInfoSort(entry_1:String, entry_2:String):Int
+	{
+		var entry_1_value = getDesiredDebugInfoOrder().indexOf(entry_1);
+		var entry_2_value = getDesiredDebugInfoOrder().indexOf(entry_2);
 
 		final e1_sortVal = "entry: " + entry_1 + " : " + entry_1_value;
 		final e2_sortVal = "entry: " + entry_2 + " : " + entry_2_value;
@@ -107,10 +83,7 @@ class GuiState extends FlxState
 			GUI_STATE_SORT_VALS.push(e2_sortVal);
 		}
 
-		if (entry_1_value == entry_2_value)
-			return -1;
-
-		return FlxSort.byValues(FlxSort.DESCENDING, entry_1_value, entry_2_value);
+		return FlxSort.byValues(FlxSort.ASCENDING, entry_1_value, entry_2_value);
 	}
 
 	public function getDebugInfoString():String
