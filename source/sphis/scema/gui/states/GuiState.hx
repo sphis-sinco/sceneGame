@@ -6,6 +6,7 @@ import flixel.input.keyboard.FlxKey;
 import flixel.math.FlxPoint;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
+import flixel.util.FlxSort;
 import lime.app.Application;
 import sphis.scema.gui.buttons.GuiButton.GuiButtonParameters;
 import sphis.scema.gui.buttons.GuiTextButton;
@@ -52,15 +53,75 @@ class GuiState extends FlxState
 
 			lb_1: "\n",
 
+			category_state: "State",
 			component_count: this.members.length,
 		}
+	}
+
+	var sortVals = [];
+
+	function getDebugInfoSort(entry_1:String, entry_2:String):Int
+	{
+		var entry_1_value = 0;
+		var entry_2_value = 0;
+
+		var checkForStart = function(prefix:String, ?addition:Int)
+		{
+			if (entry_1.startsWith(prefix))
+				entry_1_value += 1 + addition;
+			if (entry_2.startsWith(prefix))
+				entry_2_value += 1 + addition;
+		};
+
+		var checkFor = function(value:String, ?addition:Int)
+		{
+			if (entry_1 == value)
+				entry_1_value += 1 + addition;
+			if (entry_2 == value)
+				entry_2_value += 1 + addition;
+		};
+
+		var checkForEnd = function(suffix:String, ?addition:Int)
+		{
+			if (entry_1.endsWith(suffix))
+				entry_1_value += 1 + addition;
+			if (entry_2.endsWith(suffix))
+				entry_2_value += 1 + addition;
+		};
+
+		checkForStart("category_", 1);
+
+		checkFor("scema", 0);
+
+		final e1_sortVal = "entry: " + entry_1 + " : " + entry_1_value;
+		final e2_sortVal = "entry: " + entry_2 + " : " + entry_2_value;
+
+		if (!sortVals.contains(e1_sortVal))
+		{
+			trace(e1_sortVal);
+			sortVals.push(e1_sortVal);
+		}
+
+		if (!sortVals.contains(e2_sortVal))
+		{
+			trace(e2_sortVal);
+			sortVals.push(e2_sortVal);
+		}
+
+		if (entry_1_value == entry_2_value)
+			return -1;
+
+		return FlxSort.byValues(FlxSort.DESCENDING, entry_1_value, entry_2_value);
 	}
 
 	public function getDebugInfoString():String
 	{
 		var text:String = "";
 
-		for (field in Reflect.fields(getDebugInfo()))
+		var fields:Array<String> = Reflect.fields(getDebugInfo());
+		fields.sort(getDebugInfoSort);
+
+		for (field in fields)
 		{
 			final property = Std.string(Reflect.getProperty(getDebugInfo(), field));
 
