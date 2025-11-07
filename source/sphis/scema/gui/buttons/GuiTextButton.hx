@@ -22,9 +22,17 @@ class GuiTextButton extends FlxTypedGroup<FlxBasic>
 		super();
 
 		button = new GuiButton(params);
-		text_field = GuiText.drawText(params.text_content);
+		text_field = GuiText.drawText(params?.text_content ?? "N/A");
+		text_field.fieldWidth = button.snappedWidth;
 
 		add(button);
 		add(text_field);
+	}
+
+	override function update(elapsed:Float)
+	{
+		super.update(elapsed);
+
+		text_field.setPosition(button.x + ((button.snappedWidth + text_field.width) / 2), button.y + ((button.snappedHeight + text_field.height) / 2));
 	}
 }
