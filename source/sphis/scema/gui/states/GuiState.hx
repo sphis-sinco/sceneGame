@@ -68,8 +68,8 @@ class GuiState extends FlxState
 		var entry_1_value = getDesiredDebugInfoOrder().indexOf(entry_1);
 		var entry_2_value = getDesiredDebugInfoOrder().indexOf(entry_2);
 
-		final e1_sortVal = "entry: " + entry_1 + " : " + entry_1_value;
-		final e2_sortVal = "entry: " + entry_2 + " : " + entry_2_value;
+		final e1_sortVal = "f3 debug entry: " + entry_1 + " : " + entry_1_value;
+		final e2_sortVal = "f3 debug entry: " + entry_2 + " : " + entry_2_value;
 
 		if (!GUI_STATE_SORT_VALS.contains(e1_sortVal))
 		{
