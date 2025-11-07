@@ -1,9 +1,12 @@
 package sphis.scema.gui.states;
 
+import flixel.FlxG;
 import flixel.FlxState;
+import flixel.input.keyboard.FlxKey;
 import flixel.math.FlxPoint;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
+import lime.app.Application;
 import sphis.scema.gui.buttons.GuiButton.GuiButtonParameters;
 import sphis.scema.gui.buttons.GuiTextButton;
 import sphis.scema.gui.text.GuiShadowText;
@@ -11,6 +14,52 @@ import sphis.scema.gui.text.GuiText;
 
 class GuiState extends FlxState
 {
+	public var debugText:GuiShadowText;
+
+	override function create()
+	{
+		super.create();
+
+		debugText = new GuiShadowText("", 0, 0);
+
+		add(debugText);
+	}
+
+	override function update(elapsed:Float)
+	{
+		super.update(elapsed);
+
+		debugText.visible = FlxG.keys.anyPressed([getDebugKey()]);
+
+		if (debugText.visible)
+			debugText.text = getDebugInfoString();
+	}
+
+	public function getDebugKey():FlxKey
+	{
+		return F3;
+	}
+
+	public function getDebugInfo()
+	{
+		return {
+			scema: Application.current.meta.get("version"),
+			component_count: this.members.length
+		}
+	}
+
+	public function getDebugInfoString():String
+	{
+		var text:String = "";
+
+		for (field in Reflect.fields(getDebugInfo()))
+		{
+			text += field + " : " + Reflect.getProperty(getDebugInfo(), field) + "\n";
+		}
+
+		return text;
+	}
+
 	public function createTextButton(params:GuiTextButtonParameters):GuiTextButton
 	{
 		return new GuiTextButton(params);
