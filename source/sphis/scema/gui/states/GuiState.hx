@@ -48,12 +48,10 @@ class GuiState extends FlxState
 	public function getDebugInfo()
 	{
 		return {
-			category_game: "Game",
 			scema: Application.current.meta.get("version"),
 
 			lb_1: "\n",
 
-			category_state: "State",
 			component_count: this.members.length,
 		}
 	}
@@ -88,8 +86,6 @@ class GuiState extends FlxState
 			if (entry_2.endsWith(suffix))
 				entry_2_value += 1 + addition;
 		};
-
-		checkForStart("category_", 1);
 
 		checkFor("scema", 0);
 
@@ -127,14 +123,7 @@ class GuiState extends FlxState
 
 			if (property != "\n")
 			{
-				if (field.startsWith("category_"))
-				{
-					text += property + "\n";
-				}
-				else
-				{
-					text += field + " : " + property + "\n";
-				}
+				text += field + " : " + property + "\n";
 			}
 			else
 			{
