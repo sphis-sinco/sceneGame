@@ -23,6 +23,7 @@ typedef GuiButtonGraphicParameters =
 	var ?corner_radius:Int;
 }
 
+//                      thx taigo
 class GuiButton extends FlxScaledSliceSprite
 {
 	override public function new(params:GuiButtonParameters)
