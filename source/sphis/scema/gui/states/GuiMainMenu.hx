@@ -1,5 +1,6 @@
 package sphis.scema.gui.states;
 
+import flixel.FlxG;
 import flixel.math.FlxPoint;
 import flixel.util.FlxColor;
 import lime.app.Application;
@@ -20,7 +21,7 @@ class GuiMainMenu extends GuiState
 
 			pressed_callback: () ->
 			{
-				trace('Hola');
+				FlxG.switchState(() -> new PlayState());
 			},
 
 			width_scale_addition: 16,
