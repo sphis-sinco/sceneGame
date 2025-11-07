@@ -56,7 +56,7 @@ class GuiState extends FlxState
 		}
 	}
 
-	var sortVals = [];
+	public static var GUI_STATE_SORT_VALS = [];
 
 	function getDebugInfoSort(entry_1:String, entry_2:String):Int
 	{
@@ -87,21 +87,24 @@ class GuiState extends FlxState
 				entry_2_value += 1 + addition;
 		};
 
-		checkFor("scema", 0);
+		checkFor("scema", 10);
+		checkFor("lb_1", 9);
+		checkFor("component_count", 8);
+		checkFor("lb_2", 7);
 
 		final e1_sortVal = "entry: " + entry_1 + " : " + entry_1_value;
 		final e2_sortVal = "entry: " + entry_2 + " : " + entry_2_value;
 
-		if (!sortVals.contains(e1_sortVal))
+		if (!GUI_STATE_SORT_VALS.contains(e1_sortVal))
 		{
 			trace(e1_sortVal);
-			sortVals.push(e1_sortVal);
+			GUI_STATE_SORT_VALS.push(e1_sortVal);
 		}
 
-		if (!sortVals.contains(e2_sortVal))
+		if (!GUI_STATE_SORT_VALS.contains(e2_sortVal))
 		{
 			trace(e2_sortVal);
-			sortVals.push(e2_sortVal);
+			GUI_STATE_SORT_VALS.push(e2_sortVal);
 		}
 
 		if (entry_1_value == entry_2_value)

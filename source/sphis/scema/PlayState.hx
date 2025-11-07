@@ -32,6 +32,7 @@ class PlayState extends GuiState
 	{
 		var info = super.getDebugInfo();
 
+		info.lb_2 = "\n";
 		info.player_health = hearts.health;
 
 		return info;
