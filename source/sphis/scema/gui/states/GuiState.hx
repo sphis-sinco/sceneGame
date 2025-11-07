@@ -68,13 +68,25 @@ class GuiState extends FlxState
 		var entry_1_value = getDesiredDebugInfoOrder().indexOf(entry_1);
 		var entry_2_value = getDesiredDebugInfoOrder().indexOf(entry_2);
 
-		if (entry_1_value == -1)
-			entry_1_value = getDesiredDebugInfoOrder().indexOf(entry_1.split("_")[0]);
-		if (entry_2_value == -1)
-			entry_2_value = getDesiredDebugInfoOrder().indexOf(entry_2.split("_")[0]);
+		var e1_sortVal = "f3 debug entry: " + entry_1;
+		var e2_sortVal = "f3 debug entry: " + entry_2;
 
-		final e1_sortVal = "f3 debug entry: " + entry_1 + " : " + entry_1_value;
-		final e2_sortVal = "f3 debug entry: " + entry_2 + " : " + entry_2_value;
+		var e1_sortVal_reason = "";
+		var e2_sortVal_reason = "";
+
+		if (entry_1_value == -1)
+		{
+			entry_1_value = getDesiredDebugInfoOrder().indexOf(entry_1.split("_")[0]);
+			e1_sortVal_reason = " (prefix: " + entry_1.split("_")[0] + ")";
+		}
+		if (entry_2_value == -1)
+		{
+			entry_2_value = getDesiredDebugInfoOrder().indexOf(entry_2.split("_")[0]);
+			e2_sortVal_reason = " (prefix: " + entry_2.split("_")[0] + ")";
+		}
+
+		e1_sortVal += " : " + entry_1_value + e1_sortVal_reason;
+		e2_sortVal += " : " + entry_2_value + e2_sortVal_reason;
 
 		if (!GUI_STATE_SORT_VALS.contains(e1_sortVal))
 		{
