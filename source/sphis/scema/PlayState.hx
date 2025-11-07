@@ -7,6 +7,7 @@ import lime.app.Application;
 import sphis.scema.gui.GuiConstants;
 import sphis.scema.gui.GuiText;
 import sphis.scema.gui.buttons.GuiButton;
+import sphis.scema.gui.buttons.GuiTextButton;
 import sphis.scema.gui.hearts.HeartsGroup;
 
 class PlayState extends FlxState
@@ -23,13 +24,15 @@ class PlayState extends FlxState
 
 		add(GuiText.drawText('Scema ' + Application.current.meta.get("version")));
 
-		var gb = new GuiButton({
+		var gb = new GuiTextButton({
+			text_content: "Test",
 			position: new FlxPoint(),
-			width_scale_addition: 1,
-			height_scale_addition: 1
+
+			width_scale_addition: 32,
+			height_scale_addition: 8
 		});
 
-		gb.screenCenter();
+		gb.button.screenCenter();
 		add(gb);
 	}
 
