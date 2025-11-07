@@ -9,7 +9,7 @@ class PlayState extends GuiState
 {
 	public var hearts:HeartsGroup;
 
-	public var slide_x:Int = 0;
+	public var slide_path:String = "layer_0/0";
 
 	override public function create()
 	{
@@ -36,7 +36,7 @@ class PlayState extends GuiState
 
 		order.push("lb_2");
 		order.push("player_health");
-		order.push("player_slide");
+		order.push("player_slide_path");
 
 		return order;
 	}
@@ -47,7 +47,7 @@ class PlayState extends GuiState
 
 		info.lb_2 = "\n";
 		info.player_health = hearts.health;
-		info.player_slide = slide_x;
+		info.player_slide_path = slide_path;
 
 		return info;
 	}
