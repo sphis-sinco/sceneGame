@@ -4,6 +4,7 @@ import flixel.FlxBasic;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.util.FlxColor;
+import flixel.util.FlxSort;
 import haxe.Json;
 import lime.utils.Assets;
 import sphis.scema.slides.SlideData.SlidePropData;
@@ -20,6 +21,11 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 	{
 		slide_data = cast Json.parse(Assets.getText(Paths.getSlideFile(slide_path)));
 		prop_ids = [];
+
+		slide_data.props.sort((prop1, prop2) ->
+		{
+			return FlxSort.byValues(FlxSort.ASCENDING, prop1.z_index, prop2.z_index);
+		});
 
 		super();
 
