@@ -1,5 +1,5 @@
 // package sphis.onescirne.ui;
-package sphis.scema.gui;
+package sphis.scema.gui.buttons;
 
 import flixel.graphics.FlxGraphic;
 import flixel.math.FlxPoint;
