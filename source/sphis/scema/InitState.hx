@@ -2,6 +2,7 @@ package sphis.scema;
 
 import flixel.FlxG;
 import flixel.FlxState;
+import sphis.scema.gui.states.GuiMainMenu;
 
 class InitState extends FlxState
 {
@@ -9,7 +10,7 @@ class InitState extends FlxState
 	{
 		super.create();
 
-		FlxG.switchState(() -> new PlayState());
+		FlxG.switchState(() -> new GuiMainMenu());
 	}
 
 	override public function update(elapsed:Float)

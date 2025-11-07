@@ -22,8 +22,6 @@ class PlayState extends FlxState
 		add(hearts);
 		hearts.updateHealthIcons();
 
-		add(GuiText.drawText('Scema ' + Application.current.meta.get("version")));
-
 		var gb = new GuiTextButton({
 			text_content: "Test",
 			position: new FlxPoint(),
