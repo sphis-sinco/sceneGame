@@ -3,11 +3,6 @@ package sphis.scema;
 import flixel.FlxG;
 import flixel.FlxState;
 import flixel.math.FlxPoint;
-import lime.app.Application;
-import sphis.scema.gui.GuiConstants;
-import sphis.scema.gui.GuiText;
-import sphis.scema.gui.buttons.GuiButton;
-import sphis.scema.gui.buttons.GuiTextButton;
 import sphis.scema.gui.hearts.HeartsGroup;
 
 class PlayState extends FlxState
