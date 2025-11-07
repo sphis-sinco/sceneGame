@@ -21,7 +21,7 @@ class GuiState extends FlxState
 		super.create();
 
 		debugText = new GuiShadowText("", 0, 0);
-
+		debugText.text_field.alignment = LEFT;
 		add(debugText);
 	}
 
@@ -29,7 +29,9 @@ class GuiState extends FlxState
 	{
 		super.update(elapsed);
 
+		#if F3_MENU
 		debugText.visible = FlxG.keys.anyPressed([getDebugKey()]);
+		#end
 
 		if (debugText.visible)
 			debugText.text = getDebugInfoString();
@@ -43,8 +45,8 @@ class GuiState extends FlxState
 	public function getDebugInfo()
 	{
 		return {
+			component_count: this.members.length,
 			scema: Application.current.meta.get("version"),
-			component_count: this.members.length
 		}
 	}
 

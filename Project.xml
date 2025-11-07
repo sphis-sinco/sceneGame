@@ -35,6 +35,8 @@
 	<source path="source" />
 	<assets path="assets" />
 
+	<define name="F3_MENU" unless="DISABLE_F3_MENU"/>
+
 	<define name="HEART_RANDOM_KEY" if="HEART_DEBUG"/>
 	<define name="HEART_DEBUG_TRACES" if="HEART_DEBUG"/>
 
