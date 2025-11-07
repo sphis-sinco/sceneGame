@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="taigo-animated.png">
+	<!-- Created using the Spritesheet and XML generator -->
+	<!-- https://uncertainprod.github.io/FNF-Spritesheet-XML-generator-Web -->
+	<SubTexture name="tiago-animated_010000" x="1119" y="417" width="244" height="417" frameX="-448" frameY="-166" frameWidth="1280" frameHeight="720"/>
+	<SubTexture name="tiago-animated_020000" x="840" y="0" width="279" height="425" frameX="-392" frameY="-158" frameWidth="1280" frameHeight="720"/>
+	<SubTexture name="tiago-animated_030000" x="280" y="0" width="280" height="425" frameX="-390" frameY="-158" frameWidth="1280" frameHeight="720"/>
+	<SubTexture name="tiago-animated_040000" x="0" y="0" width="280" height="425" frameX="-390" frameY="-158" frameWidth="1280" frameHeight="720"/>
+	<SubTexture name="tiago-animated_050000" x="560" y="0" width="280" height="425" frameX="-390" frameY="-158" frameWidth="1280" frameHeight="720"/>
+	<SubTexture name="tiago-animated_060000" x="0" y="425" width="279" height="425" frameX="-391" frameY="-158" frameWidth="1280" frameHeight="720"/>
+	<SubTexture name="tiago-animated_070000" x="558" y="425" width="279" height="425" frameX="-391" frameY="-158" frameWidth="1280" frameHeight="720"/>
+	<SubTexture name="tiago-animated_080000" x="279" y="425" width="279" height="425" frameX="-391" frameY="-158" frameWidth="1280" frameHeight="720"/>
+	<SubTexture name="tiago-animated_090000" x="837" y="425" width="246" height="417" frameX="-446" frameY="-166" frameWidth="1280" frameHeight="720"/>
+	<SubTexture name="tiago-animated_100000" x="1119" y="0" width="244" height="417" frameX="-449" frameY="-166" frameWidth="1280" frameHeight="720"/>
+	<SubTexture name="tiago-animated_110000" x="488" y="850" width="244" height="417" frameX="-449" frameY="-166" frameWidth="1280" frameHeight="720"/>
+	<SubTexture name="tiago-animated_120000" x="732" y="850" width="243" height="417" frameX="-449" frameY="-166" frameWidth="1280" frameHeight="720"/>
+	<SubTexture name="tiago-animated_130000" x="0" y="850" width="244" height="417" frameX="-448" frameY="-166" frameWidth="1280" frameHeight="720"/>
+	<SubTexture name="tiago-animated_140000" x="244" y="850" width="244" height="417" frameX="-448" frameY="-166" frameWidth="1280" frameHeight="720"/>
+</TextureAtlas>
