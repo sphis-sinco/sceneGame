@@ -95,7 +95,7 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 
 		add(graphic_prop);
 
-		trace("Created Graphic Prop: " + prop.id);
+		trace("Created Make Graphic Prop: " + prop.id);
 		return true;
 	}
 }
