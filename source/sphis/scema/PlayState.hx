@@ -28,7 +28,17 @@ class PlayState extends GuiState
 		#end
 	}
 
-	override function getDebugInfo()
+	override function getDesiredDebugInfoOrder():Array<String>
+	{
+		var order = super.getDesiredDebugInfoOrder();
+
+		order.push("lb_2");
+		order.push("player_health");
+
+		return order;
+	}
+
+	override public function getDebugInfo()
 	{
 		var info = super.getDebugInfo();
 
