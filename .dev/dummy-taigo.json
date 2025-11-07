@@ -25,7 +25,8 @@
             "graphic_settings": {
                 "image_path": "taigo",
                 
-                "screencenter": true
+                "screencenter": true,
+                "screencenter_position_offset": [-640,0]
             }
         }
     ]

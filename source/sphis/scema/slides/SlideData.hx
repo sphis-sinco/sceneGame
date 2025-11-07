@@ -28,4 +28,6 @@ typedef SlidePropGraphicSettingsData =
 	var ?image_path:String;
 
 	var ?color:String;
+
+	var ?screencenter_position_offset:Array<Float>;
 }

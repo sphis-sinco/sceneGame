@@ -60,6 +60,16 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 
 			if (prop.prop_type == "graphic")
 			{
+				if (prop.graphic_settings.screencenter_position_offset != null)
+				{
+					if (prop.graphic_settings.screencenter_position_offset.length < 2)
+					{
+						skippedSlidePropGeneration(prop.id, INCOMPLETE_SCREENCENTER_POSITION_OFFSET_FIELD);
+						i++;
+						continue;
+					}
+				}
+
 				if (!parseGraphicProp(prop))
 				{
 					i++;
@@ -141,6 +151,12 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 		if (prop.graphic_settings.screencenter)
 		{
 			graphic_prop.screenCenter();
+
+			if (prop.graphic_settings.screencenter_position_offset != null)
+			{
+				graphic_prop.x += prop.graphic_settings.screencenter_position_offset[0];
+				graphic_prop.y += prop.graphic_settings.screencenter_position_offset[1];
+			}
 		}
 
 		add(graphic_prop);
@@ -167,6 +183,12 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 		if (prop.graphic_settings.screencenter)
 		{
 			graphic_prop.screenCenter();
+
+			if (prop.graphic_settings.screencenter_position_offset != null)
+			{
+				graphic_prop.x += prop.graphic_settings.screencenter_position_offset[0];
+				graphic_prop.y += prop.graphic_settings.screencenter_position_offset[1];
+			}
 		}
 
 		add(graphic_prop);

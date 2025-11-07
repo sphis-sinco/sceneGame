@@ -3,6 +3,7 @@ package sphis.scema.slides;
 enum abstract SlidePropGenerationSkipReason(String)
 {
 	var INCOMPLETE_POSITION_FIELD = "Incomplete position Field";
+	var INCOMPLETE_SCREENCENTER_POSITION_OFFSET_FIELD = "Incomplete graphic_settings.screencenter_position_offset Field";
 
 	var MISSING_ID = "Missing id Field";
 
