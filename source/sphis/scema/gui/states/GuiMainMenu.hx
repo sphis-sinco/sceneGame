@@ -48,6 +48,8 @@ class GuiMainMenu extends GuiState
 		options_button.button.y += options_button.button.height;
 		add(options_button);
 
-		add(drawColoredText('Scema ' + Application.current.meta.get("version"), FlxColor.GRAY));
+		var versionText = drawColoredShadowedText('Scema ' + Application.current.meta.get("version"), FlxColor.WHITE);
+		versionText.text_field_shadow.color = FlxColor.GRAY;
+		add(versionText);
 	}
 }

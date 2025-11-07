@@ -1,4 +1,4 @@
-package sphis.scema.gui;
+package sphis.scema.gui.text;
 
 import flixel.math.FlxPoint;
 import flixel.text.FlxText;
