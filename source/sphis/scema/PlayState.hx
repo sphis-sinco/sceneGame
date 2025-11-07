@@ -41,12 +41,11 @@ class PlayState extends GuiState
 		var order = super.getDesiredDebugInfoOrder();
 
 		order.push("lb_2");
-		order.push("player_health");
+		order.push("player");
 
 		order.push("lb_3");
 		order.push("slide_path");
-		order.push("slide_props");
-		order.push("slide_prop_count");
+		order.push("slide");
 
 		return order;
 	}

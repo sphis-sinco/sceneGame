@@ -60,13 +60,18 @@ class GuiState extends FlxState
 
 	public function getDesiredDebugInfoOrder():Array<String>
 	{
-		return ["scema", "lb_1", "component_count"];
+		return ["scema", "lb_1", "component"];
 	}
 
 	public function getDebugInfoSort(entry_1:String, entry_2:String):Int
 	{
 		var entry_1_value = getDesiredDebugInfoOrder().indexOf(entry_1);
 		var entry_2_value = getDesiredDebugInfoOrder().indexOf(entry_2);
+
+		if (entry_1_value == -1)
+			entry_1_value = getDesiredDebugInfoOrder().indexOf(entry_1.split("_")[0]);
+		if (entry_2_value == -1)
+			entry_2_value = getDesiredDebugInfoOrder().indexOf(entry_2.split("_")[0]);
 
 		final e1_sortVal = "f3 debug entry: " + entry_1 + " : " + entry_1_value;
 		final e2_sortVal = "f3 debug entry: " + entry_2 + " : " + entry_2_value;
