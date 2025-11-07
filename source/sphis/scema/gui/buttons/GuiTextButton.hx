@@ -12,10 +12,14 @@ typedef GuiTextButtonParameters =
 	> GuiButtonParameters,
 
 	var text_content:String;
+
+	var ?pressed_callback:Void->Void;
 }
 
 class GuiTextButton extends FlxTypedGroup<FlxBasic>
 {
+	public var pressed_callback:Void->Void;
+
 	public var button:GuiButton;
 	public var button_highlight:GuiButton;
 
@@ -25,6 +29,8 @@ class GuiTextButton extends FlxTypedGroup<FlxBasic>
 	override public function new(params:GuiTextButtonParameters)
 	{
 		super();
+
+		this.pressed_callback = params.pressed_callback;
 
 		button = new GuiButton(params);
 
@@ -68,5 +74,10 @@ class GuiTextButton extends FlxTypedGroup<FlxBasic>
 
 		button_highlight.visible = FlxG.mouse.overlaps(button);
 		button.visible = !FlxG.mouse.overlaps(button);
+
+		if (FlxG.mouse.justReleased && button_highlight.visible && pressed_callback != null)
+		{
+			pressed_callback();
+		}
 	}
 }

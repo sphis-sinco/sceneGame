@@ -28,6 +28,11 @@ class PlayState extends FlxState
 			text_content: "Test",
 			position: new FlxPoint(),
 
+			pressed_callback: () ->
+			{
+				trace('Hola');
+			},
+
 			width_scale_addition: 32,
 			height_scale_addition: 8
 		});
