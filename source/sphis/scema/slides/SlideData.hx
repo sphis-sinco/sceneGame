@@ -14,7 +14,7 @@ typedef SlidePropData =
 
 	var ?z_index:Int;
 
-	var graphic_settings:SlidePropGraphicSettingsData;
+	var ?graphic_settings:SlidePropGraphicSettingsData;
 }
 
 typedef SlidePropGraphicSettingsData =

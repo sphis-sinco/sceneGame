@@ -43,7 +43,13 @@ class PlayState extends GuiState
 
 		order.push("lb_2");
 		order.push("player_health");
-		order.push("player_slide_path");
+
+		order.push("lb_3");
+		order.push("slide_path");
+
+		order.push("lb_4");
+		order.push("props");
+		order.push("prop_count");
 
 		return order;
 	}
@@ -53,8 +59,17 @@ class PlayState extends GuiState
 		var info = super.getDebugInfo();
 
 		info.lb_2 = "\n";
+
 		info.player_health = hearts.health;
-		info.player_slide_path = slide_path;
+
+		info.lb_3 = "\n";
+
+		info.slide_path = slide_path;
+
+		info.lb_4 = "\n";
+
+		info.props = props.prop_ids;
+		info.prop_count = props.members.length;
 
 		return info;
 	}

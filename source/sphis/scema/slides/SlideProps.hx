@@ -14,19 +14,31 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 {
 	public var slide_data:SlideData;
 
+	public var prop_ids:Array<String> = [];
+
 	override public function new(slide_path:String)
 	{
 		slide_data = cast Json.parse(Assets.getText(Paths.getSlideFile(slide_path)));
+		prop_ids = [];
 
 		super();
 
+		var i = 0;
 		for (prop in slide_data.props)
 		{
+			if (prop.id == null)
+			{
+				skippedSlidePropGeneration("Prop_" + i, MISSING_ID);
+				i++;
+				continue;
+			}
+
 			if (prop.position != null)
 			{
 				if (prop.position.length < 2)
 				{
 					skippedSlidePropGeneration(prop.id, INCOMPLETE_POSITION_FIELD);
+					i++;
 					continue;
 				}
 			}
@@ -34,8 +46,13 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 			if (prop.prop_type == "graphic")
 			{
 				if (!parseGraphicProp(prop))
+				{
+					i++;
 					continue;
+				}
 			}
+
+			i++;
 		}
 	}
 
@@ -44,7 +61,7 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 		trace("Skipped generation of slide prop: " + prop_id + " for reason: " + reason);
 	}
 
-	public function parseGraphicProp(prop:SlidePropData):Bool
+	function parseGraphicProp(prop:SlidePropData):Bool
 	{
 		if (prop.graphic_settings == null)
 		{
@@ -68,7 +85,7 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 		return false;
 	}
 
-	public function parseMakeGraphicProp(graphic_prop:FlxSprite, prop:SlidePropData):Bool
+	function parseMakeGraphicProp(graphic_prop:FlxSprite, prop:SlidePropData):Bool
 	{
 		if (prop.graphic_settings.width == null || prop.graphic_settings.height == null)
 		{
@@ -79,11 +96,19 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 			return false;
 		}
 
-		var color = FlxColor.WHITE;
+		var color:Null<FlxColor> = FlxColor.WHITE;
 
 		if (prop.graphic_settings.color != null)
 		{
-			color = FlxColor.fromString(prop.graphic_settings.color);
+			if (!prop.graphic_settings.color.startsWith("#")
+				&& !prop.graphic_settings.color.startsWith("0x")
+				&& FlxColor.fromString(prop.graphic_settings.color) == null)
+				color = FlxColor.fromString("0x" + prop.graphic_settings.color);
+			else
+				color = FlxColor.fromString(prop.graphic_settings.color);
+
+			if (color == null)
+				color = FlxColor.WHITE;
 		}
 
 		graphic_prop.makeGraphic(prop.graphic_settings.width, prop.graphic_settings.height, color);
@@ -95,6 +120,7 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 
 		add(graphic_prop);
 
+		prop_ids.push(prop.id);
 		trace("Created Make Graphic Prop: " + prop.id);
 		return true;
 	}

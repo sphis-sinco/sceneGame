@@ -2,7 +2,9 @@ package sphis.scema.slides;
 
 enum abstract SlidePropGenerationSkipReason(String)
 {
-	var INCOMPLETE_POSITION_FIELD = "Incomplete Position Field";
+	var INCOMPLETE_POSITION_FIELD = "Incomplete position Field";
+
+	var MISSING_ID = "Missing id Field";
 
 	var MISSING_GRAPHIC_SETTINGS = "Missing graphic_settings Field";
 
