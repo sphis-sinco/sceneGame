@@ -29,12 +29,12 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 
 		super();
 
-		var i = 0;
+		var i = 1;
 		for (prop in slide_data.props)
 		{
 			if (prop.id == null)
 			{
-				skippedSlidePropGeneration("Prop_" + i, MISSING_ID);
+				skippedSlidePropGeneration(cast i, MISSING_ID);
 				i++;
 				continue;
 			}
@@ -64,7 +64,19 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 
 	private function skippedSlidePropGeneration(prop_id:String, reason:SlidePropGenerationSkipReason)
 	{
-		trace("Skipped generation of slide prop: " + prop_id + " for reason: " + reason);
+		var temp = "Skipped generation of ${PROP_PREFIX}${PROP_ID} for reason: ${REASON}";
+		var message = temp.replace("${REASON}", cast reason);
+		if (reason == MISSING_ID)
+		{
+			message = message.replace("${PROP_PREFIX}", "Prop #");
+		}
+		else
+		{
+			message = message.replace("${PROP_PREFIX}", "Slide Prop: ");
+		}
+		message = message.replace("${PROP_ID}", prop_id);
+
+		trace(message);
 	}
 
 	function parseGraphicProp(prop:SlidePropData):Bool
