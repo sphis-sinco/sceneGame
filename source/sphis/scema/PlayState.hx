@@ -1,7 +1,6 @@
 package sphis.scema;
 
 import flixel.FlxG;
-import flixel.group.FlxSpriteGroup;
 import flixel.math.FlxPoint;
 import sphis.scema.gui.hearts.HeartsGroup;
 import sphis.scema.gui.states.GuiState;
@@ -46,10 +45,8 @@ class PlayState extends GuiState
 
 		order.push("lb_3");
 		order.push("slide_path");
-
-		order.push("lb_4");
-		order.push("props");
-		order.push("prop_count");
+		order.push("slide_props");
+		order.push("slide_prop_count");
 
 		return order;
 	}
@@ -66,10 +63,8 @@ class PlayState extends GuiState
 
 		info.slide_path = slide_path;
 
-		info.lb_4 = "\n";
-
-		info.props = props.prop_ids;
-		info.prop_count = props.members.length;
+		info.slide_props = props.prop_ids;
+		info.slide_prop_count = props.members.length;
 
 		return info;
 	}
