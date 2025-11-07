@@ -21,22 +21,6 @@ class PlayState extends FlxState
 		hearts = new HeartsGroup(20, new FlxPoint(2, FlxG.height - (32 + 2)));
 		add(hearts);
 		hearts.updateHealthIcons();
-
-		var gb = new GuiTextButton({
-			text_content: "Test",
-			position: new FlxPoint(),
-
-			pressed_callback: () ->
-			{
-				trace('Hola');
-			},
-
-			width_scale_addition: 32,
-			height_scale_addition: 8
-		});
-
-		gb.button.screenCenter();
-		add(gb);
 	}
 
 	override public function update(elapsed:Float)
