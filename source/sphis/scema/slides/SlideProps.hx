@@ -34,7 +34,7 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 		{
 			if (prop.id == null)
 			{
-				skippedSlidePropGeneration(cast i, MISSING_ID);
+				skippedSlidePropGeneration("" + i, MISSING_ID);
 				i++;
 				continue;
 			}
