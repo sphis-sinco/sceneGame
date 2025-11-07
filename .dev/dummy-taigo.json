@@ -1,0 +1,31 @@
+{
+    "props": [
+        {
+            "id":"BG",
+            "z_index":0,
+            
+            "prop_type": "graphic",
+
+            "graphic_settings": {
+                "make_graphic": true,
+
+                "color": "808080",
+                
+                "width": 1280,
+                "height": 720,
+
+                "screencenter": true
+            }
+        },
+        {
+            "id":"Taigo",
+            "z_index":1,
+
+            "graphic_settings": {
+                "image_path": "taigo",
+                
+                "screencenter": true
+            }
+        }
+    ]
+}

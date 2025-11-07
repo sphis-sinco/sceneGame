@@ -1,19 +1,26 @@
 package sphis.scema;
 
 import flixel.FlxG;
+import flixel.group.FlxSpriteGroup;
 import flixel.math.FlxPoint;
 import sphis.scema.gui.hearts.HeartsGroup;
 import sphis.scema.gui.states.GuiState;
+import sphis.scema.slides.SlideProps;
 
 class PlayState extends GuiState
 {
 	public var hearts:HeartsGroup;
 
-	public var slide_path:String = "layer_0/0";
+	public var slide_path:String = "dummy";
+
+	public var props:SlideProps;
 
 	override public function create()
 	{
 		super.create();
+
+		props = new SlideProps(slide_path);
+		add(props);
 
 		hearts = new HeartsGroup(20, new FlxPoint(2, FlxG.height - (32 + 2)));
 		add(hearts);

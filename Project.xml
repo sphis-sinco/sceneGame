@@ -34,6 +34,8 @@
 
 	<source path="source" />
 	<assets path="assets" />
+	<assets path=".dev/taigo.png" rename="assets/images/taigo.png" if="TAIGO"/>
+	<assets path=".dev/dummy-taigo.json" rename="assets/data/slides/dummy.json" if="TAIGO"/>
 
 	<define name="F3_MENU" unless="DISABLE_F3_MENU"/>
 
