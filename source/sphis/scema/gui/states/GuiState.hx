@@ -45,7 +45,7 @@ class GuiState extends FlxState
 		return F3;
 	}
 
-	public function getDebugInfo()
+	public function getDebugInfo():Dynamic
 	{
 		return {
 			scema: Application.current.meta.get("version"),

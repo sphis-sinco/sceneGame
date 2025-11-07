@@ -1,11 +1,11 @@
 package sphis.scema;
 
 import flixel.FlxG;
-import flixel.FlxState;
 import flixel.math.FlxPoint;
 import sphis.scema.gui.hearts.HeartsGroup;
+import sphis.scema.gui.states.GuiState;
 
-class PlayState extends FlxState
+class PlayState extends GuiState
 {
 	public var hearts:HeartsGroup;
 
@@ -26,5 +26,14 @@ class PlayState extends FlxState
 		if (FlxG.keys.justReleased.R)
 			hearts.setHealth(FlxG.random.int(GuiConstants.MIN_HEALTH, GuiConstants.MAX_HEALTH));
 		#end
+	}
+
+	override function getDebugInfo()
+	{
+		var info = super.getDebugInfo();
+
+		info.player_health = hearts.health;
+
+		return info;
 	}
 }
