@@ -27,7 +27,9 @@ class PlayState extends FlxState
 	{
 		super.update(elapsed);
 
+		#if HEART_RANDOM_KEY
 		if (FlxG.keys.justReleased.R)
 			hearts.setHealth(FlxG.random.int(GuiConstants.MIN_HEALTH, GuiConstants.MAX_HEALTH));
+		#end
 	}
 }

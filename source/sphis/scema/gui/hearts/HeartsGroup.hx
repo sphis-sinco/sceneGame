@@ -73,7 +73,7 @@ class HeartsGroup extends FlxTypedGroup<HeartIcon>
 			heart.x = (this.position?.x ?? 2) + (12 * (heart.ID - 2));
 			heart.y = this.position?.y ?? 2;
 
-			#if HEART_DEBUG
+			#if HEART_DEBUG_TRACES
 			trace(heart.ID + " : " + this.health);
 			trace(this.position?.x ?? 2);
 			trace((12 * (heart.ID - 2)));
