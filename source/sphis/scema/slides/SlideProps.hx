@@ -39,6 +39,8 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 				continue;
 			}
 
+			// trace("Attempting creation of " + prop.id);
+
 			if (prop.position != null)
 			{
 				if (prop.position.length < 2)
@@ -47,6 +49,13 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 					i++;
 					continue;
 				}
+			}
+
+			if (prop.prop_type == null)
+			{
+				skippedSlidePropGeneration(prop.id, MISSING_PROP_TYPE);
+				i++;
+				continue;
 			}
 
 			if (prop.prop_type == "graphic")
@@ -60,12 +69,18 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 
 			i++;
 		}
+
+		trace("Generated " + this.members.length + " prop(s)");
 	}
 
-	private function skippedSlidePropGeneration(prop_id:String, reason:SlidePropGenerationSkipReason)
+	private function skippedSlidePropGeneration(prop_id:String, reason:SlidePropGenerationSkipReason, ?data:Dynamic)
 	{
 		var temp = "Skipped generation of ${PROP_PREFIX}${PROP_ID} for reason: ${REASON}";
 		var message = temp.replace("${REASON}", cast reason);
+
+		if (data?.REASON_IMAGE_PATH != null)
+			message.replace("${REASON_IMAGE_PATH}", data.REASON_IMAGE_PATH);
+
 		if (reason == MISSING_ID)
 		{
 			message = message.replace("${PROP_PREFIX}", "Prop #");
@@ -100,7 +115,40 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 			return parseMakeGraphicProp(graphic_prop, prop);
 		}
 
-		return false;
+		return parseImageGraphicProp(graphic_prop, prop);
+	}
+
+	function parseImageGraphicProp(graphic_prop:FlxSprite, prop:SlidePropData):Bool
+	{
+		if (prop.graphic_settings.image_path == null)
+		{
+			skippedSlidePropGeneration(prop.id, MISSING_IMAGE_PATH);
+			return false;
+		}
+
+		if (!Paths.exists(Paths.getImageFile(prop.graphic_settings.image_path)))
+		{
+			skippedSlidePropGeneration(prop.id, NONEXISTANT_IMAGE_PATH, {
+				REASON_IMAGE_PATH: prop.graphic_settings.image_path
+			});
+			return false;
+		}
+
+		graphic_prop.loadGraphic(Paths.getImageFile(prop.graphic_settings.image_path));
+
+		graphic_prop.color = getPropColor(prop);
+
+		if (prop.graphic_settings.screencenter)
+		{
+			graphic_prop.screenCenter();
+		}
+
+		add(graphic_prop);
+
+		prop_ids.push(prop.id);
+		trace("Created Image Graphic Prop: " + prop.id);
+
+		return true;
 	}
 
 	function parseMakeGraphicProp(graphic_prop:FlxSprite, prop:SlidePropData):Bool
@@ -114,6 +162,22 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 			return false;
 		}
 
+		graphic_prop.makeGraphic(prop.graphic_settings.width, prop.graphic_settings.height, getPropColor(prop));
+
+		if (prop.graphic_settings.screencenter)
+		{
+			graphic_prop.screenCenter();
+		}
+
+		add(graphic_prop);
+
+		prop_ids.push(prop.id);
+		trace("Created Make Graphic Prop: " + prop.id);
+		return true;
+	}
+
+	function getPropColor(prop:SlidePropData):Null<FlxColor>
+	{
 		var color:Null<FlxColor> = FlxColor.WHITE;
 
 		if (prop.graphic_settings.color != null)
@@ -129,17 +193,6 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 				color = FlxColor.WHITE;
 		}
 
-		graphic_prop.makeGraphic(prop.graphic_settings.width, prop.graphic_settings.height, color);
-
-		if (prop.graphic_settings.screencenter)
-		{
-			graphic_prop.screenCenter();
-		}
-
-		add(graphic_prop);
-
-		prop_ids.push(prop.id);
-		trace("Created Make Graphic Prop: " + prop.id);
-		return true;
+		return color;
 	}
 }

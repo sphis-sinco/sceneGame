@@ -33,7 +33,10 @@
 	<set name="BUILD_DIR" value="export/release" unless="debug"/>
 
 	<source path="source" />
+	<source path="assets" if="debug"/>
+
 	<assets path="assets" />
+	
 	<assets path=".dev/taigo.png" rename="assets/images/taigo.png" if="TAIGO"/>
 	<assets path=".dev/dummy-taigo.json" rename="assets/data/slides/dummy.json" if="TAIGO"/>
 

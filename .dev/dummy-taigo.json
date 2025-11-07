@@ -18,8 +18,9 @@
             }
         },
         {
-            "identity":"Taigo",
+            "id":"Taigo",
             "z_index":1,
+            "prop_type": "graphic",
 
             "graphic_settings": {
                 "image_path": "taigo",
