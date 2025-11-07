@@ -62,11 +62,18 @@ class GuiState extends FlxState
 
 		for (field in Reflect.fields(getDebugInfo()))
 		{
-			final property = Reflect.getProperty(getDebugInfo(), field);
+			final property = Std.string(Reflect.getProperty(getDebugInfo(), field));
 
 			if (property != "\n")
 			{
-				text += field + " : " + property + "\n";
+				if (field.startsWith("category_"))
+				{
+					text += property + "\n";
+				}
+				else
+				{
+					text += field + " : " + property + "\n";
+				}
 			}
 			else
 			{
