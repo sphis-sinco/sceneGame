@@ -12,6 +12,8 @@ import sphis.scema.gui.buttons.GuiTextButton;
 import sphis.scema.gui.text.GuiShadowText;
 import sphis.scema.gui.text.GuiText;
 
+using StringTools;
+
 class GuiState extends FlxState
 {
 	public var debugText:GuiShadowText;
@@ -45,8 +47,12 @@ class GuiState extends FlxState
 	public function getDebugInfo()
 	{
 		return {
-			component_count: this.members.length,
+			category_game: "Game",
 			scema: Application.current.meta.get("version"),
+
+			lb_1: "\n",
+
+			component_count: this.members.length,
 		}
 	}
 
@@ -56,7 +62,16 @@ class GuiState extends FlxState
 
 		for (field in Reflect.fields(getDebugInfo()))
 		{
-			text += field + " : " + Reflect.getProperty(getDebugInfo(), field) + "\n";
+			final property = Reflect.getProperty(getDebugInfo(), field);
+
+			if (property != "\n")
+			{
+				text += field + " : " + property + "\n";
+			}
+			else
+			{
+				text += "\n";
+			}
 		}
 
 		return text;
