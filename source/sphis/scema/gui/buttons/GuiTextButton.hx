@@ -1,6 +1,7 @@
 package sphis.scema.gui.buttons;
 
 import flixel.FlxBasic;
+import flixel.FlxG;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
@@ -16,6 +17,7 @@ typedef GuiTextButtonParameters =
 class GuiTextButton extends FlxTypedGroup<FlxBasic>
 {
 	public var button:GuiButton;
+	public var button_highlight:GuiButton;
 
 	public var text_field:FlxText;
 	public var text_field_shadow:FlxText;
@@ -25,6 +27,18 @@ class GuiTextButton extends FlxTypedGroup<FlxBasic>
 		super();
 
 		button = new GuiButton(params);
+
+		if (params?.graphic?.image_path != null && Paths.exists(params?.graphic?.image_path + "-highlight"))
+			params.graphic.image_path = params.graphic.image_path += "-highlight";
+		else
+		{
+			params.graphic = {
+				corner_radius: 4,
+				image_path: "gui/button-highlight"
+			};
+		}
+
+		button_highlight = new GuiButton(params);
 
 		text_field = GuiText.drawText(params?.text_content ?? "N/A");
 		text_field.fieldWidth = button.snappedWidth;
@@ -38,6 +52,8 @@ class GuiTextButton extends FlxTypedGroup<FlxBasic>
 		text_field_shadow.alpha = 0.9;
 
 		add(button);
+		add(button_highlight);
+
 		add(text_field_shadow);
 		add(text_field);
 	}
@@ -46,7 +62,11 @@ class GuiTextButton extends FlxTypedGroup<FlxBasic>
 	{
 		super.update(elapsed);
 
+		button_highlight.setPosition(button.x, button.y);
 		text_field.setPosition(button.x, button.y + ((button.height - text_field.height) / 2));
 		text_field_shadow.setPosition(text_field.x + 2, text_field.y + 2);
+
+		button_highlight.visible = FlxG.mouse.overlaps(button);
+		button.visible = !FlxG.mouse.overlaps(button);
 	}
 }
