@@ -34,9 +34,9 @@
 
 	<source path="source" />
 
-	<assets path="assets" />
-	<assets path=".dev/flags/TAIGO/" rename="assets/" if="TAIGO"/>
-	
+	<assets path="assets" exclude="assets/flags/"/>
+	<assets path="assets/flags/taigo/" rename="assets/" if="TAIGO"/>
+
 	<define name="F3_MENU" unless="DISABLE_F3_MENU"/>
 
 	<define name="HEART_RANDOM_KEY" if="HEART_DEBUG"/>
