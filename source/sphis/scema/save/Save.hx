@@ -56,6 +56,7 @@ class Save
 		}
 
 		setSaveData(VERSION, GeneralConstants.VERSION);
+		trace("Updated to " + getSaveData(VERSION));
 	}
 
 	public static function getSaveData(field:SaveFields):Dynamic
