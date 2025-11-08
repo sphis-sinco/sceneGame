@@ -37,7 +37,7 @@ class GuiMainMenu extends GuiState
 		});
 
 		options_button = createTextButton({
-			text_content: "Options...",
+			text_content: "Options",
 			position: new FlxPoint(),
 
 			pressed_callback_code: () ->
