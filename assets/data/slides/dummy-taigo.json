@@ -1,4 +1,11 @@
 {
+    "components": [
+        {
+            "name": "universal_image_path_prefix",
+            "data": "taigo/"
+        }
+    ],
+
     "props": [
         {
             "id":"BG",
@@ -23,7 +30,7 @@
             "prop_type": "graphic",
 
             "graphic_settings": {
-                "image_path": "taigo/taigo",
+                "image_path": "taigo",
                 
                 "screencenter": true,
                 "screencenter_position_offset": [-320,0]
@@ -35,7 +42,7 @@
             "prop_type": "graphic",
 
             "graphic_settings": {
-                "image_path": "taigo/taigo-animated",
+                "image_path": "taigo-animated",
                 
                 "screencenter": true,
                 "screencenter_position_offset": [320,0],

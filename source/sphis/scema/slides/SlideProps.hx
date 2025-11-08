@@ -7,10 +7,10 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.util.FlxColor;
 import flixel.util.FlxSort;
 import haxe.Json;
-import lime.utils.Assets;
 import sphis.scema.slides.SlideData.SlidePropData;
 
 using StringTools;
+using sphis.scema.slides.SlideComponents;
 
 class SlideProps extends FlxTypedGroup<FlxBasic>
 {
@@ -175,6 +175,9 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 			skippedSlidePropGeneration(prop.id, MISSING_IMAGE_PATH);
 			return false;
 		}
+
+		if (slide_data.getComponent('universal_image_path_prefix') != null)
+			prop.graphic_settings.image_path = Std.string(slide_data.getComponent('universal_image_path_prefix')) + prop.graphic_settings.image_path;
 
 		if (!Paths.exists(Paths.getImageFile(prop.graphic_settings.image_path)))
 		{
