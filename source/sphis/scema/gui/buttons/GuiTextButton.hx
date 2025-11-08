@@ -38,6 +38,7 @@ class GuiTextButton extends FlxTypedGroup<FlxBasic>
 
 		this.pressed_callback = params.pressed_callback;
 		script_runner = new CodeRunner();
+		script_runner.initVars();
 
 		button = new GuiButton(params);
 

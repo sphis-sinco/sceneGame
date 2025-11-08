@@ -6,6 +6,7 @@ import flixel.math.FlxPoint;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
+import haxe.Log;
 import sphis.scema.gui.hearts.HeartsGroup;
 import sphis.scema.gui.states.GuiState;
 import sphis.scema.slides.SlideCode;
@@ -46,6 +47,10 @@ class PlayState extends GuiState
 		additional_variables.set("switch_slide", (new_slide:String) ->
 		{
 			FlxG.switchState(() -> new PlayState(new_slide));
+		});
+		additional_variables.set("trace", (v, pos) ->
+		{
+			Log.trace(Paths.getSlideFile(slide_path) + ": " + Std.string(v), null);
 		});
 
 		return additional_variables;
