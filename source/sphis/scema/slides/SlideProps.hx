@@ -246,7 +246,7 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 
 				graphic_prop.animation.onBegin.add(animName ->
 				{
-					var offsets = prop_animation_offsets.get(prop.id).get(animName);
+					var offsets = getPropAnimationOffsets(prop.id, animName);
 					graphic_prop.offset.set(offsets[0], offsets[1]);
 				});
 
@@ -333,9 +333,18 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 		return color;
 	}
 
-	public function getPropAnimationCondition(prop:String, name:String):Array<String>
+	public function getPropAnimationConditions(prop:String, name:String):Array<String>
+	{
 		return prop_animation_conditions.get(prop).get(name);
+	}
 
 	public function doesPropAnimationHaveCondition(prop:String, name:String, condition:String):Bool
-		return prop_animation_conditions.get(prop).get(name).contains(condition);
+	{
+		return getPropAnimationConditions(prop, name).contains(condition);
+	}
+
+	public function getPropAnimationOffsets(prop:String, name:String):Array<Float>
+	{
+		return prop_animation_offsets.get(prop).get(name);
+	}
 }
