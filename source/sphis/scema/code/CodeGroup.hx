@@ -3,6 +3,8 @@ package sphis.scema.code;
 import haxe.io.Path;
 import polymod.fs.ZipFileSystem;
 
+using StringTools;
+
 class CodeGroup
 {
 	public var members:Array<CodeFileRunner> = [];
@@ -60,7 +62,8 @@ class CodeGroup
 			{
 				if (vars.exists(key))
 				{
-					if (vars.get(key) != value)
+					if (Std.string(vars.get(key)) != Std.string(value)
+						&& !(Std.string(key).startsWith("function#") || Std.string(value).startsWith("function#")))
 						trace("VAR " + key + " BEING OVERWRITTEN FROM " + vars.get(key) + " TO " + value);
 				}
 				vars.set(key, value);

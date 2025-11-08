@@ -42,12 +42,8 @@ class CodeRunner
 		{
 			Log.trace(Std.string(v), null);
 		});
+		variables.set("Reflect", Reflect);
 		variables.set("null", null);
-
-		variables.set("defines", {
-			debug: #if debug true #else false #end,
-			TAIGO: #if TAIGO true #else false #end
-		});
 
 		variables.set("PlayState", PlayState.instance);
 
@@ -57,6 +53,12 @@ class CodeRunner
 		variables.set("GuiConstants", GuiConstants);
 
 		variables.set("FlxG", FlxG);
+
+		variables.set("defines", {
+			debug: #if debug true #else false #end,
+			TAIGO: #if TAIGO true #else false #end
+		});
+		variables.set("current_state", FlxG.state);
 	}
 
 	public function run(script:String, ?additional_variables:Map<String, Dynamic>):Dynamic
