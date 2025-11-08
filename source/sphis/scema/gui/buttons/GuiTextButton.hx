@@ -6,13 +6,13 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import sphis.scema.code.CodeRunner;
 import sphis.scema.gui.buttons.GuiButton.GuiButtonParameters;
 import sphis.scema.gui.text.GuiShadowText;
-import sphis.scema.slides.SlideData.SlidePropButtonTextData;
+import sphis.scema.slides.SlideData.SlidePropTextSettingsData;
 
 typedef GuiTextButtonParameters =
 {
 	> GuiButtonParameters,
 
-	> SlidePropButtonTextData,
+	> SlidePropTextSettingsData,
 
 	var ?pressed_callback:Array<String>;
 }
@@ -51,12 +51,9 @@ class GuiTextButton extends FlxTypedGroup<FlxBasic>
 
 		button_highlight = new GuiButton(params);
 
-		text_field = new GuiShadowText(params?.text_content ?? "N/A", params.text_size);
+		text_field = new GuiShadowText(params);
 		text_field.text_field.fieldWidth = button.snappedWidth;
 		text_field.text_field.alignment = CENTER;
-
-		if (params?.text_shadow_color != null)
-			text_field.text_field_shadow.color = params?.text_shadow_color;
 
 		add(button);
 		add(button_highlight);

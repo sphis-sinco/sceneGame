@@ -3,6 +3,7 @@ package sphis.scema.gui.text;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
+import sphis.scema.slides.SlideData.SlidePropTextSettingsData;
 
 class GuiShadowText extends FlxTypedGroup<FlxText>
 {
@@ -47,24 +48,24 @@ class GuiShadowText extends FlxTypedGroup<FlxText>
 		this.y = y;
 	}
 
-	override public function new(text:String, ?size:Null<Int> = 16, ?x:Float = 0, ?y:Float = 0)
+	override public function new(params:SlidePropTextSettingsData)
 	{
 		super();
 
-		text_field = GuiText.drawTextWithSize(text ?? "N/A", size ?? 16);
+		text_field = GuiText.drawTextWithSize(params?.text_content ?? "N/A", params?.text_size ?? 16);
 		text_field.alignment = CENTER;
 
 		text_field_shadow = GuiText.drawTextWithSize(text_field.text, text_field.size);
 		text_field_shadow.alignment = text_field.alignment;
 
-		text_field_shadow.color = FlxColor.BLACK;
+		text_field_shadow.color = params?.text_shadow_color ?? FlxColor.BLACK;
 		text_field_shadow.alpha = 0.9;
 
 		add(text_field_shadow);
 		add(text_field);
 
-		this.x = x;
-		this.y = y;
+		this.x = params?.position?.x ?? 0;
+		this.y = params?.position?.y ?? 0;
 	}
 
 	override function update(elapsed:Float)

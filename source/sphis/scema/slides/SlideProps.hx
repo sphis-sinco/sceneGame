@@ -10,6 +10,7 @@ import flixel.util.FlxSort;
 import haxe.Json;
 import sphis.scema.code.CodeRunner;
 import sphis.scema.gui.buttons.GuiTextButton;
+import sphis.scema.gui.text.GuiShadowText;
 import sphis.scema.slides.SlideData.SlidePropData;
 
 using StringTools;
@@ -176,6 +177,15 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 				}
 			}
 
+			if (prop.prop_type == "text")
+			{
+				if (!parseTextProp(prop))
+				{
+					i++;
+					continue;
+				}
+			}
+
 			i++;
 		}
 
@@ -207,6 +217,51 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 		message = message.replace("${PROP_ID}", prop_id);
 
 		trace(message);
+	}
+
+	function parseTextProp(prop:SlidePropData):Bool
+	{
+		if (prop.text_settings == null)
+		{
+			skippedSlidePropGeneration(prop.id, MISSING_TEXT_SETTINGS);
+			return false;
+		}
+
+		if (prop.text_settings.text_content == null)
+		{
+			skippedSlidePropGeneration(prop.id, MISSING_TEXT_SETTINGS_TEXT_CONTENT);
+			return false;
+		}
+
+		if (prop?.text_settings?.text_shadow_color != null)
+			prop.text_settings.text_shadow_color = getPropColor(cast prop?.text_settings?.text_shadow_color, FlxColor.BLACK);
+
+		prop.text_settings.position = new FlxPoint();
+		if (prop.position != null)
+		{
+			prop.text_settings.position = new FlxPoint(prop.position[0], prop.position[1]);
+		}
+
+		var text_prop = new GuiShadowText(prop.text_settings);
+		text_prop.text_field_shadow.color = prop.text_settings.text_shadow_color;
+
+		if (prop.screencenter_settings.screencenter)
+		{
+			text_prop.text_field.screenCenter();
+
+			if (prop.screencenter_settings.screencenter_position_offset != null)
+			{
+				text_prop.text_field.x += prop.screencenter_settings.screencenter_position_offset[0];
+				text_prop.text_field.y += prop.screencenter_settings.screencenter_position_offset[1];
+			}
+		}
+
+		prop_id_to_index.set(prop.id, this.members.length);
+		add(text_prop);
+
+		prop_ids.push(prop.id);
+		trace("Created Text Prop: " + prop.id);
+		return true;
 	}
 
 	function parseButtonProp(prop:SlidePropData):Bool
@@ -459,9 +514,9 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 		return true;
 	}
 
-	function getPropColor(color_string:String):Null<FlxColor>
+	function getPropColor(color_string:String, ?null_color:FlxColor = FlxColor.WHITE):Null<FlxColor>
 	{
-		var color:Null<FlxColor> = FlxColor.WHITE;
+		var color:Null<FlxColor> = null_color;
 
 		if (color_string != null)
 		{
@@ -471,7 +526,7 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 				color = FlxColor.fromString(color_string);
 
 			if (color == null)
-				color = FlxColor.WHITE;
+				color = null_color;
 		}
 
 		return color;

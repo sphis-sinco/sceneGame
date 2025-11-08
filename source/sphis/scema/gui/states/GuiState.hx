@@ -13,6 +13,7 @@ import sphis.scema.gui.buttons.GuiButton.GuiButtonParameters;
 import sphis.scema.gui.buttons.GuiTextButton;
 import sphis.scema.gui.text.GuiShadowText;
 import sphis.scema.gui.text.GuiText;
+import sphis.scema.slides.SlideData.SlidePropTextSettingsData;
 
 using Reflect;
 using StringTools;
@@ -46,7 +47,7 @@ class GuiState extends FlxState
 	{
 		super.create();
 
-		debugText = new GuiShadowText("");
+		debugText = new GuiShadowText(null);
 
 		debugText.text_field.alignment = LEFT;
 		debugText.text_field.fieldWidth = FlxG.width;
@@ -210,21 +211,14 @@ class GuiState extends FlxState
 		return new GuiTextButton(cast params);
 	}
 
-	public function drawShadowedText(text:String, ?position:FlxPoint):GuiShadowText
-	{
-		return new GuiShadowText(text, position?.x ?? 0, position?.y ?? 0);
-	}
-
 	public function drawText(text:String, ?position:FlxPoint):FlxText
 	{
 		return GuiText.drawText(text, position);
 	}
 
-	public function drawColoredShadowedText(text:String, ?color:FlxColor = FlxColor.WHITE, ?position:FlxPoint):GuiShadowText
+	public function drawShadowedText(params:SlidePropTextSettingsData):GuiShadowText
 	{
-		var text = new GuiShadowText(text, position?.x ?? 0, position?.y ?? 0);
-		text.text_field.color = color;
-		return text;
+		return new GuiShadowText(params);
 	}
 
 	public function drawColoredText(text:String, ?color:FlxColor = FlxColor.WHITE, ?position:FlxPoint):FlxText

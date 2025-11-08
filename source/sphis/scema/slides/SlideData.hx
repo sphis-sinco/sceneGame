@@ -1,5 +1,6 @@
 package sphis.scema.slides;
 
+import flixel.math.FlxPoint;
 import flixel.util.FlxColor;
 import sphis.scema.gui.buttons.GuiTextButton.GuiTextButtonParameters;
 
@@ -35,7 +36,7 @@ typedef SlidePropData =
 
 	var ?graphic_settings:SlidePropGraphicSettingsData;
 	var ?button_settings:SlidePropButtonSettingsData;
-	var ?text_settings:SlidePropButtonTextData;
+	var ?text_settings:SlidePropTextSettingsData;
 
 	var ?visible_conditions:Array<SlidePropVisibleCondition>;
 }
@@ -54,12 +55,16 @@ typedef SlidePropScreencenterSettingsData =
 	var ?screencenter_position_offset:Array<Float>;
 }
 
-typedef SlidePropButtonTextData =
+typedef SlidePropTextSettingsData =
 {
 	var text_content:String;
 
 	var ?text_size:Null<Int>;
+
+	var ?text_color:FlxColor;
 	var ?text_shadow_color:FlxColor;
+
+	var ?position:FlxPoint;
 }
 
 typedef SlidePropGraphicSettingsData =

@@ -17,6 +17,8 @@ enum abstract SlidePropGenerationSkipReason(String)
 	var MISSING_BUTTON_TEXT_CONTENT = "Missing button_settings.text_content Field";
 	var MISSING_BUTTON_SETTINGS = "Missing button_settings Field";
 	var MISSING_CODE = "Missing visible_conditions.code Field";
+	var MISSING_TEXT_SETTINGS = "Missing text_settings Field";
+	var MISSING_TEXT_SETTINGS_TEXT_CONTENT = "Missing text_settings.text_content Field";
 
 	var NONEXISTANT_IMAGE_PATH = "${REASON_IMAGE_PATH} doesn't exist";
 	var NONEXISTANT_ANIMATIONS = "graphic_settings.animations has no Entries";
