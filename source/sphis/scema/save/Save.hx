@@ -22,7 +22,7 @@ class Save
 		handleEmptySave();
 		updateSave();
 
-		trace('Save data fields: ' + SAVE.data.fields());
+		trace('Save data fields: ');
 		for (field in SAVE.data.fields())
 		{
 			var depricatedMsg = '';
