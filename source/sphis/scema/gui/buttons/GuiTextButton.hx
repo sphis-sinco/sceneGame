@@ -8,6 +8,8 @@ import sphis.scema.gui.buttons.GuiButton.GuiButtonParameters;
 import sphis.scema.gui.text.GuiShadowText;
 import sphis.scema.slides.SlideData.SlidePropTextSettingsData;
 
+using Reflect;
+
 typedef GuiTextButtonParameters =
 {
 	> GuiButtonParameters,
@@ -15,13 +17,13 @@ typedef GuiTextButtonParameters =
 	> SlidePropTextSettingsData,
 
 	var ?pressed_callback:Array<String>;
-	var ?pressed_callback_code:Void->Void;
+	var ?pressed_callback_code:Dynamic->Void;
 }
 
 class GuiTextButton extends FlxTypedGroup<FlxBasic>
 {
 	public var pressed_callback:Array<String>;
-	public var pressed_callback_code:Void->Void;
+	public var pressed_callback_code:Dynamic->Void;
 
 	public var button:GuiButton;
 	public var button_highlight:GuiButton;
@@ -82,12 +84,25 @@ class GuiTextButton extends FlxTypedGroup<FlxBasic>
 
 			if (FlxG.mouse.justReleased && button_highlight.visible)
 			{
+				var data_variable:Dynamic = {
+					button: this.button,
+					button_highlight: this.button_highlight,
+					text_field: this.text_field
+				};
+				var script_variables = script_runner_additional_variables.copy();
+
+				for (field in data_variable.fields())
+					script_variables.set(field, data_variable.field(field));
+
 				if (pressed_callback != null)
 					for (line in pressed_callback)
-						script_runner.run(line, script_runner_additional_variables);
+						script_runner.run(line, script_variables);
+
+				for (field in script_variables.fields())
+					data_variable.set(field, script_variables.get(field));
 
 				if (pressed_callback_code != null)
-					pressed_callback_code();
+					pressed_callback_code(data_variable);
 			}
 		}
 	}

@@ -4,6 +4,7 @@ import flixel.FlxG;
 import flixel.math.FlxPoint;
 import flixel.util.FlxColor;
 import sphis.scema.gui.buttons.GuiTextButton;
+import sphis.scema.gui.states.options.GuiOptions;
 
 class GuiMainMenu extends GuiState
 {
@@ -25,7 +26,7 @@ class GuiMainMenu extends GuiState
 			text_content: "Play",
 			position: new FlxPoint(),
 
-			pressed_callback_code: () ->
+			pressed_callback_code: data ->
 			{
 				FlxG.camera.fade(FlxColor.BLACK, .25, false, () -> FlxG.switchState(PlayState.new.bind(script_files.getVariables().get('starting_state'))));
 			},
@@ -38,7 +39,7 @@ class GuiMainMenu extends GuiState
 			text_content: "Options",
 			position: new FlxPoint(),
 
-			pressed_callback_code: () ->
+			pressed_callback_code: data ->
 			{
 				FlxG.camera.fade(FlxColor.BLACK, .25, false, () -> FlxG.switchState(() -> new GuiOptions()));
 			},
