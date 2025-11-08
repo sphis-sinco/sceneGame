@@ -20,15 +20,6 @@ class GuiMainMenu extends GuiState
 		super('mainmenu/');
 	}
 
-	override function getAdditionalVariables():Map<String, Dynamic>
-	{
-		var av = super.getAdditionalVariables();
-
-		av.set("current_state", this);
-
-		return av;
-	}
-
 	override function create()
 	{
 		super.create();

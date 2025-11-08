@@ -32,7 +32,7 @@ class GuiState extends FlxState
 
 	public function getAdditionalVariables():Map<String, Dynamic>
 	{
-		return [];
+		return ["current_state" => this];
 	}
 
 	override function create()
