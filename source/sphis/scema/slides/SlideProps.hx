@@ -132,7 +132,7 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 						continue;
 					}
 
-					var condition_result:Bool = cast code_runner.run(condition.code, start_variables);
+					var condition_result:Bool = code_runner.run(condition.code, start_variables);
 
 					if (!condition_result && condition.high_priority)
 					{
