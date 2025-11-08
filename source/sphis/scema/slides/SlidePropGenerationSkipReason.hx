@@ -17,4 +17,6 @@ enum abstract SlidePropGenerationSkipReason(String)
 
 	var NONEXISTANT_IMAGE_PATH = "${REASON_IMAGE_PATH} doesn't exist";
 	var NONEXISTANT_ANIMATIONS = "graphic_settings.animations has no Entries";
+
+	var DUPLICATE_ID = "id already used";
 }

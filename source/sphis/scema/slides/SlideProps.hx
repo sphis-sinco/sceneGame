@@ -66,6 +66,13 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 				continue;
 			}
 
+			if (prop_ids.contains(prop.id))
+			{
+				skippedSlidePropGeneration(prop.id + " (Prop #" + i + ")", DUPLICATE_ID);
+				i++;
+				continue;
+			}
+
 			// trace("Attempting creation of " + prop.id);
 
 			if (prop.position != null)
