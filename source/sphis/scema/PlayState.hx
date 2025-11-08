@@ -1,5 +1,6 @@
 package sphis.scema;
 
+import flixel.FlxBasic;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.math.FlxPoint;
@@ -25,7 +26,7 @@ class PlayState extends GuiState
 	public var slide_props:SlideProps;
 	public var slide_code:SlideCode;
 
-	public var paused:Bool;
+	public var paused:Bool = false;
 	public var paused_blackbg:FlxSprite;
 	public var paused_bg:FlxSprite;
 
@@ -33,11 +34,31 @@ class PlayState extends GuiState
 
 	public static var instance:PlayState;
 
+	public var checkPropAlphaShit = function(prop:FlxBasic, ?speed:Float, ?alpha:Float) {};
+
 	override public function new(starting_slide_path:String = "dummy")
 	{
 		if (instance != null)
 			instance = null;
 		instance = this;
+
+		checkPropAlphaShit = function(prop, ?speed, ?alpha)
+		{
+			if (prop.hasField('alpha'))
+			{
+				FlxTween.cancelTweensOf(prop);
+				FlxTween.tween(prop, {alpha: ((paused) ? (alpha ?? 1.0) : 0.0)}, speed ?? .5, {
+					ease: FlxEase.smootherStepInOut
+				});
+			}
+			if (prop.hasField('members'))
+			{
+				var prop_members:Array<FlxBasic> = prop.field('members');
+
+				for (prop_member in prop_members)
+					checkPropAlphaShit(prop_member, speed, alpha);
+			}
+		}
 
 		super('playstate/');
 
@@ -73,7 +94,6 @@ class PlayState extends GuiState
 
 		paused_blackbg = new FlxSprite();
 		paused_blackbg.makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
-		paused_blackbg.alpha = 0;
 		add(paused_blackbg);
 
 		paused_bg = new FlxSprite();
@@ -83,7 +103,6 @@ class PlayState extends GuiState
 
 		paused_bg.color = FlxColor.fromString(Std.string(script_files.getVariables().get("paused_bg_color"))) ?? FlxColor.WHITE;
 
-		paused_bg.alpha = 0;
 		add(paused_bg);
 
 		pausescreen_slide = {
@@ -102,6 +121,10 @@ class PlayState extends GuiState
 		pausescreen_slide.code.initVars();
 		pausescreen_slide.code.parseCode();
 
+		add(pausescreen_slide.props);
+
+		togglePaused();
+
 		super.create();
 
 		slide_code.onCreate(getAdditionalVariables());
@@ -119,37 +142,41 @@ class PlayState extends GuiState
 		if (FlxG.keys.justReleased.ENTER)
 		{
 			togglePaused();
-
-			FlxTween.cancelTweensOf(paused_bg);
-			FlxTween.cancelTweensOf(paused_blackbg);
-			FlxTween.tween(paused_bg, {alpha: (paused) ? 1.0 : 0.0}, .5, {
-				ease: FlxEase.smootherStepInOut
-			});
-			FlxTween.tween(paused_blackbg, {alpha: (paused) ? 0.5 : 0.0}, .5, {
-				ease: FlxEase.smootherStepInOut
-			});
-
-			if (paused)
-			{
-				slide_props.propsPauseAnimation();
-			}
-			else
-			{
-				slide_props.propsUnpauseAnimation();
-			}
 		}
+
 		if (!paused)
 			slide_code.onUpdate(getAdditionalVariables());
 		else if (paused)
 		{
+			pausescreen_slide.code.onUpdate(getAdditionalVariables());
+
 			if (slide_code.slide_data.getComponent("on_update_bypass_pause") == true)
 				slide_code.onUpdate(getAdditionalVariables());
 		}
 	}
 
-	public static function togglePaused()
+	public static function togglePaused(onStart:Bool = false)
 	{
+		final alphaVal = (onStart ? 0.0 : 0.5);
+
+		instance.checkPropAlphaShit(instance.paused_bg, alphaVal);
+		instance.checkPropAlphaShit(instance.paused_blackbg, alphaVal, .5);
+		instance.checkPropAlphaShit(instance.pausescreen_slide.props, alphaVal);
+
+		if (onStart)
+			return;
+
 		instance.paused = !instance.paused;
+
+		if (instance.paused)
+		{
+			instance.pausescreen_slide.code.onCreate(instance.getAdditionalVariables());
+			instance.slide_props.propsPauseAnimation();
+		}
+		else
+		{
+			instance.slide_props.propsUnpauseAnimation();
+		}
 	}
 
 	override function getDesiredInfoOrder():Array<String>
