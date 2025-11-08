@@ -36,7 +36,11 @@
                 "position": [10,10],
 
                 "width_scale_addition": 32,
-                "height_scale_addition": 32
+                "height_scale_addition": 32,
+
+			    "pressed_callback": [
+                    "trace(\"Hola\");"
+                ]
             }
         }
     ],
