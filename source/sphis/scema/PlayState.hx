@@ -125,6 +125,8 @@ class PlayState extends GuiState
 
 		togglePaused();
 
+		FlxG.camera.fade(FlxColor.BLACK, 2, true);
+
 		super.create();
 
 		slide_code.onCreate(getAdditionalVariables());

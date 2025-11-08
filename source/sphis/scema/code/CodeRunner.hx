@@ -1,6 +1,7 @@
 package sphis.scema.code;
 
 import flixel.FlxG;
+import flixel.util.FlxColor;
 import haxe.Log;
 import sphis.scema.gui.GuiConstants;
 import sphis.scema.save.Save;
@@ -57,6 +58,44 @@ class CodeRunner
 		variables.set("PlayState", PlayState);
 
 		variables.set("FlxG", FlxG);
+		variables.set("FlxColor", {
+			TRANSPARENT: FlxColor.TRANSPARENT,
+			WHITE: FlxColor.WHITE,
+			GRAY: FlxColor.GRAY,
+			BLACK: FlxColor.BLACK,
+
+			GREEN: FlxColor.GREEN,
+			LIME: FlxColor.LIME,
+			YELLOW: FlxColor.YELLOW,
+			ORANGE: FlxColor.ORANGE,
+			RED: FlxColor.RED,
+			PURPLE: FlxColor.PURPLE,
+			BLUE: FlxColor.BLUE,
+			BROWN: FlxColor.BROWN,
+			PINK: FlxColor.PINK,
+			MAGENTA: FlxColor.MAGENTA,
+			CYAN: FlxColor.CYAN,
+
+			colorLookup: FlxColor.colorLookup,
+
+			fromInt: FlxColor.fromInt,
+			fromRGB: FlxColor.fromRGB,
+			fromRGBFloat: FlxColor.fromRGBFloat,
+			fromCMYK: FlxColor.fromCMYK,
+			fromHSB: FlxColor.fromHSB,
+			fromHSL: FlxColor.fromHSL,
+			fromString: FlxColor.fromString,
+
+			getHSBColorWheel: FlxColor.getHSBColorWheel,
+
+			interpolate: FlxColor.interpolate,
+			gradient: FlxColor.gradient,
+			multiply: FlxColor.multiply,
+			add: FlxColor.add,
+			subtract: FlxColor.subtract,
+
+			object: new FlxColor(),
+		});
 
 		variables.set("Save", Save);
 
