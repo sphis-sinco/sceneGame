@@ -5,7 +5,7 @@ import flixel.util.FlxColor;
 import haxe.Log;
 import sphis.scema.gui.GuiConstants;
 import sphis.scema.gui.states.GuiMainMenu;
-import sphis.scema.gui.states.GuiOptions;
+import sphis.scema.gui.states.options.GuiOptions;
 import sphis.scema.save.Save;
 
 using Reflect;
