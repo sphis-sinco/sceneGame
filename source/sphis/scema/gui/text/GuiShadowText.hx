@@ -47,14 +47,14 @@ class GuiShadowText extends FlxTypedGroup<FlxText>
 		this.y = y;
 	}
 
-	override public function new(text:String, ?x:Float = 0, ?y:Float = 0)
+	override public function new(text:String, ?size:Int = 16, ?x:Float = 0, ?y:Float = 0)
 	{
 		super();
 
-		text_field = GuiText.drawText(text ?? "N/A");
+		text_field = GuiText.drawTextWithSize(text ?? "N/A", size);
 		text_field.alignment = CENTER;
 
-		text_field_shadow = GuiText.drawText(text_field.text);
+		text_field_shadow = GuiText.drawTextWithSize(text_field.text, text_field.size);
 		text_field_shadow.alignment = text_field.alignment;
 
 		text_field_shadow.color = FlxColor.BLACK;

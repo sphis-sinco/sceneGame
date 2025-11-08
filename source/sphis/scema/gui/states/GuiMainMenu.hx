@@ -32,6 +32,8 @@ class GuiMainMenu extends GuiState
 			text_content: "Play",
 			position: new FlxPoint(),
 
+			text_size: 32,
+
 			pressed_callback: () ->
 			{
 				FlxG.switchState(() -> new PlayState(variables.get('starting_state')));
@@ -44,6 +46,8 @@ class GuiMainMenu extends GuiState
 		options_button = createTextButton({
 			text_content: "Options...",
 			position: new FlxPoint(),
+
+			text_size: 32,
 
 			pressed_callback: () ->
 			{

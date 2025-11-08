@@ -15,6 +15,7 @@ typedef GuiTextButtonParameters =
 
 	var text_content:String;
 
+	var ?text_size:Int;
 	var ?text_shadow_color:FlxColor;
 
 	var ?pressed_callback:Void->Void;
@@ -49,7 +50,7 @@ class GuiTextButton extends FlxTypedGroup<FlxBasic>
 
 		button_highlight = new GuiButton(params);
 
-		text_field = new GuiShadowText(params?.text_content ?? "N/A");
+		text_field = new GuiShadowText(params?.text_content ?? "N/A", params?.text_size ?? 16);
 		text_field.text_field.fieldWidth = button.snappedWidth;
 		text_field.text_field.alignment = CENTER;
 

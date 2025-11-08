@@ -12,4 +12,12 @@ class GuiText
 
 		return text;
 	}
+
+	public static function drawTextWithSize(text:String, ?size:Null<Int>, ?position:FlxPoint)
+	{
+		var text = drawText(text, position);
+		text.size = size ?? 16;
+
+		return text;
+	}
 }
