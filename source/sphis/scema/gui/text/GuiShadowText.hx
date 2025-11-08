@@ -76,7 +76,6 @@ class GuiShadowText extends FlxTypedGroup<FlxText>
 
 		text_field_shadow.visible = text_field.visible;
 
-		text_field_shadow.text = text_field.text;
 		text_field_shadow.alignment = text_field.alignment;
 		text_field_shadow.size = text_field.size;
 		text_field_shadow.alpha = text_field.alpha - .1;
