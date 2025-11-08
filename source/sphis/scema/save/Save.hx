@@ -1,6 +1,7 @@
 package sphis.scema.save;
 
 import flixel.util.FlxSave;
+import sphis.any.SimpleVersion;
 
 using Reflect;
 
@@ -45,18 +46,22 @@ class Save
 			return;
 
 		setSaveData(VERSION, GeneralConstants.VERSION);
+		setSaveData(SIMPLE_VERSION, true);
 	}
 
 	public static function updateSave()
 	{
 		switch (getSaveData(VERSION))
 		{
+			case "0.0.18", "0.0.17":
+				setSaveData(SIMPLE_VERSION, true);
+
 			default:
-				trace("Save data version " + getSaveData(VERSION) + " has no updateSave case");
+				trace("Save data version " + SimpleVersion.convertToSingleLetters(getSaveData(VERSION)) + " has no updateSave case");
 		}
 
 		setSaveData(VERSION, GeneralConstants.VERSION);
-		trace("Updated to version " + getSaveData(VERSION));
+		trace("Updated to version " + SimpleVersion.convertToSingleLetters(getSaveData(VERSION)));
 	}
 
 	public static function getSaveData(field:SaveFields):Dynamic

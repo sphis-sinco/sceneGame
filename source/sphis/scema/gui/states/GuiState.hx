@@ -8,11 +8,13 @@ import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.util.FlxSort;
 import lime.app.Application;
+import sphis.any.SimpleVersion;
 import sphis.scema.code.CodeGroup;
 import sphis.scema.gui.buttons.GuiButton.GuiButtonParameters;
 import sphis.scema.gui.buttons.GuiTextButton;
 import sphis.scema.gui.text.GuiShadowText;
 import sphis.scema.gui.text.GuiText;
+import sphis.scema.save.Save;
 import sphis.scema.slides.SlideData.SlidePropTextSettingsData;
 
 using Reflect;
@@ -77,6 +79,9 @@ class GuiState extends FlxState
 		var info = {
 			scema: Application.current.meta.get("version"),
 		}
+
+		if (Save.getSaveData(SIMPLE_VERSION))
+			info.scema = SimpleVersion.convertToSingleLetters(info.scema);
 
 		if (script_files.getVariables().exists("script_info"))
 		{
