@@ -2,7 +2,9 @@ package sphis.scema;
 
 import flixel.FlxG;
 import lime.app.Application;
+import polymod.util.DefineUtil;
 import sphis.scema.gui.states.GuiMainMenu;
+import sphis.scema.gui.states.GuiOptions;
 import sphis.scema.gui.states.GuiState;
 import sphis.scema.save.Save;
 
@@ -23,7 +25,21 @@ class InitState extends GuiState
 			Save.save();
 		});
 
-		FlxG.switchState(() -> new GuiMainMenu());
+		var starting_state = DefineUtil.getDefineString("STARTING_STATE");
+
+		switch (starting_state.toLowerCase())
+		{
+			case "gui_options":
+				FlxG.switchState(() -> new GuiOptions());
+
+			default:
+				if (starting_state != null)
+				{
+					trace(starting_state + " has no case");
+				}
+
+				FlxG.switchState(() -> new GuiMainMenu());
+		}
 	}
 
 	override public function update(elapsed:Float)
