@@ -11,21 +11,25 @@ class SlideCode extends CodeFileRunner
 
 	public var start_variables:Map<String, Dynamic> = [];
 
-	override public function new(filepath:String, start_variables:Map<String, Dynamic>)
+	override public function new(filepath:String, ?start_variables:Map<String, Dynamic>)
 	{
 		super(null);
 		this.start_variables = start_variables;
 
 		this.filepath = Paths.getSlideFile(filepath);
 
-		slide_data = cast Json.parse(Paths.getText(this.filepath));
+		if (filepath != null)
+			slide_data = cast Json.parse(Paths.getText(this.filepath));
 
-		parseCode(slide_data);
+		parseCode();
 	}
 
 	override public function initVars()
 	{
 		super.initVars();
+
+		if (start_variables == null)
+			return;
 
 		for (key => value in start_variables)
 		{
@@ -33,9 +37,12 @@ class SlideCode extends CodeFileRunner
 		}
 	}
 
-	public function parseCode(slide_data:SlideData)
+	public function parseCode()
 	{
 		initVars();
+
+		if (slide_data == null)
+			return;
 
 		var functions:Array<String> = Reflect.fields(slide_data.code);
 

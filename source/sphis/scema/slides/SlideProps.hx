@@ -29,12 +29,15 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 
 	public var start_variables:Map<String, Dynamic> = [];
 
-	override public function new(slide_path:String, start_variables:Map<String, Dynamic>)
+	override public function new(slide_path:String, ?start_variables:Map<String, Dynamic>)
 	{
 		super();
-		slide_data = cast Json.parse(Paths.getText(Paths.getSlideFile(slide_path)));
 
 		this.start_variables = start_variables;
+
+		if (slide_path != null)
+			slide_data = cast Json.parse(Paths.getText(Paths.getSlideFile(slide_path)));
+
 		loadProps();
 	}
 

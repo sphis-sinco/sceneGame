@@ -6,6 +6,7 @@ import flixel.math.FlxPoint;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
+import haxe.Json;
 import haxe.Log;
 import sphis.scema.gui.hearts.HeartsGroup;
 import sphis.scema.gui.states.GuiState;
@@ -27,6 +28,8 @@ class PlayState extends GuiState
 	public var paused:Bool;
 	public var paused_blackbg:FlxSprite;
 	public var paused_bg:FlxSprite;
+
+	public var pausescreen_slide:{props:SlideProps, code:SlideCode};
 
 	public static var instance:PlayState;
 
@@ -83,6 +86,22 @@ class PlayState extends GuiState
 		paused_bg.alpha = 0;
 		add(paused_bg);
 
+		pausescreen_slide = {
+			props: new SlideProps(null),
+			code: new SlideCode(null),
+		}
+
+		pausescreen_slide.props.slide_data = Json.parse(Paths.getText(Paths.getDataFile('pausescreen.json')));
+		pausescreen_slide.code.slide_data = pausescreen_slide.props.slide_data;
+
+		pausescreen_slide.props.start_variables = getAdditionalVariables();
+		pausescreen_slide.props.loadProps();
+
+		pausescreen_slide.code.slide_data = pausescreen_slide.props.slide_data;
+		pausescreen_slide.code.start_variables = getAdditionalVariables();
+		pausescreen_slide.code.initVars();
+		pausescreen_slide.code.parseCode();
+
 		super.create();
 
 		slide_code.onCreate(getAdditionalVariables());
@@ -99,7 +118,7 @@ class PlayState extends GuiState
 
 		if (FlxG.keys.justReleased.ENTER)
 		{
-			paused = !paused;
+			togglePaused();
 
 			FlxTween.cancelTweensOf(paused_bg);
 			FlxTween.cancelTweensOf(paused_blackbg);
@@ -126,6 +145,11 @@ class PlayState extends GuiState
 			if (slide_code.slide_data.getComponent("on_update_bypass_pause") == true)
 				slide_code.onUpdate(getAdditionalVariables());
 		}
+	}
+
+	public static function togglePaused()
+	{
+		instance.paused = !instance.paused;
 	}
 
 	override function getDesiredInfoOrder():Array<String>

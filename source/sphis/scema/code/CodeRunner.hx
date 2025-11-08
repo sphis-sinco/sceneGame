@@ -78,7 +78,7 @@ class CodeRunner
 
 		var program = parser.parseString(script);
 
-		var vars = variables.copy();
+		var vars = variables?.copy() ?? [];
 		try
 		{
 			for (key => value in additional_variables)

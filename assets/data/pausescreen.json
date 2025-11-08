@@ -1,0 +1,27 @@
+{
+    "components": [],
+    "props": [
+        {
+            "id":"Resume",
+            "z_index":0,
+            
+            "prop_type": "button",
+
+            "button_settings": {
+                "text_content": "Resume",
+
+                "width_scale_addition": 16,
+                "height_scale_addition": 8,
+
+			    "pressed_callback": [
+                    "PlayState.togglePaused();"
+                ]
+            },
+            "screencenter_settings": {
+                "screencenter":true,
+                "screencenter_position_offset": [-320, 0]
+            }
+        }
+    ],
+    "code": {}
+}
