@@ -117,12 +117,11 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 				code_runner.initVars();
 
 				var skip_prop:Bool = false;
-
 				var any_trues:Bool = false;
 
 				for (condition in prop.visible_conditions)
 				{
-					if (skip_prop || true)
+					if (skip_prop || any_trues)
 						continue;
 
 					if (condition.code == null)
