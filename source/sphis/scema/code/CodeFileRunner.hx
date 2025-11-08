@@ -1,7 +1,6 @@
 package sphis.scema.code;
 
 import haxe.Log;
-import lime.utils.Assets;
 
 class CodeFileRunner extends CodeRunner
 {
@@ -15,6 +14,8 @@ class CodeFileRunner extends CodeRunner
 
 		this.filepath = Paths.getScriptFile(path_addtion + filepath);
 		file_content = Paths.getText(this.filepath);
+
+		trace("New CFR: " + this.filepath);
 
 		super();
 	}

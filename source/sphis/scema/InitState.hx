@@ -4,15 +4,18 @@ import flixel.FlxG;
 import flixel.FlxState;
 import sphis.scema.code.CodeGroup;
 import sphis.scema.gui.states.GuiMainMenu;
+import sphis.scema.gui.states.GuiState;
 
-class InitState extends FlxState
+class InitState extends GuiState
 {
+	override public function new()
+	{
+		super('initstate/');
+	}
+
 	override public function create()
 	{
 		super.create();
-
-		var scriptGroup = new CodeGroup('initstate/');
-		scriptGroup.runAll();
 
 		FlxG.switchState(() -> new GuiMainMenu());
 	}

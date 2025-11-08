@@ -7,6 +7,8 @@ import sphis.scema.gui.states.GuiState;
 import sphis.scema.slides.SlideCode;
 import sphis.scema.slides.SlideProps;
 
+using Reflect;
+
 class PlayState extends GuiState
 {
 	public var hearts:HeartsGroup;
@@ -103,8 +105,8 @@ class PlayState extends GuiState
 		if (slide_code.variables.exists("script_info"))
 		{
 			var o:Dynamic = slide_code.variables.get("script_info");
-			for (e in Reflect.fields(slide_code.variables.get("script_info")))
-				Reflect.setProperty(info, e, Reflect.getProperty(slide_code.variables.get("script_info"), e));
+			for (e in o.fields())
+				info.setProperty(e, o.getProperty(e));
 		}
 
 		return info;

@@ -3,9 +3,3 @@ trace(FlxG.height);
 
 trace(Paths.exists(Paths.getScriptFile("initstate/testing")));
 trace(Paths.exists(Paths.getScriptFile("initstate/testing-2")));
-
-// trace(Reflect.fields(current_state));
-
-var script_info = {
-    testing_script: 1.0
-};

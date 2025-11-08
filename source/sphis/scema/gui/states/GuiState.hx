@@ -14,6 +14,7 @@ import sphis.scema.gui.buttons.GuiTextButton;
 import sphis.scema.gui.text.GuiShadowText;
 import sphis.scema.gui.text.GuiText;
 
+using Reflect;
 using StringTools;
 
 class GuiState extends FlxState
@@ -27,12 +28,24 @@ class GuiState extends FlxState
 		super();
 
 		script_files = new CodeGroup(starting_path_addtion);
+
+		var guistate_script_files = new CodeGroup("guistate/");
+		for (script in guistate_script_files.members)
+		{
+			script_files.add(script);
+		}
 		script_files.runAll(getAdditionalVariables());
 	}
 
 	public function getAdditionalVariables():Map<String, Dynamic>
 	{
-		return ["current_state" => this];
+		return [
+			"current_state" => this,
+			"script_info" => {},
+			"debug_script_info" => {},
+			"pre_desired_info_order" => [],
+			"post_desired_info_order" => []
+		];
 	}
 
 	override function create()
@@ -73,8 +86,8 @@ class GuiState extends FlxState
 		if (script_files.getVariables().exists("script_info"))
 		{
 			var o:Dynamic = script_files.getVariables().get("script_info");
-			for (e in Reflect.fields(script_files.getVariables().get("script_info")))
-				Reflect.setProperty(info, e, Reflect.getProperty(script_files.getVariables().get("script_info"), e));
+			for (e in o.fields())
+				info.setProperty(e, o.getProperty(e));
 		}
 
 		return info;
@@ -90,13 +103,14 @@ class GuiState extends FlxState
 			component_count: this.members.length,
 		};
 
-		info.scema = getNonDebugInfo().scema;
+		for (e in getNonDebugInfo().fields())
+			info.setProperty(e, getNonDebugInfo().getProperty(e));
 
 		if (script_files.getVariables().exists("debug_script_info"))
 		{
 			var o:Dynamic = script_files.getVariables().get("debug_script_info");
-			for (e in Reflect.fields(script_files.getVariables().get("debug_script_info")))
-				Reflect.setProperty(info, e, Reflect.getProperty(script_files.getVariables().get("debug_script_info"), e));
+			for (e in o.fields())
+				info.setProperty(e, o.getProperty(e));
 		}
 
 		return info;
@@ -176,21 +190,17 @@ class GuiState extends FlxState
 	{
 		var text:String = "";
 
-		var fields:Array<String> = Reflect.fields(info);
+		var fields:Array<String> = info.fields();
 		fields.sort(getInfoSort);
 
 		for (field in fields)
 		{
-			final property = Std.string(Reflect.getProperty(info, field));
+			final property = Std.string(info.getProperty(field));
 
 			if (property != "\n")
-			{
 				text += field + " : " + property + "\n";
-			}
 			else
-			{
 				text += "\n";
-			}
 		}
 
 		return text;
