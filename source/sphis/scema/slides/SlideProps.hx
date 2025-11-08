@@ -171,7 +171,14 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 
 		if (prop?.button_settings?.text_shadow_color != null)
 			prop.button_settings.text_shadow_color = getPropColor(cast prop?.button_settings?.text_shadow_color);
-		prop.button_settings.position = new FlxPoint(prop.position[0], prop.position[1]);
+		if (prop.position != null)
+		{
+			prop.button_settings.position = new FlxPoint(prop.position[0], prop.position[1]);
+		}
+		else
+		{
+			prop.button_settings.position = new FlxPoint();
+		}
 
 		var button_prop = new GuiTextButton(prop.button_settings);
 
