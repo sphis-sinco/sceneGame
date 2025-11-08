@@ -24,9 +24,10 @@ class GuiMainMenu extends GuiState
 			text_content: "Play",
 			position: new FlxPoint(),
 
-			pressed_callback: [
-				"FlxG.camera.fade(FlxColor.BLACK, 2, false, _ -> FlxG.switchState(PlayState.new.bind(script_files.getVariables().get('starting_state'))));"
-			],
+			pressed_callback_code: () ->
+			{
+				FlxG.camera.fade(FlxColor.BLACK, 2, false, () -> FlxG.switchState(PlayState.new.bind(script_files.getVariables().get('starting_state'))));
+			},
 
 			width_scale_addition: 16,
 			height_scale_addition: 3
@@ -36,7 +37,10 @@ class GuiMainMenu extends GuiState
 			text_content: "Options...",
 			position: new FlxPoint(),
 
-			pressed_callback: ["trace(\"Hola\");"],
+			pressed_callback_code: () ->
+			{
+				trace("Hola");
+			},
 
 			width_scale_addition: 16,
 			height_scale_addition: 3

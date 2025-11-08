@@ -15,11 +15,13 @@ typedef GuiTextButtonParameters =
 	> SlidePropTextSettingsData,
 
 	var ?pressed_callback:Array<String>;
+	var ?pressed_callback_code:Void->Void;
 }
 
 class GuiTextButton extends FlxTypedGroup<FlxBasic>
 {
 	public var pressed_callback:Array<String>;
+	public var pressed_callback_code:Void->Void;
 
 	public var button:GuiButton;
 	public var button_highlight:GuiButton;
@@ -34,6 +36,8 @@ class GuiTextButton extends FlxTypedGroup<FlxBasic>
 		super();
 
 		this.pressed_callback = params.pressed_callback;
+		this.pressed_callback_code = params.pressed_callback_code;
+
 		script_runner = new CodeRunner();
 		script_runner.initVars();
 
@@ -71,12 +75,15 @@ class GuiTextButton extends FlxTypedGroup<FlxBasic>
 		button_highlight.visible = FlxG.mouse.overlaps(button);
 		button.visible = !FlxG.mouse.overlaps(button);
 
-		if (FlxG.mouse.justReleased && button_highlight.visible && pressed_callback != null)
+		if (FlxG.mouse.justReleased && button_highlight.visible)
 		{
-			for (line in pressed_callback)
+			if (pressed_callback != null)
 			{
-				script_runner.run(line, script_runner_additional_variables);
+				for (line in pressed_callback)
+					script_runner.run(line, script_runner_additional_variables);
 			}
+			if (pressed_callback_code != null)
+				pressed_callback_code();
 		}
 	}
 }
