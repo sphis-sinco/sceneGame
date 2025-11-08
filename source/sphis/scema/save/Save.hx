@@ -18,6 +18,9 @@ class Save
 
 		handleEmptySave();
 		updateSave();
+
+		trace('Save data fields: ' + SAVE.data.fields);
+		trace('Save data: ' + SAVE.data);
 	}
 
 	public static function handleEmptySave()
