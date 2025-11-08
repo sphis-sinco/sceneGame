@@ -19,7 +19,7 @@ class GuiMainMenu extends GuiState
 	{
 		super();
 
-		variables.set("state", this);
+		variables.set("current_state", this);
 
 		script_files = new CodeGroup('mainmenu/');
 		script_files.runAll(variables);
