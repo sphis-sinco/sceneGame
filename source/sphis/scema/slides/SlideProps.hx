@@ -25,15 +25,36 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 
 	override public function new(slide_path:String)
 	{
+		super();
 		slide_data = cast Json.parse(Assets.getText(Paths.getSlideFile(slide_path)));
+
+		loadProps();
+	}
+
+	public function loadProps()
+	{
+		if (slide_data == null)
+			return;
+
+		if (this.members.length > 0)
+		{
+			for (prop in this.members)
+			{
+				this.members.remove(prop);
+				prop.destroy();
+			}
+		}
+
+		prop_animation_conditions.clear();
+		prop_animation_offsets.clear();
+		prop_animation_offsets.clear();
+
 		prop_ids = [];
 
 		slide_data.props.sort((prop1, prop2) ->
 		{
 			return FlxSort.byValues(FlxSort.ASCENDING, prop1.z_index, prop2.z_index);
 		});
-
-		super();
 
 		var i = 1;
 		for (prop in slide_data.props)
