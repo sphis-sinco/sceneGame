@@ -48,5 +48,7 @@ class GuiMainMenu extends GuiState
 		options_button.button.screenCenter();
 		options_button.button.y += options_button.button.height;
 		add(options_button);
+
+		debugText.text_field_shadow.color = FlxColor.GRAY;
 	}
 }
