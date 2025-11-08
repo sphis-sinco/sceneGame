@@ -52,12 +52,12 @@
             
             "prop_type": "text",
 
-            "button_settings": {
-                "text_content": "me no amigo yo"
+            "text_settings": {
+                "text": "me no amigo yo"
             },
             "screencenter_settings": {
                 "screencenter":true,
-                "screencenter_offset_position": [0, -32]
+                "screencenter_position_offset": [0, -32]
             }
         }
     ],

@@ -3,19 +3,16 @@ package sphis.scema.gui.buttons;
 import flixel.FlxBasic;
 import flixel.FlxG;
 import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.util.FlxColor;
 import sphis.scema.code.CodeRunner;
 import sphis.scema.gui.buttons.GuiButton.GuiButtonParameters;
 import sphis.scema.gui.text.GuiShadowText;
+import sphis.scema.slides.SlideData.SlidePropButtonTextData;
 
 typedef GuiTextButtonParameters =
 {
 	> GuiButtonParameters,
 
-	var text_content:String;
-
-	var ?text_size:Null<Int>;
-	var ?text_shadow_color:FlxColor;
+	> SlidePropButtonTextData,
 
 	var ?pressed_callback:Array<String>;
 }
