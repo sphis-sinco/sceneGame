@@ -34,12 +34,7 @@ typedef SlidePropData =
 	var ?button_settings:SlidePropButtonSettingsData;
 }
 
-typedef SlidePropButtonSettingsData =
-{
-	> GuiTextButtonParameters,
-
-	var position:Array<Float>;
-}
+typedef SlidePropButtonSettingsData = GuiTextButtonParameters;
 
 typedef SlidePropGraphicSettingsData =
 {

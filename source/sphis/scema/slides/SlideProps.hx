@@ -4,9 +4,11 @@ import flixel.FlxBasic;
 import flixel.FlxSprite;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.group.FlxGroup.FlxTypedGroup;
+import flixel.math.FlxPoint;
 import flixel.util.FlxColor;
 import flixel.util.FlxSort;
 import haxe.Json;
+import sphis.scema.gui.buttons.GuiTextButton;
 import sphis.scema.slides.SlideData.SlidePropData;
 
 using StringTools;
@@ -111,6 +113,15 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 				}
 			}
 
+			if (prop.prop_type == "button")
+			{
+				if (!parseButtonProp(prop))
+				{
+					i++;
+					continue;
+				}
+			}
+
 			i++;
 		}
 
@@ -142,6 +153,26 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 		message = message.replace("${PROP_ID}", prop_id);
 
 		trace(message);
+	}
+
+	function parseButtonProp(prop:SlidePropData):Bool
+	{
+		if (prop.button_settings.text_content == null)
+		{
+			skippedSlidePropGeneration(prop.id, MISSING_BUTTON_TEXT_CONTENT);
+			return false;
+		}
+
+		prop.button_settings.position = new FlxPoint(prop.position[0], prop.position[1]);
+
+		var button_prop = new GuiTextButton(prop.button_settings);
+
+		prop_id_to_index.set(prop.id, this.members.length);
+		add(button_prop);
+
+		prop_ids.push(prop.id);
+		trace("Created Button Prop: " + prop.id);
+		return true;
 	}
 
 	function parseGraphicProp(prop:SlidePropData):Bool
@@ -394,6 +425,17 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 		var prop_class_name = Type.getClassName(Type.getClass(prop));
 
 		if (prop_class_name.split('.')[prop_class_name.split('.').length - 1] == "FlxSprite")
+			return cast prop;
+
+		return null;
+	}
+
+	public function getButtonProp(prop:String):GuiTextButton
+	{
+		var prop = getProp(prop);
+		var prop_class_name = Type.getClassName(Type.getClass(prop));
+
+		if (prop_class_name.split('.')[prop_class_name.split('.').length - 1] == "GuiTextButton")
 			return cast prop;
 
 		return null;
