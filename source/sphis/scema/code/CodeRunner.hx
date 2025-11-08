@@ -4,6 +4,7 @@ import flixel.FlxG;
 import flixel.util.FlxColor;
 import haxe.Log;
 import sphis.scema.gui.GuiConstants;
+import sphis.scema.gui.states.GuiMainMenu;
 import sphis.scema.save.Save;
 
 using Reflect;
@@ -47,6 +48,7 @@ class CodeRunner
 		});
 		variables.set("Reflect", Reflect);
 
+		variables.set("GuiMainMenu", GuiMainMenu);
 		variables.set("PlayState", PlayState.instance);
 
 		variables.set("Paths", Paths);
