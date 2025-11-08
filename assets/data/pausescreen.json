@@ -2,13 +2,13 @@
     "components": [],
     "props": [
         {
-            "id":"Resume",
+            "id":"Leave",
             "z_index":0,
             
             "prop_type": "button",
 
             "button_settings": {
-                "text_content": "Resume",
+                "text_content": "Leave",
 
                 "width_scale_addition": 16,
                 "height_scale_addition": 8,
@@ -20,6 +20,27 @@
             "screencenter_settings": {
                 "screencenter":true,
                 "screencenter_position_offset": [-320, 0]
+            }
+        },
+        {
+            "id":"Options",
+            "z_index":1,
+            
+            "prop_type": "button",
+
+            "button_settings": {
+                "text_content": "Options",
+
+                "width_scale_addition": 16,
+                "height_scale_addition": 8,
+
+			    "pressed_callback": [
+                    "trace(\"Nola\");"
+                ]
+            },
+            "screencenter_settings": {
+                "screencenter":true,
+                "screencenter_position_offset": [320, 0]
             }
         }
     ],
