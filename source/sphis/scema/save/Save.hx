@@ -11,7 +11,7 @@ class Save
 
 	public static var SAVE:FlxSave;
 
-	public static var DEPRECATED_SAVEDATA_FIELDS_WITH_MSG:Map<SaveFields, String> = [VERSION => " since 0.0.12"];
+	public static var DEPRECATED_SAVEDATA_FIELDS_WITH_MSG:Map<SaveFields, String> = [];
 
 	public static function initalizeSave()
 	{
