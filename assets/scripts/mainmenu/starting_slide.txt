@@ -1,6 +1,7 @@
 starting_state = "dummy";
 
-#if TAIGO
-trace("TAIGO :D");
-starting_state = "dummy-taigo";
-#end
+if (defines.TAIGO)
+{
+    trace("TAIGO :D");
+    starting_state = "dummy-taigo";
+}

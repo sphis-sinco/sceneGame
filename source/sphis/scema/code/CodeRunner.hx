@@ -24,9 +24,6 @@ class CodeRunner
 		parser.allowJSON = true;
 		parser.allowMetadata = true;
 		parser.allowTypes = true;
-
-		parser.preprocesorValues.set('debug', #if debug true #else false #end);
-		parser.preprocesorValues.set('TAIGO', #if TAIGO true #else false #end);
 	}
 
 	public function initVars()
@@ -46,6 +43,11 @@ class CodeRunner
 		variables.set("null", null);
 
 		variables.set("playstate", PlayState.instance ?? null);
+
+		variables.set("defines", {
+			debug: #if debug true #else false #end,
+			TAIGO: #if TAIGO true #else false #end
+		});
 	}
 
 	public function run(script:String, ?additional_variables:Map<String, Dynamic>):Dynamic
