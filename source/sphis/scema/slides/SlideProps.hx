@@ -169,6 +169,8 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 			return false;
 		}
 
+		if (prop?.button_settings?.text_shadow_color != null)
+			prop.button_settings.text_shadow_color = getPropColor(cast prop?.button_settings?.text_shadow_color);
 		prop.button_settings.position = new FlxPoint(prop.position[0], prop.position[1]);
 
 		var button_prop = new GuiTextButton(prop.button_settings);
@@ -226,7 +228,7 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 
 		graphic_prop.loadGraphic(Paths.getImageFile(prop.graphic_settings.image_path));
 
-		graphic_prop.color = getPropColor(prop);
+		graphic_prop.color = getPropColor(prop.graphic_settings.color);
 
 		if (prop.graphic_settings.screencenter)
 		{
@@ -362,7 +364,7 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 			return false;
 		}
 
-		graphic_prop.makeGraphic(prop.graphic_settings.width, prop.graphic_settings.height, getPropColor(prop));
+		graphic_prop.makeGraphic(prop.graphic_settings.width, prop.graphic_settings.height, getPropColor(prop.graphic_settings.color));
 
 		if (prop.graphic_settings.screencenter)
 		{
@@ -383,18 +385,16 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 		return true;
 	}
 
-	function getPropColor(prop:SlidePropData):Null<FlxColor>
+	function getPropColor(color_string:String):Null<FlxColor>
 	{
 		var color:Null<FlxColor> = FlxColor.WHITE;
 
-		if (prop.graphic_settings.color != null)
+		if (color_string != null)
 		{
-			if (!prop.graphic_settings.color.startsWith("#")
-				&& !prop.graphic_settings.color.startsWith("0x")
-				&& FlxColor.fromString(prop.graphic_settings.color) == null)
-				color = FlxColor.fromString("0x" + prop.graphic_settings.color);
+			if (!color_string.startsWith("#") && !color_string.startsWith("0x") && FlxColor.fromString(color_string) == null)
+				color = FlxColor.fromString("0x" + color_string);
 			else
-				color = FlxColor.fromString(prop.graphic_settings.color);
+				color = FlxColor.fromString(color_string);
 
 			if (color == null)
 				color = FlxColor.WHITE;
