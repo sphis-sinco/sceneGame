@@ -53,7 +53,7 @@ class Save
 	{
 		switch (getSaveData(VERSION))
 		{
-			case "0.0.18", "0.0.17":
+			case "0.0.18":
 				setSaveData(SIMPLE_VERSION, true);
 
 			default:
