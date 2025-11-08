@@ -14,7 +14,7 @@
                 "height_scale_addition": 8,
 
 			    "pressed_callback": [
-                    "FlxG.switchState(new GuiMainMenu());"
+                    "FlxG.camera.fade(FlxColor.BLACK, .25, false, () -> FlxG.switchState(new GuiMainMenu()));"
                 ]
             },
             "screencenter_settings": {
