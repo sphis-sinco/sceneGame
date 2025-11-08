@@ -50,7 +50,8 @@
 	<haxelib name="hscript" />
 	<define name="hscriptPos"/>
 
-	<haxelib name="polymod" />
+	<haxelib name="polymod" version="git" if="hl"/>
+	<haxelib name="polymod" unless="hl"/>
 
 	<!-- ______________________________ Haxedefines _____________________________ -->
 
