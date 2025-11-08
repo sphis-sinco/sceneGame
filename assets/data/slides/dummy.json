@@ -19,9 +19,10 @@
                 "color": "808080",
                 
                 "width": 1280,
-                "height": 720,
-
-                "screencenter": true
+                "height": 720
+            },
+            "screencenter_settings": {
+                "screencenter":true
             }
         },
         {
@@ -34,11 +35,14 @@
                 "text_content": "Hola mi amigo",
 
                 "width_scale_addition": 32,
-                "height_scale_addition": 32,
+                "height_scale_addition": 8,
 
 			    "pressed_callback": [
                     "trace(\"Hola\");"
                 ]
+            },
+            "screencenter_settings": {
+                "screencenter":true
             }
         }
     ],

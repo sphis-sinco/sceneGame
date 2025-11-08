@@ -19,9 +19,10 @@
                 "color": "808080",
                 
                 "width": 1280,
-                "height": 720,
-
-                "screencenter": true
+                "height": 720
+            },
+            "screencenter_settings": {
+                "screencenter":true
             }
         },
         {
@@ -30,9 +31,10 @@
             "prop_type": "graphic",
 
             "graphic_settings": {
-                "image_path": "taigo",
-                
-                "screencenter": true,
+                "image_path": "taigo"
+            },
+            "screencenter_settings": {
+                "screencenter":true,
                 "screencenter_position_offset": [-320,0]
             }
         },
@@ -43,9 +45,6 @@
 
             "graphic_settings": {
                 "image_path": "taigo-animated",
-                
-                "screencenter": true,
-                "screencenter_position_offset": [320,0],
 
                 "animation_type": "xml",
                 "animations": [
@@ -59,6 +58,10 @@
                         "conditions": ["default"]
                     }
                 ]
+            },
+            "screencenter_settings": {
+                "screencenter":true,
+                "screencenter_position_offset": [320,0]
             }
         }
     ],

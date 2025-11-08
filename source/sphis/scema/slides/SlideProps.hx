@@ -94,18 +94,21 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 				continue;
 			}
 
-			if (prop.prop_type == "graphic")
+			if (prop.screencenter_settings != null)
 			{
-				if (prop.graphic_settings.screencenter_position_offset != null)
+				if (prop.screencenter_settings.screencenter_position_offset != null)
 				{
-					if (prop.graphic_settings.screencenter_position_offset.length < 2)
+					if (prop.screencenter_settings.screencenter_position_offset.length < 2)
 					{
 						skippedSlidePropGeneration(prop.id, INCOMPLETE_SCREENCENTER_POSITION_OFFSET_FIELD);
 						i++;
 						continue;
 					}
 				}
+			}
 
+			if (prop.prop_type == "graphic")
+			{
 				if (!parseGraphicProp(prop))
 				{
 					i++;
@@ -182,6 +185,17 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 
 		var button_prop = new GuiTextButton(prop.button_settings);
 
+		if (prop.screencenter_settings.screencenter)
+		{
+			button_prop.button.screenCenter();
+
+			if (prop.screencenter_settings.screencenter_position_offset != null)
+			{
+				button_prop.button.x += prop.screencenter_settings.screencenter_position_offset[0];
+				button_prop.button.y += prop.screencenter_settings.screencenter_position_offset[1];
+			}
+		}
+
 		prop_id_to_index.set(prop.id, this.members.length);
 		add(button_prop);
 
@@ -237,14 +251,14 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 
 		graphic_prop.color = getPropColor(prop.graphic_settings.color);
 
-		if (prop.graphic_settings.screencenter)
+		if (prop.screencenter_settings.screencenter)
 		{
 			graphic_prop.screenCenter();
 
-			if (prop.graphic_settings.screencenter_position_offset != null)
+			if (prop.screencenter_settings.screencenter_position_offset != null)
 			{
-				graphic_prop.x += prop.graphic_settings.screencenter_position_offset[0];
-				graphic_prop.y += prop.graphic_settings.screencenter_position_offset[1];
+				graphic_prop.x += prop.screencenter_settings.screencenter_position_offset[0];
+				graphic_prop.y += prop.screencenter_settings.screencenter_position_offset[1];
 			}
 		}
 
@@ -373,14 +387,14 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 
 		graphic_prop.makeGraphic(prop.graphic_settings.width, prop.graphic_settings.height, getPropColor(prop.graphic_settings.color));
 
-		if (prop.graphic_settings.screencenter)
+		if (prop.screencenter_settings.screencenter)
 		{
 			graphic_prop.screenCenter();
 
-			if (prop.graphic_settings.screencenter_position_offset != null)
+			if (prop.screencenter_settings.screencenter_position_offset != null)
 			{
-				graphic_prop.x += prop.graphic_settings.screencenter_position_offset[0];
-				graphic_prop.y += prop.graphic_settings.screencenter_position_offset[1];
+				graphic_prop.x += prop.screencenter_settings.screencenter_position_offset[0];
+				graphic_prop.y += prop.screencenter_settings.screencenter_position_offset[1];
 			}
 		}
 

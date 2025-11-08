@@ -30,16 +30,23 @@ typedef SlidePropData =
 
 	var ?z_index:Int;
 
+	var ?screencenter_settings:SlidePropScreencenterSettingsData;
+
 	var ?graphic_settings:SlidePropGraphicSettingsData;
 	var ?button_settings:SlidePropButtonSettingsData;
 }
 
 typedef SlidePropButtonSettingsData = GuiTextButtonParameters;
 
+typedef SlidePropScreencenterSettingsData =
+{
+	var ?screencenter:Bool;
+	var ?screencenter_position_offset:Array<Float>;
+}
+
 typedef SlidePropGraphicSettingsData =
 {
 	var ?make_graphic:Bool;
-	var ?screencenter:Bool;
 
 	var ?width:Int;
 	var ?height:Int;
@@ -47,8 +54,6 @@ typedef SlidePropGraphicSettingsData =
 	var ?image_path:String;
 
 	var ?color:String;
-
-	var ?screencenter_position_offset:Array<Float>;
 
 	var ?animation_type:String;
 	var ?animations:Array<SlidePropGraphicSettingsAnimationData>;
