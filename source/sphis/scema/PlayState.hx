@@ -94,6 +94,15 @@ class PlayState extends GuiState
 			FlxTween.tween(paused_bg, {alpha: (paused) ? 1.0 : 0.0}, .5, {
 				ease: FlxEase.smootherStepInOut
 			});
+
+			if (paused)
+			{
+				slide_props.propsPauseAnimation();
+			}
+			else
+			{
+				slide_props.propsUnpauseAnimation();
+			}
 		}
 
 		if (!paused)

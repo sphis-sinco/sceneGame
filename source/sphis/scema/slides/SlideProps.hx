@@ -451,6 +451,26 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 			prop.animation.play(animation);
 	}
 
+	public function propsPauseAnimation()
+	{
+		for (prop in this.prop_ids)
+		{
+			var prop:FlxSprite = getGraphicProp(prop);
+			if (prop != null)
+				prop.animation.pause();
+		}
+	}
+
+	public function propsUnpauseAnimation()
+	{
+		for (prop in this.prop_ids)
+		{
+			var prop:FlxSprite = getGraphicProp(prop);
+			if (prop != null)
+				prop.animation.resume();
+		}
+	}
+
 	public function getGraphicProp(prop:String):FlxSprite
 	{
 		var prop = getProp(prop);

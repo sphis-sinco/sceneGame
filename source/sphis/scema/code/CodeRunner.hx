@@ -96,7 +96,7 @@ class CodeRunner
 				variables.set(key, value.field("r"));
 			else
 			{
-				trace(value);
+				trace(key + ": " + value);
 				variables.set(key, value);
 			}
 		}
