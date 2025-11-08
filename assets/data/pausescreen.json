@@ -14,7 +14,8 @@
                 "height_scale_addition": 8,
 
 			    "pressed_callback": [
-                    "FlxG.camera.fade(FlxColor.BLACK, .25, false, () -> FlxG.switchState(new GuiMainMenu()));"
+                    "PlayState.instance.pauseProps(PlayState.instance.pausescreen_slide.props);",
+                    "PlayState.instance.leave(new GuiMainMenu());"
                 ]
             },
             "screencenter_settings": {

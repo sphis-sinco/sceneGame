@@ -3,6 +3,7 @@ package sphis.scema;
 import flixel.FlxBasic;
 import flixel.FlxG;
 import flixel.FlxSprite;
+import flixel.FlxState;
 import flixel.math.FlxPoint;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
@@ -198,6 +199,11 @@ class PlayState extends GuiState
 		{
 			instance.slide_props.propsUnpauseAnimation();
 		}
+	}
+
+	public function leave(state:FlxState)
+	{
+		FlxG.camera.fade(FlxColor.BLACK, .25, false, () -> FlxG.switchState(() -> state));
 	}
 
 	override function getDesiredInfoOrder():Array<String>

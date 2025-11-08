@@ -20,6 +20,8 @@ class GuiMainMenu extends GuiState
 	{
 		super.create();
 
+		FlxG.camera.fade(FlxColor.BLACK, .25, true);
+
 		play_button = createTextButton({
 			text_content: "Play",
 			position: new FlxPoint(),
