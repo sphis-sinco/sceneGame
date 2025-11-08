@@ -36,11 +36,11 @@ class GuiState extends FlxState
 		super.update(elapsed);
 
 		#if F3_MENU
-		debugText.visible = FlxG.keys.anyPressed([getDebugKey()]);
+		if (FlxG.keys.anyPressed([getDebugKey()]))
+			debugText.text = getInfoString(getDebugInfo());
+		else
 		#end
-
-		if (debugText.visible)
-			debugText.text = getDebugInfoString();
+		debugText.text = getInfoString(getNonDebugInfo());
 	}
 
 	public function getDebugKey():FlxKey
@@ -48,29 +48,39 @@ class GuiState extends FlxState
 		return F3;
 	}
 
-	public function getDebugInfo():Dynamic
+	public function getNonDebugInfo():Dynamic
 	{
 		return {
 			scema: Application.current.meta.get("version"),
+		}
+	}
+
+	public function getDebugInfo():Dynamic
+	{
+		var info:Dynamic = {
 			fps: Main.fpsCounter.currentFPS,
 
 			lb_1: "\n",
 
 			component_count: this.members.length,
-		}
+		};
+
+		info.scema = getNonDebugInfo().scema;
+
+		return info;
 	}
 
 	public static var GUI_STATE_SORT_VALS = [];
 
-	public function getDesiredDebugInfoOrder():Array<String>
+	public function getDesiredInfoOrder():Array<String>
 	{
-		return ["scema", "lb_1", "component"];
+		return ["scema", "fps", "lb_1", "component"];
 	}
 
-	public function getDebugInfoSort(entry_1:String, entry_2:String):Int
+	public function getInfoSort(entry_1:String, entry_2:String):Int
 	{
-		var entry_1_value = getDesiredDebugInfoOrder().indexOf(entry_1);
-		var entry_2_value = getDesiredDebugInfoOrder().indexOf(entry_2);
+		var entry_1_value = getDesiredInfoOrder().indexOf(entry_1);
+		var entry_2_value = getDesiredInfoOrder().indexOf(entry_2);
 
 		var e1_sortVal = "f3 debug entry: " + entry_1;
 		var e2_sortVal = "f3 debug entry: " + entry_2;
@@ -80,13 +90,13 @@ class GuiState extends FlxState
 
 		if (entry_1_value == -1)
 		{
-			entry_1_value = getDesiredDebugInfoOrder().indexOf(entry_1.split("_")[0]);
+			entry_1_value = getDesiredInfoOrder().indexOf(entry_1.split("_")[0]);
 			if (entry_1_value != -1)
 				e1_sortVal_reason = " (prefix: " + entry_1.split("_")[0] + ")";
 		}
 		if (entry_2_value == -1)
 		{
-			entry_2_value = getDesiredDebugInfoOrder().indexOf(entry_2.split("_")[0]);
+			entry_2_value = getDesiredInfoOrder().indexOf(entry_2.split("_")[0]);
 			if (entry_1_value != -1)
 				e2_sortVal_reason = " (prefix: " + entry_2.split("_")[0] + ")";
 		}
@@ -109,16 +119,16 @@ class GuiState extends FlxState
 		return FlxSort.byValues(FlxSort.ASCENDING, entry_1_value, entry_2_value);
 	}
 
-	public function getDebugInfoString():String
+	public function getInfoString(info:Dynamic):String
 	{
 		var text:String = "";
 
-		var fields:Array<String> = Reflect.fields(getDebugInfo());
-		fields.sort(getDebugInfoSort);
+		var fields:Array<String> = Reflect.fields(info);
+		fields.sort(getInfoSort);
 
 		for (field in fields)
 		{
-			final property = Std.string(Reflect.getProperty(getDebugInfo(), field));
+			final property = Std.string(Reflect.getProperty(info, field));
 
 			if (property != "\n")
 			{
