@@ -157,6 +157,12 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 
 	function parseButtonProp(prop:SlidePropData):Bool
 	{
+		if (prop.button_settings == null)
+		{
+			skippedSlidePropGeneration(prop.id, MISSING_BUTTON_SETTINGS);
+			return false;
+		}
+
 		if (prop.button_settings.text_content == null)
 		{
 			skippedSlidePropGeneration(prop.id, MISSING_BUTTON_TEXT_CONTENT);

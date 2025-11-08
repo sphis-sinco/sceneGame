@@ -15,6 +15,7 @@ enum abstract SlidePropGenerationSkipReason(String)
 	var MISSING_ANIMATIONS = "Missing graphic_settings.animations Field";
 	var MISSING_ANIMATION_NAME = "Missing graphic_settings.animations[${ANIMATION_INDEX}].name Field";
 	var MISSING_BUTTON_TEXT_CONTENT = "Missing button_settings.text_content Field";
+	var MISSING_BUTTON_SETTINGS = "Missing button_settings Field";
 
 	var NONEXISTANT_IMAGE_PATH = "${REASON_IMAGE_PATH} doesn't exist";
 	var NONEXISTANT_ANIMATIONS = "graphic_settings.animations has no Entries";
