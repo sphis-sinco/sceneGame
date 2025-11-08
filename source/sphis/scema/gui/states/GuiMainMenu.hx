@@ -3,9 +3,7 @@ package sphis.scema.gui.states;
 import flixel.FlxG;
 import flixel.math.FlxPoint;
 import flixel.util.FlxColor;
-import sphis.scema.code.CodeGroup;
 import sphis.scema.gui.buttons.GuiTextButton;
-import sphis.scema.gui.states.options.GuiOptions;
 
 class GuiMainMenu extends GuiState
 {
@@ -46,7 +44,7 @@ class GuiMainMenu extends GuiState
 			},
 
 			width_scale_addition: 16,
-			height_scale_addition: 3
+			height_scale_addition: 3,
 		});
 
 		play_button.button.screenCenter();
