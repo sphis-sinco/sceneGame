@@ -16,6 +16,7 @@ class GuiShadowText extends FlxTypedGroup<FlxText>
 	function set_text(text:String):String
 	{
 		text_field.text = text;
+		text_field_shadow.text = text;
 
 		return text;
 	}
@@ -25,6 +26,7 @@ class GuiShadowText extends FlxTypedGroup<FlxText>
 	function set_x(x:Float):Float
 	{
 		text_field.x = x;
+		text_field_shadow.x = x + shadow_padding;
 
 		return x;
 	}
@@ -34,6 +36,7 @@ class GuiShadowText extends FlxTypedGroup<FlxText>
 	function set_y(y:Float):Float
 	{
 		text_field.y = y;
+		text_field_shadow.y = y + shadow_padding;
 
 		return y;
 	}
@@ -77,7 +80,5 @@ class GuiShadowText extends FlxTypedGroup<FlxText>
 		text_field_shadow.alignment = text_field.alignment;
 		text_field_shadow.size = text_field.size;
 		text_field_shadow.alpha = text_field.alpha - .1;
-
-		text_field_shadow.setPosition(text_field.x + shadow_padding, text_field.y + shadow_padding);
 	}
 }
