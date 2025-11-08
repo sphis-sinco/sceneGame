@@ -42,6 +42,33 @@
                 "screencenter":true,
                 "screencenter_position_offset": [320, 0]
             }
+        },
+        {
+            "id":"Reload",
+            "z_index":2,
+            
+            "prop_type": "button",
+
+            "visible_conditions": [
+                {
+                    "code": "return defines.debug;"
+                }
+            ],
+
+            "button_settings": {
+                "text_content": "Reload",
+
+                "width_scale_addition": 16,
+                "height_scale_addition": 8,
+
+			    "pressed_callback": [
+                    "FlxG.resetState();"
+                ]
+            },
+            "screencenter_settings": {
+                "screencenter":true,
+                "screencenter_position_offset": [0, 320]
+            }
         }
     ],
     "code": {}
