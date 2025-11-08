@@ -4,12 +4,13 @@ import flixel.FlxG;
 import haxe.Log;
 import sphis.scema.gui.GuiConstants;
 
+using Reflect;
+
 class CodeRunner
 {
 	public var variables:Map<String, Dynamic> = null;
 
 	public var parser = new hscript.Parser();
-
 	public var interp = new hscript.Interp();
 
 	public function new()
@@ -89,7 +90,13 @@ class CodeRunner
 		@:privateAccess
 		for (key => value in interp.locals)
 		{
-			variables.set(key, value.r);
+			if (value.hasField("r"))
+				variables.set(key, value.field("r"));
+			else
+			{
+				trace(value);
+				variables.set(key, value);
+			}
 		}
 
 		return execution;
