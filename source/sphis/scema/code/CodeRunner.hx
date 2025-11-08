@@ -43,7 +43,6 @@ class CodeRunner
 			Log.trace(Std.string(v), null);
 		});
 		variables.set("Reflect", Reflect);
-		variables.set("null", null);
 
 		variables.set("PlayState", PlayState.instance);
 
@@ -53,6 +52,10 @@ class CodeRunner
 		variables.set("GuiConstants", GuiConstants);
 
 		variables.set("FlxG", FlxG);
+
+		variables.set("null", null);
+		variables.set("true", true);
+		variables.set("false", true);
 
 		variables.set("defines", {
 			debug: #if debug true #else false #end,
