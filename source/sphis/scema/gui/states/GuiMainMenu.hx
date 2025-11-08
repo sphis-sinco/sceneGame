@@ -11,12 +11,8 @@ class GuiMainMenu extends GuiState
 	public var play_button:GuiTextButton;
 	public var options_button:GuiTextButton;
 
-	var variables:Map<String, Dynamic> = ["starting_state" => "dummy"];
-
 	override public function new()
 	{
-		variables.set("current_state", this);
-
 		super('mainmenu/');
 	}
 
@@ -24,17 +20,13 @@ class GuiMainMenu extends GuiState
 	{
 		super.create();
 
-		variables = script_files.getVariables();
-
-		trace(variables.get("starting_state"));
-
 		play_button = createTextButton({
 			text_content: "Play",
 			position: new FlxPoint(),
 
 			pressed_callback: () ->
 			{
-				FlxG.switchState(() -> new PlayState(variables.get('starting_state')));
+				FlxG.switchState(() -> new PlayState(script_files.getVariables().get('starting_state')));
 			},
 
 			width_scale_addition: 16,

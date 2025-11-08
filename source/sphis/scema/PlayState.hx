@@ -37,16 +37,6 @@ class PlayState extends GuiState
 		super('playstate/');
 
 		this.slide_path = starting_slide_path ?? 'dummy';
-
-		paused_bg = new FlxSprite();
-
-		paused_bg.loadGraphic(Paths.getImageFile('fade'));
-		paused_bg.color = FlxColor.WHITE;
-
-		if (script_files.getVariables().exists("paused_bg_color"))
-			paused_bg.color = FlxColor.fromString(Std.string(script_files.getVariables().get("paused_bg_color"))) ?? FlxColor.WHITE;
-
-		paused_bg.alpha = 0;
 	}
 
 	override public function create()
@@ -60,6 +50,15 @@ class PlayState extends GuiState
 		add(hearts);
 		hearts.updateHealthIcons();
 
+		paused_bg = new FlxSprite();
+
+		paused_bg.loadGraphic(Paths.getImageFile('fade'));
+		paused_bg.color = FlxColor.WHITE;
+
+		trace(Std.string(script_files.getVariables().get("paused_bg_color")));
+		paused_bg.color = FlxColor.fromString(Std.string(script_files.getVariables().get("paused_bg_color"))) ?? FlxColor.WHITE;
+
+		paused_bg.alpha = 0;
 		add(paused_bg);
 
 		super.create();

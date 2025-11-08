@@ -89,7 +89,7 @@ class CodeRunner
 		@:privateAccess
 		for (key => value in interp.locals)
 		{
-			variables.set(key, value);
+			variables.set(key, value.r);
 		}
 
 		return execution;
