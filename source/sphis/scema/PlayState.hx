@@ -24,11 +24,11 @@ class PlayState extends GuiState
 
 	override public function create()
 	{
-		slide_props = new SlideProps(slide_path);
-		add(slide_props);
-
 		script_files = new CodeGroup();
 		script_files.runAll(getAdditionalVariables());
+
+		slide_props = new SlideProps(slide_path);
+		add(slide_props);
 
 		slide_code = new SlideCode(slide_path);
 
@@ -55,7 +55,7 @@ class PlayState extends GuiState
 
 	public function getAdditionalVariables():Map<String, Dynamic>
 	{
-		return ["slide_path" => this.slide_path, "hearts" => this.hearts];
+		return ["playstate" => this];
 	}
 
 	override function getDesiredInfoOrder():Array<String>

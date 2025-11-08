@@ -14,7 +14,7 @@ class CodeFileRunner extends CodeRunner
 			return;
 
 		this.filepath = Paths.getScriptFile(filepath);
-		file_content = Assets.getText(filepath);
+		file_content = Assets.getText(this.filepath);
 
 		super();
 	}

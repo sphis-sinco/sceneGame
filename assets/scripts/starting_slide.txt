@@ -1,5 +1,6 @@
 #if TAIGO
-slide_path = "dummy-taigo";
+playstate.slide_path = "dummy-taigo";
+trace("TAIGO :D");
 #end
 
-slide_path = "dummy";
+playstate.slide_path = "dummy";

@@ -1,5 +1,6 @@
 package sphis.scema.code;
 
+import haxe.io.Path;
 import polymod.fs.ZipFileSystem;
 
 class CodeGroup
@@ -10,7 +11,7 @@ class CodeGroup
 	{
 		for (file in new ZipFileSystem({}).readDirectoryRecursive('assets/scripts/'))
 		{
-			var new_script_file = new CodeFileRunner(file);
+			var new_script_file = new CodeFileRunner(Path.withoutExtension(file));
 			add(new_script_file);
 		}
 	}

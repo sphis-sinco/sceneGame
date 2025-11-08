@@ -4,7 +4,7 @@ import haxe.Log;
 
 class CodeRunner
 {
-	public var variables:Map<String, Dynamic> = [];
+	public var variables:Map<String, Dynamic> = null;
 
 	public function new()
 	{
@@ -13,6 +13,9 @@ class CodeRunner
 
 	public function initVars()
 	{
+		if (variables == null)
+			variables = new Map<String, Dynamic>();
+
 		variables.clear();
 
 		variables.set("Std", Std); // TODO: add a proxy for std
