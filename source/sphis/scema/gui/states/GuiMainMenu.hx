@@ -5,6 +5,7 @@ import flixel.math.FlxPoint;
 import flixel.util.FlxColor;
 import sphis.scema.code.CodeGroup;
 import sphis.scema.gui.buttons.GuiTextButton;
+import sphis.scema.gui.states.options.GuiOptions;
 
 class GuiMainMenu extends GuiState
 {
@@ -41,7 +42,7 @@ class GuiMainMenu extends GuiState
 
 			pressed_callback_code: () ->
 			{
-				trace("Hola");
+				FlxG.camera.fade(FlxColor.BLACK, .25, false, () -> FlxG.switchState(() -> new GuiOptions()));
 			},
 
 			width_scale_addition: 16,

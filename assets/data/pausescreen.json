@@ -36,7 +36,8 @@
                 "height_scale_addition": 8,
 
 			    "pressed_callback": [
-                    "trace(\"Nola\");"
+                    "PlayState.instance.pauseProps(PlayState.instance.pausescreen_slide.props);",
+                    "PlayState.instance.leave(new GuiOptions());"
                 ]
             },
             "screencenter_settings": {
