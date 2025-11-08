@@ -116,12 +116,17 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 				var code_runner = new CodeRunner();
 				code_runner.initVars();
 
+				var skip_prop:Bool = false;
+
 				for (condition in prop.visible_conditions)
 				{
+					if (skip_prop)
+						continue;
+
 					if (condition.code == null)
 					{
 						skippedSlidePropGeneration(prop.id, MISSING_CODE);
-						i++;
+						skip_prop = true;
 						continue;
 					}
 
@@ -130,9 +135,15 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 					if (!condition_result && condition.high_priority)
 					{
 						skippedSlidePropGeneration(prop.id, FALSE_VISIBLE_CONDITION_HIGH_PRIORITY);
-						i++;
+						skip_prop = true;
 						continue;
 					}
+				}
+
+				if (skip_prop)
+				{
+					i++;
+					continue;
 				}
 			}
 
