@@ -35,12 +35,28 @@ class PlayState extends GuiState
 	public static var instance:PlayState;
 
 	public var checkPropAlphaShit = function(prop:FlxBasic, ?speed:Float, ?alpha:Float) {};
+	public var pauseProps = function(prop:FlxBasic) {};
 
 	override public function new(starting_slide_path:String = "dummy")
 	{
 		if (instance != null)
 			instance = null;
 		instance = this;
+
+		pauseProps = function(prop)
+		{
+			if (prop.hasField('paused'))
+			{
+				prop.setField('paused', !prop.field('paused'));
+			}
+			if (prop.hasField('members'))
+			{
+				var prop_members:Array<FlxBasic> = prop.field('members');
+
+				for (prop_member in prop_members)
+					pauseProps(prop_member);
+			}
+		}
 
 		checkPropAlphaShit = function(prop, ?speed, ?alpha)
 		{
@@ -168,6 +184,7 @@ class PlayState extends GuiState
 		if (onStart)
 			return;
 
+		instance.pauseProps(instance.pausescreen_slide.props);
 		instance.paused = !instance.paused;
 
 		if (instance.paused)

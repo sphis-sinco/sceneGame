@@ -31,6 +31,8 @@ class GuiTextButton extends FlxTypedGroup<FlxBasic>
 	public var script_runner:CodeRunner;
 	public var script_runner_additional_variables:Map<String, Dynamic> = [];
 
+	public var paused:Bool = false;
+
 	override public function new(params:GuiTextButtonParameters)
 	{
 		super();
@@ -71,6 +73,9 @@ class GuiTextButton extends FlxTypedGroup<FlxBasic>
 
 		button_highlight.setPosition(button.x, button.y);
 		text_field.setPosition(button.x, button.y + ((button.height - text_field.text_field.height) / 2));
+
+		if (paused)
+			return;
 
 		button_highlight.visible = FlxG.mouse.overlaps(button);
 		button.visible = !FlxG.mouse.overlaps(button);
