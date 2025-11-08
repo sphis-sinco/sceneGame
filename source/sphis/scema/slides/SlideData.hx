@@ -34,6 +34,14 @@ typedef SlidePropData =
 
 	var ?graphic_settings:SlidePropGraphicSettingsData;
 	var ?button_settings:SlidePropButtonSettingsData;
+
+	var ?visible_conditions:Array<SlidePropVisibleCondition>;
+}
+
+typedef SlidePropVisibleCondition =
+{
+	var ?high_priority:Bool;
+	var code:String;
 }
 
 typedef SlidePropButtonSettingsData = GuiTextButtonParameters;

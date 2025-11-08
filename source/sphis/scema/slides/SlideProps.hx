@@ -8,6 +8,7 @@ import flixel.math.FlxPoint;
 import flixel.util.FlxColor;
 import flixel.util.FlxSort;
 import haxe.Json;
+import sphis.scema.code.CodeRunner;
 import sphis.scema.gui.buttons.GuiTextButton;
 import sphis.scema.slides.SlideData.SlidePropData;
 
@@ -104,6 +105,31 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 					if (prop.screencenter_settings.screencenter_position_offset.length < 2)
 					{
 						skippedSlidePropGeneration(prop.id, INCOMPLETE_SCREENCENTER_POSITION_OFFSET_FIELD);
+						i++;
+						continue;
+					}
+				}
+			}
+
+			if (prop.visible_conditions != null)
+			{
+				var code_runner = new CodeRunner();
+				code_runner.initVars();
+
+				for (condition in prop.visible_conditions)
+				{
+					if (condition.code == null)
+					{
+						skippedSlidePropGeneration(prop.id, MISSING_CODE);
+						i++;
+						continue;
+					}
+
+					var condition_result:Bool = cast code_runner.run(condition.code, start_variables);
+
+					if (!condition_result && condition.high_priority)
+					{
+						skippedSlidePropGeneration(prop.id, FALSE_VISIBLE_CONDITION_HIGH_PRIORITY);
 						i++;
 						continue;
 					}

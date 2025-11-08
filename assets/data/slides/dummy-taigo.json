@@ -30,6 +30,12 @@
             "z_index":1,
             "prop_type": "graphic",
 
+            "visible_conditions": [
+                {
+                    "code": "return FlxG.random.int(0, 1) == 0;"
+                }
+            ],
+
             "graphic_settings": {
                 "image_path": "taigo"
             },
@@ -42,6 +48,12 @@
             "id":"Taigo (Animated)",
             "z_index":1,
             "prop_type": "graphic",
+
+            "visible_conditions": [
+                {
+                    "code": "return FlxG.random.int(0, 1) == 1;"
+                }
+            ],
 
             "graphic_settings": {
                 "image_path": "taigo-animated",
