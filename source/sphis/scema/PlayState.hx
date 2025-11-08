@@ -44,7 +44,7 @@ class PlayState extends GuiState
 		paused_bg.color = FlxColor.WHITE;
 
 		if (script_files.getVariables().exists("paused_bg_color"))
-			paused_bg.color = FlxColor.fromString(script_files.getVariables().get("paused_bg_color")) ?? FlxColor.WHITE;
+			paused_bg.color = FlxColor.fromString(Std.string(script_files.getVariables().get("paused_bg_color"))) ?? FlxColor.WHITE;
 
 		paused_bg.alpha = 0;
 	}

@@ -1,4 +1,4 @@
-starting_state = "dummy";
+var starting_state = "dummy";
 
 if (defines.TAIGO)
 {

@@ -86,6 +86,12 @@ class CodeRunner
 
 		variables = interp.variables.copy();
 
+		@:privateAccess
+		for (key => value in interp.locals)
+		{
+			variables.set(key, value);
+		}
+
 		return execution;
 	}
 }

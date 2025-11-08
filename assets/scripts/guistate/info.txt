@@ -1,1 +1,3 @@
-script_info.script_info_script_working = true;
+var script_info = {
+    "script_working":true
+};
