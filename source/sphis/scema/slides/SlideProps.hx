@@ -362,7 +362,6 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 		var prop = getProp(prop);
 		var prop_class_name = Type.getClassName(Type.getClass(prop));
 
-		trace(prop_class_name);
 		if (prop_class_name.split('.')[prop_class_name.split('.').length - 1] == "FlxSprite")
 			return cast prop;
 
