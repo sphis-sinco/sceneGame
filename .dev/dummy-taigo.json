@@ -46,24 +46,27 @@
                         "name": "tiago-animated",
 
                         "prefix": "tiago-animated",
-                        "looped": false,
 
                         "offsets": [0, -360],
                         
-                        "conditions": ["default", "after-tiago-animated-post"]
-                    },
-                    {
-                        "name": "tiago-animated-post",
-
-                        "prefix": "tiago-animated",
-                        "looped": false,
-
-                        "offsets": [0, -360],
-                        
-                        "conditions": ["after-tiago-animated"]
+                        "conditions": ["default"]
                     }
                 ]
             }
         }
-    ]
+    ],
+    "code": {
+        "onCreate": [
+            "trace(\"run only once!\");",
+            "onCustomFunction([\"arg1\" => \"arg1_value\"]);"
+        ],
+        "onUpdate": [
+            "// trace(\"run always!\");"
+        ],
+        "onCustomFunction": [
+            "trace(\"run when called\");",
+            "trace(\"with args!\");",
+            "trace(arg1);"
+        ]
+    }
 }

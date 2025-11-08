@@ -3,6 +3,14 @@ package sphis.scema.slides;
 typedef SlideData =
 {
 	var props:Array<SlidePropData>;
+
+	var code:SlideCodeData;
+}
+
+typedef SlideCodeData =
+{
+	var ?onCreate:Array<String>;
+	var ?onUpdate:Array<String>;
 }
 
 typedef SlidePropData =

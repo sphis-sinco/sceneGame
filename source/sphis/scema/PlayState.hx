@@ -4,6 +4,7 @@ import flixel.FlxG;
 import flixel.math.FlxPoint;
 import sphis.scema.gui.hearts.HeartsGroup;
 import sphis.scema.gui.states.GuiState;
+import sphis.scema.slides.SlideCode;
 import sphis.scema.slides.SlideProps;
 
 class PlayState extends GuiState
@@ -13,17 +14,22 @@ class PlayState extends GuiState
 	public var slide_path:String = "dummy";
 
 	public var props:SlideProps;
+	public var code:SlideCode;
 
 	override public function create()
 	{
 		props = new SlideProps(slide_path);
 		add(props);
 
+		code = new SlideCode(slide_path);
+
 		hearts = new HeartsGroup(20, new FlxPoint(2, FlxG.height - (32 + 2)));
 		add(hearts);
 		hearts.updateHealthIcons();
 
 		super.create();
+
+		code.onCreate();
 	}
 
 	override public function update(elapsed:Float)
@@ -34,6 +40,8 @@ class PlayState extends GuiState
 		if (FlxG.keys.justReleased.R)
 			hearts.setHealth(FlxG.random.int(GuiConstants.MIN_HEALTH, GuiConstants.MAX_HEALTH));
 		#end
+
+		code.onUpdate();
 	}
 
 	override function getDesiredInfoOrder():Array<String>
