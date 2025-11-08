@@ -25,11 +25,14 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 
 	public var prop_id_to_index:Map<String, Int> = [];
 
-	override public function new(slide_path:String)
+	public var start_variables:Map<String, Dynamic> = [];
+
+	override public function new(slide_path:String, start_variables:Map<String, Dynamic>)
 	{
 		super();
 		slide_data = cast Json.parse(Paths.getText(Paths.getSlideFile(slide_path)));
 
+		this.start_variables = start_variables;
 		loadProps();
 	}
 
@@ -195,6 +198,8 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 				button_prop.button.y += prop.screencenter_settings.screencenter_position_offset[1];
 			}
 		}
+
+		button_prop.script_runner_additional_variables = start_variables;
 
 		prop_id_to_index.set(prop.id, this.members.length);
 		add(button_prop);
@@ -466,6 +471,13 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 			return cast prop;
 
 		return null;
+	}
+
+	public function buttonPropSetVariable(prop:String, variable:String, value:Dynamic)
+	{
+		var prop:GuiTextButton = getButtonProp(prop);
+
+		prop.script_runner_additional_variables.set(variable, value);
 	}
 
 	public function getProp(prop:String):FlxBasic

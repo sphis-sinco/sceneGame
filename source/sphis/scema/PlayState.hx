@@ -39,12 +39,24 @@ class PlayState extends GuiState
 		this.slide_path = starting_slide_path ?? 'dummy';
 	}
 
+	override function getAdditionalVariables():Map<String, Dynamic>
+	{
+		var additional_variables = super.getAdditionalVariables();
+
+		additional_variables.set("switch_slide", (new_slide:String) ->
+		{
+			FlxG.switchState(() -> new PlayState(new_slide));
+		});
+
+		return additional_variables;
+	}
+
 	override public function create()
 	{
-		slide_props = new SlideProps(slide_path);
+		slide_props = new SlideProps(slide_path, getAdditionalVariables());
 		add(slide_props);
 
-		slide_code = new SlideCode(slide_path);
+		slide_code = new SlideCode(slide_path, getAdditionalVariables());
 
 		hearts = new HeartsGroup(20, new FlxPoint(2, FlxG.height - (32 + 2)));
 		add(hearts);

@@ -30,6 +30,7 @@ class GuiTextButton extends FlxTypedGroup<FlxBasic>
 	public var text_field:GuiShadowText;
 
 	public var script_runner:CodeRunner;
+	public var script_runner_additional_variables:Map<String, Dynamic> = [];
 
 	override public function new(params:GuiTextButtonParameters)
 	{
@@ -79,7 +80,7 @@ class GuiTextButton extends FlxTypedGroup<FlxBasic>
 		{
 			for (line in pressed_callback)
 			{
-				script_runner.run(line);
+				script_runner.run(line, script_runner_additional_variables);
 			}
 		}
 	}

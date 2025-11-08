@@ -38,7 +38,8 @@
                 "height_scale_addition": 8,
 
 			    "pressed_callback": [
-                    "trace(\"Hola\");"
+                    "trace(\"Hola\");",
+                    "switch_slide(\"dummy-taigo\");"
                 ]
             },
             "screencenter_settings": {
