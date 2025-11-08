@@ -17,6 +17,7 @@ class GuiOptions extends GuiState
 	override function create()
 	{
 		super.create();
+		debugText.text_field_shadow.color = FlxColor.GRAY;
 
 		FlxG.camera.fade(FlxColor.BLACK, .25, true);
 
