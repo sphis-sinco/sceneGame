@@ -11,6 +11,8 @@ class Save
 
 	public static var SAVE:FlxSave;
 
+	public static var DEPRECATED_SAVEDATA_FIELDS:Map<SaveFields, String> = [VERSION => " Since 0.0.12"];
+
 	public static function initalizeSave()
 	{
 		SAVE = new FlxSave();
@@ -19,8 +21,18 @@ class Save
 		handleEmptySave();
 		updateSave();
 
-		trace('Save data fields: ' + SAVE.data.fields);
-		trace('Save data: ' + SAVE.data);
+		trace('Save data fields: ' + SAVE.data.fields());
+		for (field in SAVE.data.fields())
+		{
+			var depricatedMsg = '';
+
+			if (DEPRECATED_SAVEDATA_FIELDS.exists(cast field))
+			{
+				depricatedMsg += "(Deprecated" + DEPRECATED_SAVEDATA_FIELDS.get(cast field) + ")";
+			}
+
+			trace(' * ' + field + " : " + getSaveData(cast field) + depricatedMsg);
+		}
 	}
 
 	public static function handleEmptySave()
