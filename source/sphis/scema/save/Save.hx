@@ -34,8 +34,6 @@ class Save
 
 			trace(' * ' + field + " : " + getSaveData(cast field) + depricatedMsg);
 		}
-
-		save();
 	}
 
 	public static function handleEmptySave()
@@ -79,6 +77,7 @@ class Save
 
 	public static function save()
 	{
+		trace("Flushing save");
 		SAVE.flush();
 	}
 }

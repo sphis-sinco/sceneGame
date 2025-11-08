@@ -23,7 +23,7 @@ class InitState extends GuiState
 		Application.current.onExit.add(l ->
 		{
 			Save.save();
-		});
+		}, true, 1000);
 
 		var starting_state = DefineUtil.getDefineString("STARTING_STATE");
 
