@@ -25,6 +25,7 @@ class PlayState extends GuiState
 	public var slide_code:SlideCode;
 
 	public var paused:Bool;
+	public var paused_blackbg:FlxSprite;
 	public var paused_bg:FlxSprite;
 
 	public static var instance:PlayState;
@@ -67,6 +68,11 @@ class PlayState extends GuiState
 		add(hearts);
 		hearts.updateHealthIcons();
 
+		paused_blackbg = new FlxSprite();
+		paused_blackbg.makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+		paused_blackbg.alpha = 0;
+		add(paused_blackbg);
+
 		paused_bg = new FlxSprite();
 
 		paused_bg.loadGraphic(Paths.getImageFile('fade'));
@@ -96,7 +102,11 @@ class PlayState extends GuiState
 			paused = !paused;
 
 			FlxTween.cancelTweensOf(paused_bg);
+			FlxTween.cancelTweensOf(paused_blackbg);
 			FlxTween.tween(paused_bg, {alpha: (paused) ? 1.0 : 0.0}, .5, {
+				ease: FlxEase.smootherStepInOut
+			});
+			FlxTween.tween(paused_blackbg, {alpha: (paused) ? 0.5 : 0.0}, .5, {
 				ease: FlxEase.smootherStepInOut
 			});
 
@@ -109,7 +119,6 @@ class PlayState extends GuiState
 				slide_props.propsUnpauseAnimation();
 			}
 		}
-
 		if (!paused)
 			slide_code.onUpdate(getAdditionalVariables());
 		else if (paused)
