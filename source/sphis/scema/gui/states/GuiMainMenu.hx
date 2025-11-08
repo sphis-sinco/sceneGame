@@ -11,18 +11,22 @@ class GuiMainMenu extends GuiState
 	public var play_button:GuiTextButton;
 	public var options_button:GuiTextButton;
 
-	public var script_files:CodeGroup;
-
 	var variables:Map<String, Dynamic> = ["starting_state" => "dummy"];
 
 	override public function new()
 	{
-		super();
-
 		variables.set("current_state", this);
 
-		script_files = new CodeGroup('mainmenu/');
-		script_files.runAll(variables);
+		super('mainmenu/');
+	}
+
+	override function getAdditionalVariables():Map<String, Dynamic>
+	{
+		var av = super.getAdditionalVariables();
+
+		av.set("current_state", this);
+
+		return av;
 	}
 
 	override function create()

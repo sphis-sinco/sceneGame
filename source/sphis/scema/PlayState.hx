@@ -2,10 +2,6 @@ package sphis.scema;
 
 import flixel.FlxG;
 import flixel.math.FlxPoint;
-import polymod.fs.ZipFileSystem;
-import sphis.scema.code.CodeFileRunner;
-import sphis.scema.code.CodeGroup;
-import sphis.scema.code.CodeRunner;
 import sphis.scema.gui.hearts.HeartsGroup;
 import sphis.scema.gui.states.GuiState;
 import sphis.scema.slides.SlideCode;
@@ -20,20 +16,15 @@ class PlayState extends GuiState
 	public var slide_props:SlideProps;
 	public var slide_code:SlideCode;
 
-	public var script_files:CodeGroup;
-
 	public static var instance:PlayState;
 
 	override public function new(starting_slide_path:String = "dummy")
 	{
-		super();
+		super('playstate/');
 
 		if (instance != null)
 			instance = null;
 		instance = this;
-
-		script_files = new CodeGroup('playstate/');
-		script_files.runAll(getAdditionalVariables());
 
 		this.slide_path = starting_slide_path ?? 'dummy';
 	}
@@ -66,14 +57,23 @@ class PlayState extends GuiState
 		slide_code.onUpdate(getAdditionalVariables());
 	}
 
-	public function getAdditionalVariables():Map<String, Dynamic>
-	{
-		return [];
-	}
-
 	override function getDesiredInfoOrder():Array<String>
 	{
-		var order = super.getDesiredInfoOrder();
+		var order:Array<String> = [];
+
+		var pre_desired_info_order:Array<String> = [];
+		if (slide_code.variables.exists("pre_desired_info_order"))
+		{
+			var o:Array<String> = slide_code.variables.get("pre_desired_info_order");
+			for (e in o)
+				pre_desired_info_order.push(e);
+		}
+
+		for (value in pre_desired_info_order)
+			order.push(value);
+
+		for (e in super.getDesiredInfoOrder())
+			order.push(e);
 
 		order.push("lb_2");
 		order.push("player");
@@ -82,7 +82,32 @@ class PlayState extends GuiState
 		order.push("slide_path");
 		order.push("slide");
 
+		var post_desired_info_order:Array<String> = [];
+		if (slide_code.variables.exists("post_desired_info_order"))
+		{
+			var o:Array<String> = slide_code.variables.get("post_desired_info_order");
+			for (e in o)
+				post_desired_info_order.push(e);
+		}
+
+		for (value in post_desired_info_order)
+			order.push(value);
+
 		return order;
+	}
+
+	override function getNonDebugInfo():Dynamic
+	{
+		var info = super.getNonDebugInfo();
+
+		if (slide_code.variables.exists("script_info"))
+		{
+			var o:Dynamic = slide_code.variables.get("script_info");
+			for (e in Reflect.fields(slide_code.variables.get("script_info")))
+				Reflect.setProperty(info, e, Reflect.getProperty(slide_code.variables.get("script_info"), e));
+		}
+
+		return info;
 	}
 
 	override public function getDebugInfo()

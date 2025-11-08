@@ -1,9 +1,7 @@
 package sphis.scema.slides;
 
 import haxe.Json;
-import lime.utils.Assets;
 import sphis.scema.code.CodeFileRunner;
-import sphis.scema.gui.GuiConstants;
 
 using StringTools;
 

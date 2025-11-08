@@ -8,6 +8,7 @@ import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.util.FlxSort;
 import lime.app.Application;
+import sphis.scema.code.CodeGroup;
 import sphis.scema.gui.buttons.GuiButton.GuiButtonParameters;
 import sphis.scema.gui.buttons.GuiTextButton;
 import sphis.scema.gui.text.GuiShadowText;
@@ -18,6 +19,21 @@ using StringTools;
 class GuiState extends FlxState
 {
 	public var debugText:GuiShadowText;
+
+	public var script_files:CodeGroup;
+
+	override public function new(?starting_path_addtion:String)
+	{
+		super();
+
+		script_files = new CodeGroup(starting_path_addtion);
+		script_files.runAll(getAdditionalVariables());
+	}
+
+	public function getAdditionalVariables():Map<String, Dynamic>
+	{
+		return [];
+	}
 
 	override function create()
 	{
@@ -50,9 +66,18 @@ class GuiState extends FlxState
 
 	public function getNonDebugInfo():Dynamic
 	{
-		return {
+		var info = {
 			scema: Application.current.meta.get("version"),
 		}
+
+		if (script_files.getVariables().exists("script_info"))
+		{
+			var o:Dynamic = script_files.getVariables().get("script_info");
+			for (e in Reflect.fields(script_files.getVariables().get("script_info")))
+				Reflect.setProperty(info, e, Reflect.getProperty(script_files.getVariables().get("script_info"), e));
+		}
+
+		return info;
 	}
 
 	public function getDebugInfo():Dynamic
@@ -67,6 +92,13 @@ class GuiState extends FlxState
 
 		info.scema = getNonDebugInfo().scema;
 
+		if (script_files.getVariables().exists("debug_script_info"))
+		{
+			var o:Dynamic = script_files.getVariables().get("debug_script_info");
+			for (e in Reflect.fields(script_files.getVariables().get("debug_script_info")))
+				Reflect.setProperty(info, e, Reflect.getProperty(script_files.getVariables().get("debug_script_info"), e));
+		}
+
 		return info;
 	}
 
@@ -74,7 +106,28 @@ class GuiState extends FlxState
 
 	public function getDesiredInfoOrder():Array<String>
 	{
-		return ["scema", "fps", "lb_1", "component"];
+		var order = [];
+
+		if (script_files.getVariables().exists("pre_desired_info_order"))
+		{
+			var o:Array<String> = script_files.getVariables().get("pre_desired_info_order");
+			for (e in o)
+				order.push(e);
+		}
+
+		order.push("scema");
+		order.push("fps");
+		order.push("lb_1");
+		order.push("component");
+
+		if (script_files.getVariables().exists("post_desired_info_order"))
+		{
+			var o:Array<String> = script_files.getVariables().get("post_desired_info_order");
+			for (e in o)
+				order.push(e);
+		}
+
+		return order;
 	}
 
 	public function getInfoSort(entry_1:String, entry_2:String):Int
