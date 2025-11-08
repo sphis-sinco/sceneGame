@@ -29,7 +29,7 @@ class InitState extends GuiState
 
 		switch (starting_state.toLowerCase())
 		{
-			case "gui_options":
+			case "gui_options", "options", "settings":
 				FlxG.switchState(() -> new GuiOptions());
 
 			default:

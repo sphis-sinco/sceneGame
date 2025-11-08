@@ -128,7 +128,7 @@ class CodeRunner
 			for (key => value in additional_variables)
 				vars.set(key, value);
 		}
-		catch (e) {}
+		catch (_) {}
 
 		interp = new hscript.Interp();
 		interp.variables = vars.copy();

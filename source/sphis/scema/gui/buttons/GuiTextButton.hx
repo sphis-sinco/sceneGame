@@ -39,23 +39,24 @@ class GuiTextButton extends FlxTypedGroup<FlxBasic>
 	{
 		super();
 
-		this.pressed_callback = params.pressed_callback;
-		this.pressed_callback_code = params.pressed_callback_code;
+		this.pressed_callback = params?.pressed_callback ?? null;
+		this.pressed_callback_code = params?.pressed_callback_code ?? null;
 
 		script_runner = new CodeRunner();
 		script_runner.initVars();
 
 		button = new GuiButton(params);
 
-		if (params?.graphic?.image_path != null && Paths.exists(params?.graphic?.image_path + "-highlight"))
-			params.graphic.image_path = params.graphic.image_path += "-highlight";
-		else
-		{
-			params.graphic = {
-				corner_radius: 4,
-				image_path: "gui/button-highlight"
-			};
-		}
+		if (params != null)
+			if (params?.graphic?.image_path != null && Paths.exists(params?.graphic?.image_path + "-highlight"))
+				params.graphic.image_path = params.graphic.image_path += "-highlight";
+			else
+			{
+				params.graphic = {
+					corner_radius: 4,
+					image_path: "gui/button-highlight"
+				};
+			}
 
 		button_highlight = new GuiButton(params);
 
@@ -99,7 +100,13 @@ class GuiTextButton extends FlxTypedGroup<FlxBasic>
 						script_runner.run(line, script_variables);
 
 				for (field in script_variables.fields())
-					data_variable.set(field, script_variables.get(field));
+				{
+					try
+					{
+						data_variable.set(field, script_variables.field(field));
+					}
+					catch (_) {}
+				}
 
 				if (pressed_callback_code != null)
 					pressed_callback_code(data_variable);
