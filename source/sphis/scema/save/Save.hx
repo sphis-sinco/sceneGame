@@ -11,7 +11,7 @@ class Save
 
 	public static var SAVE:FlxSave;
 
-	public static var DEPRECATED_SAVEDATA_FIELDS:Map<SaveFields, String> = [VERSION => " Since 0.0.12"];
+	public static var DEPRECATED_SAVEDATA_FIELDS_WITH_MSG:Map<SaveFields, String> = [VERSION => " since 0.0.12"];
 
 	public static function initalizeSave()
 	{
@@ -26,9 +26,9 @@ class Save
 		{
 			var depricatedMsg = '';
 
-			if (DEPRECATED_SAVEDATA_FIELDS.exists(cast field))
+			if (DEPRECATED_SAVEDATA_FIELDS_WITH_MSG.exists(cast field))
 			{
-				depricatedMsg += " (Deprecated" + DEPRECATED_SAVEDATA_FIELDS.get(cast field) + ")";
+				depricatedMsg += " (Deprecated" + DEPRECATED_SAVEDATA_FIELDS_WITH_MSG.get(cast field) + ")";
 			}
 
 			trace(' * ' + field + " : " + getSaveData(cast field) + depricatedMsg);
