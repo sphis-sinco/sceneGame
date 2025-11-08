@@ -30,4 +30,23 @@ typedef SlidePropGraphicSettingsData =
 	var ?color:String;
 
 	var ?screencenter_position_offset:Array<Float>;
+
+	var ?animation_type:String;
+	var ?animations:Array<SlidePropGraphicSettingsAnimationData>;
+}
+
+typedef SlidePropGraphicSettingsAnimationData =
+{
+	var name:String;
+
+	var ?prefix:String;
+
+	var ?framerate:Int;
+	var ?looped:Bool;
+	var ?flip_x:Bool;
+	var ?flip_y:Bool;
+
+	var ?conditions:Array<String>;
+
+	var ?offsets:Array<Float>;
 }

@@ -26,7 +26,32 @@
                 "image_path": "taigo",
                 
                 "screencenter": true,
-                "screencenter_position_offset": [-640,0]
+                "screencenter_position_offset": [-320,0]
+            }
+        },
+        {
+            "id":"Taigo (Animated)",
+            "z_index":1,
+            "prop_type": "graphic",
+
+            "graphic_settings": {
+                "image_path": "taigo-animated",
+                
+                "screencenter": true,
+                "screencenter_position_offset": [320,0],
+
+                "animation_type": "xml",
+                "animations": [
+                    {
+                        "name": "tiago-animated",
+
+                        "prefix": "tiago-animated",
+
+                        "offsets": [0, -360],
+                        
+                        "conditions": ["default"]
+                    }
+                ]
             }
         }
     ]

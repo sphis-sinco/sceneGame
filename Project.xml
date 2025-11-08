@@ -37,6 +37,8 @@
 
 	<assets path="assets" />
 	
+	<assets path=".dev/taigo-animated.png" rename="assets/images/taigo-animated.png" if="TAIGO"/>
+	<assets path=".dev/taigo-animated.xml" rename="assets/images/taigo-animated.xml" if="TAIGO"/>
 	<assets path=".dev/taigo.png" rename="assets/images/taigo.png" if="TAIGO"/>
 	<assets path=".dev/dummy-taigo.json" rename="assets/data/slides/dummy.json" if="TAIGO"/>
 
