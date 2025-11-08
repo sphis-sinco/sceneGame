@@ -1,4 +1,11 @@
 {
+    "components": [
+        {
+            "name": "on_update_bypass_pause",
+            "data": false
+        }
+    ],
+
     "props": [
         {
             "id":"BG",
@@ -24,7 +31,7 @@
             "onCustomFunction([\"arg1\" => \"arg1_value\"]);"
         ],
         "onUpdate": [
-            "// trace(\"run always!\");"
+            "trace(\"run always! (unless paused and not on_update_bypass_pause)\");"
         ],
         "onCustomFunction": [
             "trace(\"run when called\");",

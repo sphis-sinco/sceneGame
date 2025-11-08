@@ -1,13 +1,18 @@
 package sphis.scema;
 
 import flixel.FlxG;
+import flixel.FlxSprite;
 import flixel.math.FlxPoint;
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween;
+import flixel.util.FlxColor;
 import sphis.scema.gui.hearts.HeartsGroup;
 import sphis.scema.gui.states.GuiState;
 import sphis.scema.slides.SlideCode;
 import sphis.scema.slides.SlideProps;
 
 using Reflect;
+using sphis.scema.slides.SlideComponents;
 
 class PlayState extends GuiState
 {
@@ -18,17 +23,31 @@ class PlayState extends GuiState
 	public var slide_props:SlideProps;
 	public var slide_code:SlideCode;
 
+	public var paused:Bool;
+	public var paused_bg:FlxSprite;
+
 	public static var instance:PlayState;
 
 	override public function new(starting_slide_path:String = "dummy")
 	{
-		super('playstate/');
-
 		if (instance != null)
 			instance = null;
 		instance = this;
 
+		super('playstate/');
+
 		this.slide_path = starting_slide_path ?? 'dummy';
+
+		paused_bg = new FlxSprite();
+
+		paused_bg.loadGraphic(Paths.getImageFile('fade'));
+		paused_bg.color = FlxColor.WHITE;
+
+		if (script_files.getVariables().exists("paused_bg_color"))
+			paused_bg.color = FlxColor.fromString(script_files.getVariables().get("paused_bg_color")) ?? FlxColor.WHITE;
+
+		add(paused_bg);
+		paused_bg.alpha = 0;
 	}
 
 	override public function create()
@@ -56,7 +75,23 @@ class PlayState extends GuiState
 			hearts.setHealth(FlxG.random.int(GuiConstants.MIN_HEALTH, GuiConstants.MAX_HEALTH));
 		#end
 
-		slide_code.onUpdate(getAdditionalVariables());
+		if (FlxG.keys.justReleased.ENTER)
+		{
+			paused = !paused;
+
+			FlxTween.cancelTweensOf(paused_bg);
+			FlxTween.tween(paused_bg, {alpha: (paused) ? 1.0 : 0.0}, .5, {
+				ease: FlxEase.smootherStepInOut
+			});
+		}
+
+		if (!paused)
+			slide_code.onUpdate(getAdditionalVariables());
+		else if (paused)
+		{
+			if (slide_code.slide_data.getComponent("on_update_bypass_pause") == true)
+				slide_code.onUpdate(getAdditionalVariables());
+		}
 	}
 
 	override function getDesiredInfoOrder():Array<String>
@@ -128,6 +163,8 @@ class PlayState extends GuiState
 
 		info.slide_props = slide_props.prop_ids;
 		info.slide_prop_count = slide_props.members.length;
+
+		info.slide_paused = paused;
 
 		return info;
 	}
