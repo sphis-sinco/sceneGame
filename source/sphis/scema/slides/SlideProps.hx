@@ -118,9 +118,11 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 
 				var skip_prop:Bool = false;
 
+				var any_trues:Bool = false;
+
 				for (condition in prop.visible_conditions)
 				{
-					if (skip_prop)
+					if (skip_prop || true)
 						continue;
 
 					if (condition.code == null)
@@ -138,10 +140,18 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 						skip_prop = true;
 						continue;
 					}
+
+					if (!any_trues && condition_result)
+					{
+						any_trues = true;
+					}
 				}
 
-				if (skip_prop)
+				if (skip_prop || !any_trues)
 				{
+					if (!any_trues)
+						skippedSlidePropGeneration(prop.id, NO_TRUE_VISIBLE_CONDITION);
+
 					i++;
 					continue;
 				}

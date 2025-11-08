@@ -24,4 +24,5 @@ enum abstract SlidePropGenerationSkipReason(String)
 	var DUPLICATE_ID = "id already used";
 
 	var FALSE_VISIBLE_CONDITION_HIGH_PRIORITY = "High Priority Visible Condition is false";
+	var NO_TRUE_VISIBLE_CONDITION = "No Visible Condition was true";
 }

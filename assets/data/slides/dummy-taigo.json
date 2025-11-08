@@ -83,7 +83,7 @@
             "onCustomFunction([\"arg1\" => \"arg1_value\"]);"
         ],
         "onUpdate": [
-            "// trace(\"run always!\");"
+            "if (FlxG.keys.justReleased.R) { FlxG.resetState(); }"
         ],
         "onCustomFunction": [
             "trace(\"run when called\");",
