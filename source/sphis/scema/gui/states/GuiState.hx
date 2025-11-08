@@ -49,6 +49,7 @@ class GuiState extends FlxState
 	{
 		return {
 			scema: Application.current.meta.get("version"),
+			fps: Main.fpsCounter.currentFPS,
 
 			lb_1: "\n",
 
@@ -77,12 +78,14 @@ class GuiState extends FlxState
 		if (entry_1_value == -1)
 		{
 			entry_1_value = getDesiredDebugInfoOrder().indexOf(entry_1.split("_")[0]);
-			e1_sortVal_reason = " (prefix: " + entry_1.split("_")[0] + ")";
+			if (entry_1_value != -1)
+				e1_sortVal_reason = " (prefix: " + entry_1.split("_")[0] + ")";
 		}
 		if (entry_2_value == -1)
 		{
 			entry_2_value = getDesiredDebugInfoOrder().indexOf(entry_2.split("_")[0]);
-			e2_sortVal_reason = " (prefix: " + entry_2.split("_")[0] + ")";
+			if (entry_1_value != -1)
+				e2_sortVal_reason = " (prefix: " + entry_2.split("_")[0] + ")";
 		}
 
 		e1_sortVal += " : " + entry_1_value + e1_sortVal_reason;
