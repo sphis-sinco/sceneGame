@@ -17,7 +17,7 @@ class SlideCode extends CodeFileRunner
 
 		this.filepath = Paths.getSlideFile(filepath);
 
-		slide_data = cast Json.parse(Assets.getText(this.filepath));
+		slide_data = cast Json.parse(Paths.getText(this.filepath));
 
 		parseCode(slide_data);
 	}

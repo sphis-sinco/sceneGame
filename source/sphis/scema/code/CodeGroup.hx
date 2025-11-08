@@ -7,11 +7,11 @@ class CodeGroup
 {
 	public var members:Array<CodeFileRunner> = [];
 
-	public function new()
+	public function new(?starting_path_addtion:String)
 	{
-		for (file in new ZipFileSystem({}).readDirectoryRecursive('assets/scripts/'))
+		for (file in new ZipFileSystem({}).readDirectoryRecursive('assets/scripts/' + starting_path_addtion))
 		{
-			var new_script_file = new CodeFileRunner(Path.withoutExtension(file));
+			var new_script_file = new CodeFileRunner(Path.withoutExtension(file), starting_path_addtion);
 			add(new_script_file);
 		}
 	}
@@ -21,20 +21,52 @@ class CodeGroup
 		members.push(runner);
 	}
 
-	public function runAll(?additional_variables:Map<String, Dynamic>)
+	public function runAll(?additional_variables:Map<String, Dynamic>):Dynamic
 	{
 		for (file in members)
 		{
-			run(file.filepath, additional_variables);
+			var runVal:Dynamic = run(file.filepath, additional_variables);
+
+			if (runVal != null)
+				return runVal;
 		}
+
+		return null;
 	}
 
-	public function run(filepath:String, ?additional_variables:Map<String, Dynamic>)
+	public function run(filepath:String, ?additional_variables:Map<String, Dynamic>):Dynamic
 	{
 		for (file in members)
 		{
 			if (file.filepath == filepath)
-				file.runFile(additional_variables);
+			{
+				var runVal:Dynamic = file.runFile(additional_variables);
+
+				if (runVal != null)
+					return runVal;
+			}
 		}
+
+		return null;
+	}
+
+	public function getVariables():Map<String, Dynamic>
+	{
+		var vars:Map<String, Dynamic> = [];
+
+		for (file in members)
+		{
+			for (key => value in file.variables)
+			{
+				if (vars.exists(key))
+				{
+					if (vars.get(key) != value)
+						trace("VAR " + key + " BEING OVERWRITTEN FROM " + vars.get(key) + " TO " + value);
+				}
+				vars.set(key, value);
+			}
+		}
+
+		return vars;
 	}
 }

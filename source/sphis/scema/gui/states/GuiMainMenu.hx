@@ -3,7 +3,7 @@ package sphis.scema.gui.states;
 import flixel.FlxG;
 import flixel.math.FlxPoint;
 import flixel.util.FlxColor;
-import lime.app.Application;
+import sphis.scema.code.CodeGroup;
 import sphis.scema.gui.buttons.GuiTextButton;
 
 class GuiMainMenu extends GuiState
@@ -11,9 +11,25 @@ class GuiMainMenu extends GuiState
 	public var play_button:GuiTextButton;
 	public var options_button:GuiTextButton;
 
+	public var script_files:CodeGroup;
+
+	var variables:Map<String, Dynamic> = ["starting_state" => "dummy"];
+
+	override public function new()
+	{
+		super();
+
+		script_files = new CodeGroup('mainmenu/');
+		script_files.runAll(variables);
+	}
+
 	override function create()
 	{
 		super.create();
+
+		variables = script_files.getVariables();
+
+		trace(variables.get("starting_state"));
 
 		play_button = createTextButton({
 			text_content: "Play",
@@ -21,7 +37,7 @@ class GuiMainMenu extends GuiState
 
 			pressed_callback: () ->
 			{
-				FlxG.switchState(() -> new PlayState());
+				FlxG.switchState(() -> new PlayState(variables.get('starting_state')));
 			},
 
 			width_scale_addition: 16,

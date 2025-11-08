@@ -26,7 +26,7 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 	override public function new(slide_path:String)
 	{
 		super();
-		slide_data = cast Json.parse(Assets.getText(Paths.getSlideFile(slide_path)));
+		slide_data = cast Json.parse(Paths.getText(Paths.getSlideFile(slide_path)));
 
 		loadProps();
 	}

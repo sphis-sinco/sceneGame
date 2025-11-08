@@ -6,9 +6,27 @@ class CodeRunner
 {
 	public var variables:Map<String, Dynamic> = null;
 
+	public var parser = new hscript.Parser();
+
+	public var interp = new hscript.Interp();
+
 	public function new()
 	{
+		initParser();
+
 		initVars();
+	}
+
+	public function initParser()
+	{
+		parser = new hscript.Parser();
+
+		parser.allowJSON = true;
+		parser.allowMetadata = true;
+		parser.allowTypes = true;
+
+		parser.preprocesorValues.set('debug', #if debug true #else false #end);
+		parser.preprocesorValues.set('TAIGO', #if TAIGO true #else false #end);
 	}
 
 	public function initVars()
@@ -25,21 +43,17 @@ class CodeRunner
 		{
 			Log.trace(v, null);
 		});
+		variables.set("null", null);
+
+		variables.set("playstate", PlayState.instance ?? null);
 	}
 
 	public function run(script:String, ?additional_variables:Map<String, Dynamic>):Dynamic
 	{
-		var parser = new hscript.Parser();
-
-		parser.allowJSON = true;
-		parser.allowMetadata = true;
-		parser.allowTypes = true;
-
-		parser.preprocesorValues.set('debug', #if debug true #else false #end);
-		parser.preprocesorValues.set('TAIGO', #if TAIGO true #else false #end);
+		if (parser == null)
+			initParser();
 
 		var program = parser.parseString(script);
-		var interp = new hscript.Interp();
 
 		var vars = variables.copy();
 		try
@@ -49,8 +63,13 @@ class CodeRunner
 		}
 		catch (e) {}
 
+		interp = new hscript.Interp();
 		interp.variables = vars.copy();
 
-		return interp.execute(program);
+		var execution = interp.execute(program);
+
+		variables = interp.variables.copy();
+
+		return execution;
 	}
 }

@@ -8,13 +8,13 @@ class CodeFileRunner extends CodeRunner
 	public var filepath:String;
 	public var file_content:String;
 
-	override public function new(filepath:String)
+	override public function new(filepath:String, ?path_addtion:String)
 	{
 		if (filepath == null)
 			return;
 
-		this.filepath = Paths.getScriptFile(filepath);
-		file_content = Assets.getText(this.filepath);
+		this.filepath = Paths.getScriptFile(path_addtion + filepath);
+		file_content = Paths.getText(this.filepath);
 
 		super();
 	}
@@ -29,8 +29,8 @@ class CodeFileRunner extends CodeRunner
 		});
 	}
 
-	public function runFile(additional_variable:Map<String, Dynamic>)
+	public function runFile(additional_variable:Map<String, Dynamic>):Dynamic
 	{
-		run(file_content, additional_variable);
+		return run(file_content, additional_variable);
 	}
 }
