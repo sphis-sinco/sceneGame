@@ -1,10 +1,9 @@
 package sphis.scema;
 
 import flixel.FlxG;
-import flixel.FlxState;
-import sphis.scema.code.CodeGroup;
 import sphis.scema.gui.states.GuiMainMenu;
 import sphis.scema.gui.states.GuiState;
+import sphis.scema.save.Save;
 
 class InitState extends GuiState
 {
@@ -16,6 +15,8 @@ class InitState extends GuiState
 	override public function create()
 	{
 		super.create();
+
+		Save.initalizeSave();
 
 		FlxG.switchState(() -> new GuiMainMenu());
 	}

@@ -50,11 +50,14 @@ class CodeRunner
 		variables.set("Paths", Paths);
 		variables.set("Main", Main);
 
+		variables.set("GeneralConstants", GeneralConstants);
 		variables.set("GuiConstants", GuiConstants);
 
 		variables.set("PlayState", PlayState);
 
 		variables.set("FlxG", FlxG);
+
+		variables.set("Save", Save);
 
 		variables.set("null", null);
 		variables.set("true", true);
