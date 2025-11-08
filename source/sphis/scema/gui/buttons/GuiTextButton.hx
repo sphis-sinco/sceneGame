@@ -4,6 +4,7 @@ import flixel.FlxBasic;
 import flixel.FlxG;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.util.FlxColor;
+import sphis.scema.code.CodeRunner;
 import sphis.scema.gui.buttons.GuiButton.GuiButtonParameters;
 import sphis.scema.gui.text.GuiShadowText;
 
@@ -16,23 +17,26 @@ typedef GuiTextButtonParameters =
 	var ?text_size:Null<Int>;
 	var ?text_shadow_color:FlxColor;
 
-	var ?pressed_callback:Void->Void;
+	var ?pressed_callback:Array<String>;
 }
 
 class GuiTextButton extends FlxTypedGroup<FlxBasic>
 {
-	public var pressed_callback:Void->Void;
+	public var pressed_callback:Array<String>;
 
 	public var button:GuiButton;
 	public var button_highlight:GuiButton;
 
 	public var text_field:GuiShadowText;
 
+	public var script_runner:CodeRunner;
+
 	override public function new(params:GuiTextButtonParameters)
 	{
 		super();
 
 		this.pressed_callback = params.pressed_callback;
+		script_runner = new CodeRunner();
 
 		button = new GuiButton(params);
 
@@ -73,7 +77,10 @@ class GuiTextButton extends FlxTypedGroup<FlxBasic>
 
 		if (FlxG.mouse.justReleased && button_highlight.visible && pressed_callback != null)
 		{
-			pressed_callback();
+			for (line in pressed_callback)
+			{
+				script_runner.run(line);
+			}
 		}
 	}
 }

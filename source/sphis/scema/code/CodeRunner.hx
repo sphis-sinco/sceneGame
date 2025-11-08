@@ -52,6 +52,8 @@ class CodeRunner
 
 		variables.set("GuiConstants", GuiConstants);
 
+		variables.set("PlayState", PlayState);
+
 		variables.set("FlxG", FlxG);
 
 		variables.set("null", null);

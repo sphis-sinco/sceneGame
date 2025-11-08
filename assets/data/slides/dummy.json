@@ -23,6 +23,21 @@
 
                 "screencenter": true
             }
+        },
+        {
+            "id":"NextSlide",
+            "z_index":0,
+            
+            "prop_type": "button",
+
+            "button_settings": {
+                "text_content": "Hola mi amigo",
+
+                "position": [10,10],
+
+                "width_scale_addition": 32,
+                "height_scale_addition": 32
+            }
         }
     ],
     "code": {

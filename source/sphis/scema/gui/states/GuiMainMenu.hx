@@ -24,10 +24,9 @@ class GuiMainMenu extends GuiState
 			text_content: "Play",
 			position: new FlxPoint(),
 
-			pressed_callback: () ->
-			{
-				FlxG.switchState(() -> new PlayState(script_files.getVariables().get('starting_state')));
-			},
+			pressed_callback: [
+				"FlxG.switchState(() -> new PlayState(" + script_files.getVariables().get('starting_state') + "));"
+			],
 
 			width_scale_addition: 16,
 			height_scale_addition: 3
@@ -37,10 +36,7 @@ class GuiMainMenu extends GuiState
 			text_content: "Options...",
 			position: new FlxPoint(),
 
-			pressed_callback: () ->
-			{
-				trace('Hola');
-			},
+			pressed_callback: ["trace(\"Hola\");"],
 
 			width_scale_addition: 16,
 			height_scale_addition: 3

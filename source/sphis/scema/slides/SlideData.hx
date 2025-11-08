@@ -1,5 +1,7 @@
 package sphis.scema.slides;
 
+import sphis.scema.gui.buttons.GuiTextButton.GuiTextButtonParameters;
+
 typedef SlideData =
 {
 	var props:Array<SlidePropData>;
@@ -29,6 +31,14 @@ typedef SlidePropData =
 	var ?z_index:Int;
 
 	var ?graphic_settings:SlidePropGraphicSettingsData;
+	var ?button_settings:SlidePropButtonSettingsData;
+}
+
+typedef SlidePropButtonSettingsData =
+{
+	> GuiTextButtonParameters,
+
+	var position:Array<Float>;
 }
 
 typedef SlidePropGraphicSettingsData =
