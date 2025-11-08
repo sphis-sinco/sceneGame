@@ -1,6 +1,8 @@
 package sphis.scema.code;
 
+import flixel.FlxG;
 import haxe.Log;
+import sphis.scema.gui.GuiConstants;
 
 class CodeRunner
 {
@@ -38,16 +40,23 @@ class CodeRunner
 		variables.set("Math", Math);
 		variables.set("trace", (v, pos) ->
 		{
-			Log.trace(v, null);
+			Log.trace(Std.string(v), null);
 		});
 		variables.set("null", null);
-
-		variables.set("playstate", PlayState.instance ?? null);
 
 		variables.set("defines", {
 			debug: #if debug true #else false #end,
 			TAIGO: #if TAIGO true #else false #end
 		});
+
+		variables.set("PlayState", PlayState.instance);
+
+		variables.set("Paths", Paths);
+		variables.set("Main", Main);
+
+		variables.set("GuiConstants", GuiConstants);
+
+		variables.set("FlxG", FlxG);
 	}
 
 	public function run(script:String, ?additional_variables:Map<String, Dynamic>):Dynamic

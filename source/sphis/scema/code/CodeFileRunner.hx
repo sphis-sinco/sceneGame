@@ -25,7 +25,7 @@ class CodeFileRunner extends CodeRunner
 
 		variables.set("trace", (v, pos) ->
 		{
-			Log.trace(filepath + ": " + v, null);
+			Log.trace(filepath + ": " + Std.string(v), null);
 		});
 	}
 

@@ -1,0 +1,5 @@
+trace(FlxG.width);
+trace(FlxG.height);
+
+trace(Paths.exists(Paths.getScriptFile("initstate/testing.txt")));
+trace(Paths.exists(Paths.getScriptFile("initstate/testing-2.txt")));

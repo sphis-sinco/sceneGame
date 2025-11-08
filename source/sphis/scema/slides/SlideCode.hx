@@ -31,10 +31,6 @@ class SlideCode extends CodeFileRunner
 	{
 		initVars();
 
-		variables.set("Paths", Paths);
-		variables.set("Main", Main);
-		variables.set("GuiConstants", GuiConstants);
-
 		var functions:Array<String> = Reflect.fields(slide_data.code);
 
 		functions.remove("onCreate");
