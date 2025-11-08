@@ -54,6 +54,8 @@ class PlayState extends GuiState
 	{
 		var info = super.getDebugInfo();
 
+		info.component_count_with_props = this.members.length + props.members.length;
+
 		info.lb_2 = "\n";
 
 		info.player_health = hearts.health;
