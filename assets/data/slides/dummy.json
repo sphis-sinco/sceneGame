@@ -45,6 +45,20 @@
             "screencenter_settings": {
                 "screencenter":true
             }
+        },
+        {
+            "id":"Text",
+            "z_index":0,
+            
+            "prop_type": "text",
+
+            "button_settings": {
+                "text_content": "me no amigo yo"
+            },
+            "screencenter_settings": {
+                "screencenter":true,
+                "screencenter_offset_position": [0, -32]
+            }
         }
     ],
     "code": {
