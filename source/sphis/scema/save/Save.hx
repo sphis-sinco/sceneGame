@@ -28,7 +28,7 @@ class Save
 
 			if (DEPRECATED_SAVEDATA_FIELDS.exists(cast field))
 			{
-				depricatedMsg += "(Deprecated" + DEPRECATED_SAVEDATA_FIELDS.get(cast field) + ")";
+				depricatedMsg += " (Deprecated" + DEPRECATED_SAVEDATA_FIELDS.get(cast field) + ")";
 			}
 
 			trace(' * ' + field + " : " + getSaveData(cast field) + depricatedMsg);
