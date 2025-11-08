@@ -11,14 +11,17 @@ class GuiOptions extends GuiState
 {
 	public var button_params:Array<GuiOptionEntry> = [];
 
-	override public function new()
+	override public function new(fade:Bool = true)
 	{
 		super('options/');
+
+		if (fade)
+			FlxG.camera.fade(FlxColor.BLACK, .25, true);
 
 		button_params = [
 			{
 				text_content: "Leave",
-				position: new FlxPoint(0, -FlxG.height * 0.9),
+				position: new FlxPoint(0, FlxG.height * 0.425),
 				pressed_callback_code: data ->
 				{
 					FlxG.camera.fade(FlxColor.BLACK, .25, false, () -> FlxG.switchState(() -> new GuiMainMenu()));
@@ -29,15 +32,15 @@ class GuiOptions extends GuiState
 			},
 			{
 				text_content: "Simple Version: " + Save.getSaveData(SIMPLE_VERSION),
-				position: new FlxPoint(20, 20),
+				position: new FlxPoint(60, 80),
 				pressed_callback_code: data ->
 				{
 					var current_simple_version:Bool = cast Save.getSaveData(SIMPLE_VERSION);
 					Save.setSaveData(SIMPLE_VERSION, !current_simple_version);
 
-					data.field('text_field').field('text_field').setField('text', "Simple Version: " + Save.getSaveData(SIMPLE_VERSION));
+					FlxG.switchState(() -> new GuiOptions(false));
 				},
-				width_scale_addition: 16,
+				width_scale_addition: 24,
 				height_scale_addition: 3
 			}
 		];
@@ -45,8 +48,6 @@ class GuiOptions extends GuiState
 
 	override function create()
 	{
-		FlxG.camera.fade(FlxColor.BLACK, .25, true);
-
 		for (params in button_params)
 		{
 			var buttonGrp = createTextButton(params);
