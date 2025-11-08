@@ -34,8 +34,7 @@
 
 	<source path="source" />
 
-	<assets path="assets" exclude="assets/flags/"/>
-	<assets path="assets/flags/taigo/" rename="assets/" if="TAIGO"/>
+	<assets path="assets"/>
 
 	<define name="F3_MENU" unless="DISABLE_F3_MENU"/>
 
