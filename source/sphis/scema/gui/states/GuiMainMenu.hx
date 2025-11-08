@@ -26,7 +26,7 @@ class GuiMainMenu extends GuiState
 
 			pressed_callback_code: () ->
 			{
-				FlxG.camera.fade(FlxColor.BLACK, 2, false, () -> FlxG.switchState(PlayState.new.bind(script_files.getVariables().get('starting_state'))));
+				FlxG.camera.fade(FlxColor.BLACK, .25, false, () -> FlxG.switchState(PlayState.new.bind(script_files.getVariables().get('starting_state'))));
 			},
 
 			width_scale_addition: 16,

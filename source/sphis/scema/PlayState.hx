@@ -123,9 +123,9 @@ class PlayState extends GuiState
 
 		add(pausescreen_slide.props);
 
-		togglePaused();
+		togglePaused(true);
 
-		FlxG.camera.fade(FlxColor.BLACK, 2, true);
+		FlxG.camera.fade(FlxColor.BLACK, .25, true);
 
 		super.create();
 
@@ -159,7 +159,7 @@ class PlayState extends GuiState
 
 	public static function togglePaused(onStart:Bool = false)
 	{
-		final alphaVal = (onStart ? 0.0 : 0.5);
+		final alphaVal = (onStart ? 1 / 10000000000000000000 : 0.5);
 
 		instance.checkPropAlphaShit(instance.paused_bg, alphaVal);
 		instance.checkPropAlphaShit(instance.paused_blackbg, alphaVal, .5);
