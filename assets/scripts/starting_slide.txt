@@ -1,0 +1,5 @@
+#if TAIGO
+slide_path = "dummy-taigo";
+#end
+
+slide_path = "dummy";

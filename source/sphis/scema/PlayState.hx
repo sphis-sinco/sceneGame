@@ -2,6 +2,10 @@ package sphis.scema;
 
 import flixel.FlxG;
 import flixel.math.FlxPoint;
+import polymod.fs.ZipFileSystem;
+import sphis.scema.code.CodeFileRunner;
+import sphis.scema.code.CodeGroup;
+import sphis.scema.code.CodeRunner;
 import sphis.scema.gui.hearts.HeartsGroup;
 import sphis.scema.gui.states.GuiState;
 import sphis.scema.slides.SlideCode;
@@ -13,15 +17,20 @@ class PlayState extends GuiState
 
 	public var slide_path:String = "dummy";
 
-	public var props:SlideProps;
-	public var code:SlideCode;
+	public var slide_props:SlideProps;
+	public var slide_code:SlideCode;
+
+	public var script_files:CodeGroup;
 
 	override public function create()
 	{
-		props = new SlideProps(slide_path);
-		add(props);
+		slide_props = new SlideProps(slide_path);
+		add(slide_props);
 
-		code = new SlideCode(slide_path);
+		script_files = new CodeGroup();
+		script_files.runAll(getAdditionalVariables());
+
+		slide_code = new SlideCode(slide_path);
 
 		hearts = new HeartsGroup(20, new FlxPoint(2, FlxG.height - (32 + 2)));
 		add(hearts);
@@ -29,7 +38,7 @@ class PlayState extends GuiState
 
 		super.create();
 
-		code.onCreate();
+		slide_code.onCreate(getAdditionalVariables());
 	}
 
 	override public function update(elapsed:Float)
@@ -41,7 +50,12 @@ class PlayState extends GuiState
 			hearts.setHealth(FlxG.random.int(GuiConstants.MIN_HEALTH, GuiConstants.MAX_HEALTH));
 		#end
 
-		code.onUpdate();
+		slide_code.onUpdate(getAdditionalVariables());
+	}
+
+	public function getAdditionalVariables():Map<String, Dynamic>
+	{
+		return ["slide_path" => this.slide_path, "hearts" => this.hearts];
 	}
 
 	override function getDesiredInfoOrder():Array<String>
@@ -62,7 +76,7 @@ class PlayState extends GuiState
 	{
 		var info = super.getDebugInfo();
 
-		info.component_count_with_props = this.members.length + props.members.length;
+		info.component_count_with_props = this.members.length + slide_props.members.length;
 
 		info.lb_2 = "\n";
 
@@ -72,8 +86,8 @@ class PlayState extends GuiState
 
 		info.slide_path = slide_path;
 
-		info.slide_props = props.prop_ids;
-		info.slide_prop_count = props.members.length;
+		info.slide_props = slide_props.prop_ids;
+		info.slide_prop_count = slide_props.members.length;
 
 		return info;
 	}

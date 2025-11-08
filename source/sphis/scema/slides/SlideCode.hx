@@ -1,42 +1,35 @@
 package sphis.scema.slides;
 
 import haxe.Json;
-import haxe.Log;
 import lime.utils.Assets;
+import sphis.scema.code.CodeFileRunner;
 import sphis.scema.gui.GuiConstants;
 
 using StringTools;
 
-class SlideCode
+class SlideCode extends CodeFileRunner
 {
 	public var slide_data:SlideData;
 
-	public var variables:Map<String, Dynamic> = [];
-
-	public function new(slide_path:String)
+	override public function new(filepath:String)
 	{
-		slide_data = cast Json.parse(Assets.getText(Paths.getSlideFile(slide_path)));
+		super(null);
 
-		parseCode(slide_data, slide_path);
+		this.filepath = Paths.getSlideFile(filepath);
+
+		slide_data = cast Json.parse(Assets.getText(this.filepath));
+
+		parseCode(slide_data);
 	}
 
-	public function parseCode(slide_data:SlideData, ?slide_path:String)
+	override public function initVars()
 	{
-		variables.clear();
+		super.initVars();
+	}
 
-		variables.set("Std", Std); // TODO: add a proxy for std
-		variables.set("StringTools", StringTools);
-		variables.set("Math", Math);
-		variables.set("trace", (v, pos) ->
-		{
-			var str = '';
-
-			str += (Paths.getSlideFile(slide_path) ?? slide_path);
-			str += ": ";
-			str += v;
-
-			return Log.trace(str, null);
-		});
+	public function parseCode(slide_data:SlideData)
+	{
+		initVars();
 
 		variables.set("Paths", Paths);
 		variables.set("Main", Main);
@@ -77,31 +70,5 @@ class SlideCode
 		}
 
 		return null;
-	}
-
-	public function run(script:String, ?additional_variables:Map<String, Dynamic>):Dynamic
-	{
-		var parser = new hscript.Parser();
-
-		parser.allowJSON = true;
-		parser.allowMetadata = true;
-		parser.allowTypes = true;
-
-		parser.preprocesorValues.set('debug', #if debug true #else false #end);
-
-		var program = parser.parseString(script);
-		var interp = new hscript.Interp();
-
-		var vars = variables.copy();
-		try
-		{
-			for (key => value in additional_variables)
-				vars.set(key, value);
-		}
-		catch (e) {}
-
-		interp.variables = vars.copy();
-
-		return interp.execute(program);
 	}
 }

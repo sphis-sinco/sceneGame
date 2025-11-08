@@ -1,5 +1,6 @@
 export/
 dump/
+.haxelib/
 
 .DS_Store
 .dev/taigo-animated/taigo-animated.zip

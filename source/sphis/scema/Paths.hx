@@ -23,4 +23,9 @@ class Paths
 	{
 		return getDataFile('slides/' + slidefile + ".json");
 	}
+
+	public static function getScriptFile(scriptfile:String):String
+	{
+		return 'assets/scripts/' + scriptfile + ".txt";
+	}
 }

@@ -33,17 +33,10 @@
 	<set name="BUILD_DIR" value="export/release" unless="debug"/>
 
 	<source path="source" />
-	<source path="assets" if="debug"/>
 
 	<assets path="assets" />
+	<assets path=".dev/flags/TAIGO/" rename="assets/" if="TAIGO"/>
 	
-	<section if="TAIGO">
-		<assets path=".dev/taigo-animated.png" rename="assets/images/taigo-animated.png" />
-		<assets path=".dev/taigo-animated.xml" rename="assets/images/taigo-animated.xml" />
-		<assets path=".dev/taigo.png" rename="assets/images/taigo.png" />
-		<assets path=".dev/dummy-taigo.json" rename="assets/data/slides/dummy.json" />
-	</section>
-
 	<define name="F3_MENU" unless="DISABLE_F3_MENU"/>
 
 	<define name="HEART_RANDOM_KEY" if="HEART_DEBUG"/>
@@ -56,6 +49,8 @@
 	
 	<haxelib name="hscript" />
 	<define name="hscriptPos"/>
+
+	<haxelib name="polymod" />
 
 	<!-- ______________________________ Haxedefines _____________________________ -->
 
