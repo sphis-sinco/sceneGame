@@ -24,7 +24,10 @@ class GuiState extends FlxState
 		super.create();
 
 		debugText = new GuiShadowText("", 0, 0);
+
 		debugText.text_field.alignment = LEFT;
+		debugText.text_field.fieldWidth = FlxG.width;
+
 		add(debugText);
 	}
 
