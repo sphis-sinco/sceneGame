@@ -74,21 +74,20 @@ class GuiTextButton extends FlxTypedGroup<FlxBasic>
 		button_highlight.setPosition(button.x, button.y);
 		text_field.setPosition(button.x, button.y + ((button.height - text_field.text_field.height) / 2));
 
-		if (paused)
-			return;
-
-		button_highlight.visible = FlxG.mouse.overlaps(button);
-		button.visible = !FlxG.mouse.overlaps(button);
-
-		if (FlxG.mouse.justReleased && button_highlight.visible)
+		if (!paused)
 		{
-			if (pressed_callback != null)
+			button_highlight.visible = FlxG.mouse.overlaps(button);
+			button.visible = !FlxG.mouse.overlaps(button);
+
+			if (FlxG.mouse.justReleased && button_highlight.visible)
 			{
-				for (line in pressed_callback)
-					script_runner.run(line, script_runner_additional_variables);
+				if (pressed_callback != null)
+					for (line in pressed_callback)
+						script_runner.run(line, script_runner_additional_variables);
+
+				if (pressed_callback_code != null)
+					pressed_callback_code();
 			}
-			if (pressed_callback_code != null)
-				pressed_callback_code();
 		}
 	}
 }

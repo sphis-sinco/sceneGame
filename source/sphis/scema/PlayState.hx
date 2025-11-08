@@ -47,7 +47,7 @@ class PlayState extends GuiState
 		{
 			if (prop.hasField('paused'))
 			{
-				prop.setField('paused', !prop.field('paused'));
+				prop.setField('paused', instance.paused);
 			}
 			if (prop.hasField('members'))
 			{
@@ -177,6 +177,9 @@ class PlayState extends GuiState
 	{
 		final alphaVal = (onStart ? 1 / 10000000000000000000 : 0.5);
 
+		if (!onStart)
+			instance.paused = !instance.paused;
+
 		instance.checkPropAlphaShit(instance.paused_bg, alphaVal);
 		instance.checkPropAlphaShit(instance.paused_blackbg, alphaVal, .5);
 		instance.checkPropAlphaShit(instance.pausescreen_slide.props, alphaVal);
@@ -184,8 +187,7 @@ class PlayState extends GuiState
 		if (onStart)
 			return;
 
-		instance.pauseProps(instance.pausescreen_slide.props);
-		instance.paused = !instance.paused;
+		instance.pauseProps(instance.slide_props);
 
 		if (instance.paused)
 		{

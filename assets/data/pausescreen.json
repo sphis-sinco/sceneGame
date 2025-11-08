@@ -14,7 +14,7 @@
                 "height_scale_addition": 8,
 
 			    "pressed_callback": [
-                    "PlayState.togglePaused();"
+                    "FlxG.switchState(new GuiMainMenu());"
                 ]
             },
             "screencenter_settings": {
