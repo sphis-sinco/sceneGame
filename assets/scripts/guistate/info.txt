@@ -1,1 +1,1 @@
-script_info.testing_script = "1.0";
+script_info.script_info_script_working = true;
