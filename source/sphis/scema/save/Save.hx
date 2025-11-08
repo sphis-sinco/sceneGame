@@ -33,6 +33,8 @@ class Save
 
 			trace(' * ' + field + " : " + getSaveData(cast field) + depricatedMsg);
 		}
+
+		save();
 	}
 
 	public static function handleEmptySave()
@@ -67,5 +69,10 @@ class Save
 	public static function setSaveData(field:SaveFields, value:Dynamic)
 	{
 		SAVE.data.setField(cast field, value);
+	}
+
+	public static function save()
+	{
+		SAVE.flush();
 	}
 }
