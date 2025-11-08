@@ -134,6 +134,8 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 
 					var condition_result:Bool = code_runner.run(condition.code, start_variables);
 
+					trace("Ran " + condition.code + " : " + condition_result);
+
 					if (!condition_result && condition.high_priority)
 					{
 						skippedSlidePropGeneration(prop.id, FALSE_VISIBLE_CONDITION_HIGH_PRIORITY);
