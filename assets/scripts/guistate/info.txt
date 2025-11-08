@@ -1,3 +1,0 @@
-var script_info = {
-    "script_working" : true
-};

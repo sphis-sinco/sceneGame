@@ -1,5 +1,0 @@
-trace(FlxG.width);
-trace(FlxG.height);
-
-trace(Paths.exists(Paths.getScriptFile("initstate/testing")));
-trace(Paths.exists(Paths.getScriptFile("initstate/testing-2")));
