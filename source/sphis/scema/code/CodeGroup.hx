@@ -63,7 +63,8 @@ class CodeGroup
 				if (vars.exists(key))
 				{
 					if (Std.string(vars.get(key)) != Std.string(value)
-						&& !(Std.string(key).startsWith("function#") || Std.string(value).startsWith("function#")))
+						&& !(Std.string(key).startsWith("function#") || Std.string(value).startsWith("function#"))
+						&& !(Std.string(key).startsWith("(active: ") || Std.string(value).startsWith("(active: ")))
 						trace("VAR " + key + " BEING OVERWRITTEN FROM " + vars.get(key) + " TO " + value);
 				}
 				vars.set(key, value);
