@@ -154,7 +154,7 @@ class PlayState extends GuiState
 		super.update(elapsed);
 
 		#if HEART_RANDOM_KEY
-		if (FlxG.keys.justReleased.R)
+		if (FlxG.keys.justReleased.H)
 			hearts.setHealth(FlxG.random.int(GuiConstants.MIN_HEALTH, GuiConstants.MAX_HEALTH));
 		#end
 
