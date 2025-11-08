@@ -51,7 +51,6 @@ class Save
 
 	public static function setSaveData(field:SaveFields, value:Dynamic)
 	{
-		if (SAVE.data.hasField(cast field))
-			SAVE.data.setField(cast field, value);
+		SAVE.data.setField(cast field, value);
 	}
 }
