@@ -46,7 +46,6 @@ class PlayState extends GuiState
 		if (script_files.getVariables().exists("paused_bg_color"))
 			paused_bg.color = FlxColor.fromString(script_files.getVariables().get("paused_bg_color")) ?? FlxColor.WHITE;
 
-		add(paused_bg);
 		paused_bg.alpha = 0;
 	}
 
@@ -60,6 +59,8 @@ class PlayState extends GuiState
 		hearts = new HeartsGroup(20, new FlxPoint(2, FlxG.height - (32 + 2)));
 		add(hearts);
 		hearts.updateHealthIcons();
+
+		add(paused_bg);
 
 		super.create();
 
