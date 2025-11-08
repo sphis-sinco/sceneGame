@@ -17,8 +17,11 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 	public var slide_data:SlideData;
 
 	public var prop_ids:Array<String> = [];
+
 	public var prop_animation_offsets:Map<String, Map<String, Array<Float>>> = [];
 	public var prop_animation_conditions:Map<String, Map<String, Array<String>>> = [];
+
+	public var prop_id_to_index:Map<String, Int> = [];
 
 	override public function new(slide_path:String)
 	{
@@ -84,11 +87,6 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 		}
 
 		trace("Generated " + this.members.length + " prop(s)");
-	}
-
-	override function update(elapsed:Float)
-	{
-		super.update(elapsed);
 	}
 
 	private function skippedSlidePropGeneration(prop_id:String, reason:SlidePropGenerationSkipReason, ?data:Dynamic)
@@ -178,6 +176,7 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 			return parseAnimatedImageGraphicProp(graphic_prop, prop);
 		}
 
+		prop_id_to_index.set(prop.id, this.members.length);
 		add(graphic_prop);
 
 		prop_ids.push(prop.id);
@@ -261,7 +260,8 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 						if (doesPropAnimationHaveCondition(prop.id, animation, 'after-' + animName))
 						{
 							// 'moved to ' + animation
-							graphic_prop.animation.play(animation);
+							// graphic_prop.animation.play(animation);
+							propPlayAnimation(prop.id, animation);
 						}
 					}
 				});
@@ -274,6 +274,7 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 			}
 		}
 
+		prop_id_to_index.set(prop.id, this.members.length);
 		add(graphic_prop);
 
 		prop_ids.push(prop.id);
@@ -306,6 +307,7 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 			}
 		}
 
+		prop_id_to_index.set(prop.id, this.members.length);
 		add(graphic_prop);
 
 		prop_ids.push(prop.id);
@@ -346,5 +348,29 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 	public function getPropAnimationOffsets(prop:String, name:String):Array<Float>
 	{
 		return prop_animation_offsets.get(prop).get(name);
+	}
+
+	public function propPlayAnimation(prop:String, animation:String)
+	{
+		var prop:FlxSprite = getGraphicProp(prop);
+		if (prop != null)
+			prop.animation.play(animation);
+	}
+
+	public function getGraphicProp(prop:String):FlxSprite
+	{
+		var prop = getProp(prop);
+		var prop_class_name = Type.getClassName(Type.getClass(prop));
+
+		trace(prop_class_name);
+		if (prop_class_name.split('.')[prop_class_name.split('.').length - 1] == "FlxSprite")
+			return cast prop;
+
+		return null;
+	}
+
+	public function getProp(prop:String):FlxBasic
+	{
+		return this.members[prop_id_to_index.get(prop)];
 	}
 }

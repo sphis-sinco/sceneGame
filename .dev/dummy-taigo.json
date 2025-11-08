@@ -46,10 +46,21 @@
                         "name": "tiago-animated",
 
                         "prefix": "tiago-animated",
+                        "looped": false,
 
                         "offsets": [0, -360],
                         
-                        "conditions": ["default"]
+                        "conditions": ["default", "after-tiago-animated-post"]
+                    },
+                    {
+                        "name": "tiago-animated-post",
+
+                        "prefix": "tiago-animated",
+                        "looped": false,
+
+                        "offsets": [0, -360],
+                        
+                        "conditions": ["after-tiago-animated"]
                     }
                 ]
             }
