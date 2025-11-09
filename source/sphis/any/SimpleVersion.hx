@@ -10,7 +10,9 @@ class SimpleVersion
 		var i = 0;
 		for (entry in version_split)
 		{
-			if ((Std.parseInt(entry) ?? 0) < 1)
+			var int_entry = (Std.parseInt(entry) ?? null);
+
+			if (int_entry < 1 && int_entry != null)
 			{
 				i++;
 				continue;
