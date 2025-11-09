@@ -23,6 +23,7 @@ class InitState extends FlxState
 		super.create();
 
 		trace("Initalizing...");
+		OutdatedChecker.check();
 
 		FlxG.debugger.toggleKeys = [];
 
@@ -43,7 +44,7 @@ class InitState extends FlxState
 		}, true, 1000);
 
 		var starting_state = DefineUtil.getDefineString("STARTING_STATE", null);
-		var outdated:Bool = OutdatedChecker.check();
+		var outdated:Bool = OutdatedChecker.GAVE_OUTDATED_WARNING;
 
 		switch (starting_state.toLowerCase())
 		{
