@@ -55,7 +55,7 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 
 		slide_data.props.sort((prop1, prop2) ->
 		{
-			return FlxSort.byValues(FlxSort.ASCENDING, prop1.z_index, prop2.z_index);
+			return FlxSort.byValues(FlxSort.ASCENDING, prop1?.z_index ?? 0, prop2?.z_index ?? 0);
 		});
 
 		var i = 1;
