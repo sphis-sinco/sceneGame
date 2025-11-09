@@ -15,7 +15,7 @@ class CodeGroup
 
 	public function new(?starting_path_addition:String)
 	{
-		var path = 'assets/scripts/' + starting_path_addition + '/';
+		var path = 'assets/scripts/' + starting_path_addition;
 
 		#if !sys
 		for (file in new ZipFileSystem({}).readDirectoryRecursive(path))
