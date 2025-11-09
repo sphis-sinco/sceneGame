@@ -103,9 +103,6 @@ class Save
 	{
 		DATA.setProperty(field, value);
 
-		if (field == VOLUME)
-			FlxG.sound.volume = (cast value / 100) ?? 0.0;
-
 		save();
 	}
 

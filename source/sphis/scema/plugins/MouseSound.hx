@@ -19,6 +19,7 @@ class MouseSound extends FlxBasic
 		if (sound.playing)
 			sound.stop();
 
+		sound.volume = FlxG.sound.volume;
 		sound.pitch = FlxG.random.int(-2, 2);
 		sound.play();
 	}
