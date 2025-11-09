@@ -11,10 +11,11 @@ class GeneralConstants
 	{
 		var version = Application.current.meta.get("version");
 
+		if (!DefineUtil.getDefineBool("INCLUDE_VERSION_SUFFIXES"))
+			return version;
+
 		if (DefineUtil.getDefineString("VERSION_SUFFIX", null) != null && DefineUtil.getDefineString("VERSION_SUFFIX", null) != "")
-		{
 			version += "." + DefineUtil.getDefineString("VERSION_SUFFIX");
-		}
 
 		return version;
 	}

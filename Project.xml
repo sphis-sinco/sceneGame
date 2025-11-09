@@ -37,7 +37,10 @@
 
 	<assets path="assets"/>
 
+	<define name="INCLUDE_VERSION_SUFFIXES" unless="DONT_INCLUDE_VERSION_SUFFIXES"/>
+
 	<define name="F3_MENU" unless="DISABLE_F3_MENU"/>
+	<define name="OUTDATED_MENU" unless="DISABLE_OUTDATED_MENU"/>
 
 	<define name="HEART_RANDOM_KEY" if="HEART_DEBUG"/>
 	<define name="HEART_DEBUG_TRACES" if="HEART_DEBUG"/>
