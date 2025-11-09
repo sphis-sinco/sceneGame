@@ -31,8 +31,7 @@
                 "height_scale_addition": 8,
 
 			    "pressed_callback": [
-                    "trace(\"Hola\");",
-                    "switch_slide(\"dummy-taigo\");"
+                    "trace(\"proceed\");"
                 ],
 
                 "graphic": {

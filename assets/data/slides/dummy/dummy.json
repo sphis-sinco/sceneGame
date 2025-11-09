@@ -39,7 +39,7 @@
 
 			    "pressed_callback": [
                     "trace(\"Hola\");",
-                    "switch_slide(\"dummy-taigo\");"
+                    "switch_slide(\"dummy/dummy-taigo\");"
                 ]
             },
             "screencenter_settings": {
