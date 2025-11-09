@@ -33,7 +33,11 @@
 			    "pressed_callback": [
                     "trace(\"Hola\");",
                     "switch_slide(\"dummy-taigo\");"
-                ]
+                ],
+
+                "graphic": {
+                    "image_path": "gui/button-shadow"
+                }
             },
             "screencenter_settings": {
                 "screencenter":true
