@@ -81,7 +81,7 @@ class GuiState extends FlxState
 	public function getNonDebugInfo():Dynamic
 	{
 		var info = {
-			scema: Application.current.meta.get("version"),
+			scema: GeneralConstants.VERSION,
 		}
 
 		if (Save.getSaveData(SIMPLE_VERSION))

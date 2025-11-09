@@ -1,5 +1,7 @@
 package sphis.any;
 
+using StringTools;
+
 class SimpleVersion
 {
 	public static function convertToSingleLetters(version:String):String
@@ -10,22 +12,17 @@ class SimpleVersion
 		var i = 0;
 		for (entry in version_split)
 		{
-			var int_entry = (Std.parseInt(entry) ?? null);
-
-			if (int_entry < 1 && int_entry != null)
+			if (entry != "0")
 			{
-				i++;
-				continue;
+				if (i == 0)
+					version_string += "x" + entry;
+				else if (i == 1)
+					version_string += "y" + entry;
+				else if (i == 2)
+					version_string += "z" + entry;
+				else
+					version_string += "-" + entry;
 			}
-
-			if (i == 0)
-				version_string += "x" + entry;
-			else if (i == 1)
-				version_string += "y" + entry;
-			else if (i == 2)
-				version_string += "z" + entry;
-			else
-				version_string += "-" + entry;
 
 			i++;
 		}
