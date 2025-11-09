@@ -35,6 +35,8 @@ class OutdatedChecker
 
 				if (newVersion.version != GeneralConstants.VERSION)
 				{
+					http = null;
+
 					GAVE_OUTDATED_WARNING = true;
 					return true;
 				}

@@ -15,10 +15,17 @@ class CodeGroup
 
 	public function new(?starting_path_addition:String)
 	{
-		for (file in #if !sys new ZipFileSystem({}).readDirectoryRecursive #else FileSystem.readDirectory #end ('assets/scripts/' + starting_path_addition)
-	)
+		var path = 'assets/scripts/' + starting_path_addition + '/';
+
+		#if !sys
+		for (file in new ZipFileSystem({}).readDirectoryRecursive(path))
+		#else
+		var files = Paths.getTypeArray('Script File', 'scripts', ['.txt'], [path]);
+
+		for (file in files)
+		#end
 		{
-			var new_script_file = new CodeFileRunner(Path.withoutExtension(file), starting_path_addition);
+			var new_script_file = new CodeFileRunner(Path.withoutDirectory(Path.withoutExtension(file.replace("//", "/"))), starting_path_addition);
 			add(new_script_file);
 		}
 	}

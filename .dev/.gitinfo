@@ -1,6 +1,7 @@
 {
   "version": "0.0.23",
   "changelog": [
+    "Added \"getTypeArray\" function to Paths",
     "Removed support for InitState Scripts",
     "Added Outdated Menu",
     "Added \"VERSION_SUFFIX\" define",
