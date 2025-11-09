@@ -1,5 +1,5 @@
 var dummy = defines.DUMMY_SLIDE;
-GuiMainMenu.starting_state = "game/intro/narration-9";
+GuiMainMenu.starting_state = "game/intro/narration-0";
 
 if (dummy)
     GuiMainMenu.starting_state = "dummy/dummy";
