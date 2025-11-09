@@ -24,14 +24,14 @@ class OutdatedChecker
 			http.onData = function(data:String)
 			{
 				var newVersion:GitInfoData = Json.parse(data) ?? {
-					version: GeneralConstants.VERSION
+					version: GeneralConstants.VERSION_SUFFIXLESS
 				};
 				VERSION = newVersion.version;
 
 				trace("Git Version: " + newVersion.version);
-				trace("Current Version: " + GeneralConstants.VERSION);
+				trace("Current Version: " + GeneralConstants.VERSION_SUFFIXLESS);
 
-				if (newVersion.version != GeneralConstants.VERSION)
+				if (newVersion.version != GeneralConstants.VERSION_SUFFIXLESS)
 				{
 					http = null;
 

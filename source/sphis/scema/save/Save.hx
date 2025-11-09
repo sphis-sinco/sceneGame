@@ -1,12 +1,6 @@
 package sphis.scema.save;
 
-import flixel.FlxG;
-import flixel.util.FlxSave;
 import haxe.Json;
-import polymod.fs.MemoryZipFileSystem;
-import polymod.fs.SysFileSystem;
-import polymod.fs.ZipFileSystem;
-import sphis.any.SimpleVersion;
 
 using Reflect;
 
@@ -68,7 +62,7 @@ class Save
 		if (!emptySave())
 			return;
 
-		setSaveData(VERSION, GeneralConstants.VERSION);
+		setSaveData(VERSION, GeneralConstants.VERSION_SUFFIXLESS);
 		setSaveData(SIMPLE_VERSION, true);
 		setSaveData(VOLUME, 100);
 		setSaveData(DEBUG_TEXT, true);

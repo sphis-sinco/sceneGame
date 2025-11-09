@@ -20,8 +20,6 @@ class GuiMainMenu extends GuiState
 
 	override function create()
 	{
-		super.create();
-
 		FlxG.camera.fade(FlxColor.BLACK, .25, true);
 
 		play_button = createTextButton({
@@ -58,6 +56,7 @@ class GuiMainMenu extends GuiState
 		options_button.button.y += options_button.button.height;
 		add(options_button);
 
+		super.create();
 		debugText.text_field_shadow.color = FlxColor.GRAY;
 	}
 }

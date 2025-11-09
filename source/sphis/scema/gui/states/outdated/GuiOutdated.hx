@@ -13,8 +13,6 @@ class GuiOutdated extends GuiState
 
 	override function create()
 	{
-		super.create();
-
 		FlxG.camera.fade(FlxColor.BLACK, .25, true);
 
 		var dontcare = createTextButton({
@@ -30,7 +28,7 @@ class GuiOutdated extends GuiState
 			height_scale_addition: 3
 		});
 		dontcare.button.screenCenter();
-		dontcare.button.y = FlxG.height - dontcare.button.height * 1.1;
+		dontcare.button.y = FlxG.height - dontcare.button.height * 2;
 		dontcare.button.x += dontcare.button.width;
 
 		add(dontcare);
@@ -48,7 +46,7 @@ class GuiOutdated extends GuiState
 			height_scale_addition: 3
 		});
 		careplusasked.button.screenCenter();
-		careplusasked.button.y = FlxG.height - careplusasked.button.height * 1.1;
+		careplusasked.button.y = FlxG.height - careplusasked.button.height * 2;
 		careplusasked.button.x -= careplusasked.button.width;
 
 		add(careplusasked);
@@ -56,11 +54,14 @@ class GuiOutdated extends GuiState
 		var prompt = drawShadowedText({text_content: "Your game is outdated!"
 			+ "\n\n"
 			+ "Your version is: "
-			+ GeneralConstants.VERSION
+			+ GeneralConstants.VERSION_SUFFIXLESS
 			+ " and the current version is "
 			+ OutdatedChecker.VERSION});
 
 		prompt.text_field.screenCenter();
 		add(prompt);
+
+		super.create();
+		debugText.text_field_shadow.color = FlxColor.GRAY;
 	}
 }
