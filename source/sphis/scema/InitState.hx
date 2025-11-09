@@ -7,6 +7,8 @@ import polymod.util.DefineUtil;
 import sphis.scema.gui.states.GuiMainMenu;
 import sphis.scema.gui.states.GuiState;
 import sphis.scema.gui.states.options.GuiOptions;
+import sphis.scema.gui.states.outdated.GuiOutdated;
+import sphis.scema.gui.states.outdated.OutdatedChecker;
 import sphis.scema.plugins.MouseSound;
 import sphis.scema.plugins.VolumeManager;
 import sphis.scema.save.Save;
@@ -53,7 +55,10 @@ class InitState extends GuiState
 				if (starting_state != null && starting_state != "")
 					trace(starting_state + " has no case");
 
-				FlxG.switchState(() -> new GuiMainMenu());
+				if (OutdatedChecker.check())
+					FlxG.switchState(() -> new GuiOutdated());
+				else
+					FlxG.switchState(() -> new GuiMainMenu());
 		}
 	}
 

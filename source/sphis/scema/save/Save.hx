@@ -72,6 +72,7 @@ class Save
 		setSaveData(SIMPLE_VERSION, true);
 		setSaveData(VOLUME, 100);
 		setSaveData(DEBUG_TEXT, true);
+		setSaveData(CHECK_OUTDATED, true);
 	}
 
 	public static function updateSave()
@@ -86,6 +87,9 @@ class Save
 
 			case "0.0.21":
 				setSaveData(DEBUG_TEXT, true);
+
+			case "0.0.23":
+				setSaveData(CHECK_OUTDATED, true);
 
 			default:
 				trace("Save data version " + getSaveData(VERSION) + " has no updateSave case");
