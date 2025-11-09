@@ -2,17 +2,26 @@ package sphis.scema.gui;
 
 import flixel.FlxSprite;
 
+typedef GuiSliderData =
+{
+	var target_offset:Float;
+
+	var ?percent:Float;
+
+	var ?position:Array<Float>;
+}
+
 class GuiSlider extends FlxSprite
 {
 	public var target_offset:Float = 0;
 	public var percent:Float = 0.0;
 
-	override public function new(target_offset:Float = 100, ?percent:Float = 0, X:Float = 0, Y:Float = 0)
+	override public function new(params:GuiSliderData)
 	{
-		super(X, Y);
+		super(params?.position[0] ?? 0, params?.position[1] ?? 0);
 
-		this.target_offset = target_offset;
-		this.percent = percent;
+		this.target_offset = params?.target_offset ?? 0;
+		this.percent = params?.percent ?? 0.0;
 
 		loadGraphic(Paths.getImageFile('gui/slider'));
 		scale.set(GuiConstants.UI_SCALE_MULTIPLIER, GuiConstants.UI_SCALE_MULTIPLIER);
