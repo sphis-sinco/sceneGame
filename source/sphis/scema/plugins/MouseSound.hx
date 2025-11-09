@@ -14,21 +14,29 @@ class MouseSound extends FlxBasic
 	public var right_down:FlxSound = new FlxSound().loadStream(Paths.getMouseSoundFile("right_down"));
 	public var right_up:FlxSound = new FlxSound().loadStream(Paths.getMouseSoundFile("right_up"));
 
+	public function playSound(sound:FlxSound)
+	{
+		if (sound.playing)
+			sound.stop();
+
+		sound.play();
+	}
+
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
 
 		if (FlxG.mouse.justPressed)
-			left_down.play();
+			playSound(left_down);
 		if (FlxG.mouse.justReleased)
-			left_up.play();
+			playSound(left_up);
 
 		if (FlxG.mouse.justPressedMiddle)
-			middle.play();
+			playSound(middle);
 
 		if (FlxG.mouse.justPressedRight)
-			right_down.play();
+			playSound(right_down);
 		if (FlxG.mouse.justReleasedRight)
-			right_up.play();
+			playSound(right_up);
 	}
 }
