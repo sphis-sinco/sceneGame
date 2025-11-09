@@ -57,7 +57,6 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 
 		prop_animation_conditions.clear();
 		prop_animation_offsets.clear();
-		prop_animation_offsets.clear();
 
 		prop_ids = [];
 
