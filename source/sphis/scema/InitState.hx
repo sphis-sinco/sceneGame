@@ -11,6 +11,8 @@ import sphis.scema.plugins.MouseSound;
 import sphis.scema.plugins.VolumeManager;
 import sphis.scema.save.Save;
 
+using Reflect;
+
 class InitState extends GuiState
 {
 	override public function new()
@@ -40,7 +42,7 @@ class InitState extends GuiState
 			Save.save();
 		}, true, 1000);
 
-		var starting_state = DefineUtil.getDefineString("STARTING_STATE");
+		var starting_state = DefineUtil.getDefineString("STARTING_STATE", null);
 
 		switch (starting_state.toLowerCase())
 		{
