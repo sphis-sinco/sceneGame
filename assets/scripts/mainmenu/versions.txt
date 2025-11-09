@@ -1,0 +1,4 @@
+trace("Current version: " + GeneralConstants.VERSION_SUFFIXLESS);
+trace("Current scema version: " + VersionConverts.convertToScema(GeneralConstants.VERSION_SUFFIXLESS));
+trace("Current int array version: " + VersionConverts.convertToIntArray(GeneralConstants.VERSION_SUFFIXLESS));
+trace("Current int version: " + VersionConverts.convertToInt(GeneralConstants.VERSION_SUFFIXLESS));
