@@ -8,7 +8,7 @@ import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.util.FlxSort;
 import lime.app.Application;
-import sphis.any.SimpleVersion;
+import sphis.any.VersionConverts;
 import sphis.scema.code.CodeGroup;
 import sphis.scema.gui.buttons.GuiButton.GuiButtonParameters;
 import sphis.scema.gui.buttons.GuiTextButton;
@@ -85,7 +85,7 @@ class GuiState extends FlxState
 		}
 
 		if (Save.getSaveData(SIMPLE_VERSION))
-			info.scema = SimpleVersion.convertToSingleLetters(info.scema);
+			info.scema = VersionConverts.convertToSingleLetters(info.scema);
 
 		if (script_files.getVariables().exists("script_info"))
 		{

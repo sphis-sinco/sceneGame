@@ -2,8 +2,21 @@ package sphis.any;
 
 using StringTools;
 
-class SimpleVersion
+class VersionConverts
 {
+	public static function convertToIntArray(version:String):Array<Int>
+	{
+		var int_version:Array<Int> = [];
+
+		for (entry in version.split('.'))
+		{
+			if (Std.parseInt(entry) != null)
+				int_version.push(Std.parseInt(entry));
+		}
+
+		return int_version;
+	}
+
 	public static function convertToSingleLetters(version:String):String
 	{
 		var version_split = version.split(".");
