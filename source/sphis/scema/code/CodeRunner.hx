@@ -62,7 +62,6 @@ class CodeRunner
 		variables.set("PlayState", PlayState);
 
 		variables.set("FlxG", FlxG);
-		variables.set("FlxG.camera.fade", (color, duration, fade_in, on_complete, force) -> FlxG.camera.fade(color, duration, fade_in, on_complete, force));
 		variables.set("FlxColor", {
 			TRANSPARENT: FlxColor.TRANSPARENT,
 			WHITE: FlxColor.WHITE,
