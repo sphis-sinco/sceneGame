@@ -48,10 +48,14 @@ class GuiTextButton extends FlxTypedGroup<FlxBasic>
 		button = new GuiButton(params);
 
 		if (params != null)
-			if (params?.graphic?.image_path != null && Paths.exists(params?.graphic?.image_path + "-highlight"))
+			if (params?.graphic?.image_path != null && Paths.exists(Paths.getImageFile(params?.graphic?.image_path + "-highlight")))
+			{
 				params.graphic.image_path = params.graphic.image_path += "-highlight";
+				trace("Using custom button-highlight: " + params?.graphic?.image_path);
+			}
 			else
 			{
+				trace("Using default button-highlight");
 				params.graphic = {
 					corner_radius: 4,
 					image_path: "gui/button-highlight"

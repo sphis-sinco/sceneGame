@@ -1,6 +1,7 @@
 {
   "version": "0.0.24",
   "changelog": [
+    "Fixed Custom button highlights not working",
     "The \"Leave\" button changes to \"Return\" when entering GuiOptions from gameplay",
     "Changed GuiOptions so when you enter it from gameplay it will send you back to gameplay",
     "Added GuiOptions params",
