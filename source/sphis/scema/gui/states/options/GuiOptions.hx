@@ -88,17 +88,10 @@ class GuiOptions extends GuiState
 			add(buttonGrp);
 		}
 
-		volume_slider = new GuiSlider(button_params[2].position.x, button_params[2].position.y);
+		volume_slider = new GuiSlider(200, cast Save.getSaveData(VOLUME) / 100, button_params[2].position.x, button_params[2].position.y - 4);
 		add(volume_slider);
 
 		super.create();
 		debugText.text_field_shadow.color = FlxColor.GRAY;
-	}
-
-	override function update(elapsed:Float)
-	{
-		super.update(elapsed);
-
-		volume_slider.percent = cast Save.getSaveData(VOLUME);
 	}
 }

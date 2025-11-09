@@ -44,10 +44,8 @@ class InitState extends GuiState
 				FlxG.switchState(() -> new GuiOptions());
 
 			default:
-				if (starting_state != null)
-				{
+				if (starting_state != null && starting_state != "")
 					trace(starting_state + " has no case");
-				}
 
 				FlxG.switchState(() -> new GuiMainMenu());
 		}

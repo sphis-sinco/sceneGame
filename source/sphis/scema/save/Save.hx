@@ -108,8 +108,6 @@ class Save
 
 	public static function save()
 	{
-		trace("Saving...");
-
 		#if sys
 		sys.io.File.saveContent(Paths.getDataFile(FILE_PATH), Json.stringify(DATA, "\t"));
 		#else
