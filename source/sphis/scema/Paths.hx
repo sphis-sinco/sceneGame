@@ -128,7 +128,7 @@ class Paths
 		}
 		else
 		{
-			trace('Found ' + arr.length + ' ' + type + ' files with paths: ' + paths);
+			trace('Found ' + arr.length + ' ' + type + ' files in paths: ' + paths);
 			for (file in arr)
 			{
 				trace(' * ' + file);
