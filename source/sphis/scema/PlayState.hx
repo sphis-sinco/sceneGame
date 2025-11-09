@@ -142,8 +142,6 @@ class PlayState extends GuiState
 		pausescreen_slide.code.initVars();
 		pausescreen_slide.code.parseCode();
 
-		add(pausescreen_slide.props);
-
 		togglePaused(true);
 
 		FlxG.camera.fade(FlxColor.BLACK, .25, true);
@@ -184,6 +182,24 @@ class PlayState extends GuiState
 
 		if (!onStart)
 			instance.paused = !instance.paused;
+
+		#if windows
+		if (!instance.members.contains(instance.pausescreen_slide.props) && instance.paused)
+		{
+			instance.add(instance.paused_bg);
+			instance.add(instance.paused_blackbg);
+			instance.add(instance.pausescreen_slide.props);
+		}
+		else
+		{
+			instance.remove(instance.paused_bg);
+			instance.remove(instance.paused_blackbg);
+			instance.remove(instance.pausescreen_slide.props);
+		}
+		#else
+		if (!instance.members.contains(instance.pausescreen_slide.props))
+			instance.add(instance.pausescreen_slide.props);
+		#end
 
 		instance.checkPropAlphaShit(instance.paused_bg, alphaVal);
 		instance.checkPropAlphaShit(instance.paused_blackbg, alphaVal, .5);
