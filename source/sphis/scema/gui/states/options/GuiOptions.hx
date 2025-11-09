@@ -107,7 +107,12 @@ class GuiOptions extends GuiState
 
 	public function reload()
 	{
-		this.params.fade = false;
+		if (this.params != null)
+			this.params.fade = false;
+		else
+			this.params = {
+				fade: false
+			};
 
 		FlxG.switchState(() -> new GuiOptions(this.params));
 	}
