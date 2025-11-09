@@ -46,14 +46,7 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 		if (slide_data == null)
 			return;
 
-		if (this.members.length > 0)
-		{
-			for (prop in this.members)
-			{
-				this.members.remove(prop);
-				prop.destroy();
-			}
-		}
+		clear();
 
 		prop_animation_conditions.clear();
 		prop_animation_offsets.clear();
