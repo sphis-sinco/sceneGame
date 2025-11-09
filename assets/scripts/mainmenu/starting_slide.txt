@@ -1,11 +1,11 @@
 var dummy = defines.DUMMY_SLIDE;
-var starting_state = "game/intro";
+GuiMainMenu.starting_state = "game/intro";
 
 if (dummy)
-    starting_state = "dummy/dummy";
+    GuiMainMenu.starting_state = "dummy/dummy";
 
 if (defines.TAIGO && dummy)
 {
     trace("TAIGO :D");
-    starting_state = "dummy/dummy-taigo";
+    GuiMainMenu.starting_state = "dummy/dummy-taigo";
 }

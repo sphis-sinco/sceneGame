@@ -11,6 +11,8 @@ class GuiMainMenu extends GuiState
 	public var play_button:GuiTextButton;
 	public var options_button:GuiTextButton;
 
+	public static var starting_state:String = "dummy/dummy";
+
 	override public function new()
 	{
 		super('mainmenu/');
@@ -28,7 +30,7 @@ class GuiMainMenu extends GuiState
 
 			pressed_callback_code: data ->
 			{
-				FlxG.camera.fade(FlxColor.BLACK, .25, false, () -> FlxG.switchState(PlayState.new.bind(script_files.getVariables().get('starting_state'))));
+				FlxG.camera.fade(FlxColor.BLACK, .25, false, () -> FlxG.switchState(() -> new PlayState(starting_state)));
 			},
 
 			width_scale_addition: 16,
