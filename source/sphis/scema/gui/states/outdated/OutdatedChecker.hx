@@ -7,7 +7,7 @@ using StringTools;
 
 class OutdatedChecker
 {
-	public static var GAVE_OUTDATED_WARNING:Bool = false;
+	public static var GAVE_OUTDATED_WARNING:Bool;
 	public static var VERSION:String = "";
 
 	public static function check(url:String = null)
