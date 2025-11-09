@@ -39,12 +39,34 @@ class GuiOptions extends GuiState
 					var current_simple_version:Bool = cast Save.getSaveData(SIMPLE_VERSION);
 					Save.setSaveData(SIMPLE_VERSION, !current_simple_version);
 
-					FlxG.switchState(() -> new GuiOptions(false));
+					reload();
+				},
+				width_scale_addition: 24,
+				height_scale_addition: 3
+			},
+			{
+				text_content: "Volume: " + Save.getSaveData(VOLUME),
+				position: new FlxPoint(120, 80),
+				pressed_callback_code: data ->
+				{
+					var current_volume:Int = cast Save.getSaveData(VOLUME);
+					current_volume += 10;
+					if (current_volume > 100)
+						current_volume = 0;
+
+					Save.setSaveData(VOLUME, current_volume);
+
+					reload();
 				},
 				width_scale_addition: 24,
 				height_scale_addition: 3
 			}
 		];
+	}
+
+	public function reload()
+	{
+		FlxG.switchState(() -> new GuiOptions(false));
 	}
 
 	override function create()

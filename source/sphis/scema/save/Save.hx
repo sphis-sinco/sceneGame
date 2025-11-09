@@ -1,5 +1,6 @@
 package sphis.scema.save;
 
+import flixel.FlxG;
 import flixel.util.FlxSave;
 import haxe.Json;
 import polymod.fs.MemoryZipFileSystem;
@@ -69,6 +70,7 @@ class Save
 
 		setSaveData(VERSION, GeneralConstants.VERSION);
 		setSaveData(SIMPLE_VERSION, true);
+		setSaveData(VOLUME, 100);
 	}
 
 	public static function updateSave()
@@ -77,6 +79,9 @@ class Save
 		{
 			case "0.0.18":
 				setSaveData(SIMPLE_VERSION, true);
+
+			case "0.0.19":
+				setSaveData(VOLUME, 100);
 
 			default:
 				trace("Save data version " + SimpleVersion.convertToSingleLetters(getSaveData(VERSION)) + " has no updateSave case");
@@ -97,6 +102,9 @@ class Save
 	public static function setSaveData(field:SaveFields, value:Dynamic)
 	{
 		DATA.setProperty(field, value);
+
+		if (field == VOLUME)
+			FlxG.sound.volume = (cast value / 100) ?? 0.0;
 
 		save();
 	}

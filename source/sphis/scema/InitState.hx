@@ -20,6 +20,12 @@ class InitState extends GuiState
 	{
 		super.create();
 
+		FlxG.debugger.toggleKeys = [];
+
+		FlxG.sound.muteKeys = [];
+		FlxG.sound.volumeUpKeys = [];
+		FlxG.sound.volumeDownKeys = [];
+
 		FlxG.plugins.addPlugin(new MouseSound());
 
 		Save.initalizeSave();
