@@ -1,6 +1,6 @@
 package sphis.scema.save;
 
-enum abstract SaveFields(String)
+enum abstract SaveFields(String) from String to String
 {
 	var VERSION = "version";
 

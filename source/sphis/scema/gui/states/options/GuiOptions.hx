@@ -24,6 +24,7 @@ class GuiOptions extends GuiState
 				position: new FlxPoint(0, FlxG.height * 0.425),
 				pressed_callback_code: data ->
 				{
+					Save.save();
 					FlxG.camera.fade(FlxColor.BLACK, .25, false, () -> FlxG.switchState(() -> new GuiMainMenu()));
 				},
 				width_scale_addition: 16,
