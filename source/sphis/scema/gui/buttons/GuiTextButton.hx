@@ -55,7 +55,6 @@ class GuiTextButton extends FlxTypedGroup<FlxBasic>
 			}
 			else
 			{
-				trace("Using default button-highlight");
 				params.graphic = {
 					corner_radius: 4,
 					image_path: "gui/button-highlight"
