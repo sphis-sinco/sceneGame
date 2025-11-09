@@ -180,7 +180,7 @@ class PlayState extends GuiState
 
 	public static function togglePaused(onStart:Bool = false)
 	{
-		final alphaVal = (onStart ? 1 / 10000000000000000000 : 0.5);
+		final alphaVal = (onStart ? 1 / 100 : 0.5);
 
 		if (!onStart)
 			instance.paused = !instance.paused;
