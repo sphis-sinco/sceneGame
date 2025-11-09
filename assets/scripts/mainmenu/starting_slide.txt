@@ -1,6 +1,10 @@
-var starting_state = "dummy";
+var dummy = defines.DUMMY_SLIDE;
+var starting_state = "";
 
-if (defines.TAIGO)
+if (dummy)
+    starting_state = "dummy";
+
+if (defines.TAIGO && dummy)
 {
     trace("TAIGO :D");
     starting_state = "dummy-taigo";
