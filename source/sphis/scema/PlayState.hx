@@ -113,10 +113,8 @@ class PlayState extends GuiState
 			add(hearts);
 		hearts.updateHealthIcons();
 
-		#if !windows
 		trace('Creating Pause Menu');
 		initPauseMenu();
-		#end
 
 		togglePaused(true);
 
