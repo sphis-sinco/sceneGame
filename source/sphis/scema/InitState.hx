@@ -28,8 +28,6 @@ class InitState extends GuiState
 		FlxG.sound.volumeUpKeys = [];
 		FlxG.sound.volumeDownKeys = [];
 
-		FlxG.log.redirectTraces = true;
-
 		LogStyle.ERROR.openConsole = false;
 		LogStyle.WARNING.openConsole = false;
 
