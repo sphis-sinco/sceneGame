@@ -1,18 +1,8 @@
 {
-  "version": "0.0.24",
+  "version": "0.0.25",
   "changelog": [
-    "Removed _-go-here text files",
-    "Fixed Custom button highlights not working",
-    "The \"Leave\" button changes to \"Return\" when entering GuiOptions from gameplay",
-    "Changed GuiOptions so when you enter it from gameplay it will send you back to gameplay",
-    "Added GuiOptions params",
-    "Fixed Crash when the components field is null",
-    "More slides added to gameplay",
-    "Added Prebuild and Postbuild files",
-    "Added \"gui_outdated\" and \"outdated\" starting_state options",
-    "Fixed Position of \"Check Outdated\" option",
-    "Fixed Save Data Version using the Suffixed Version",
-    "Added Version Changelog to GuiOutdated",
-    "Added \"VERSION_SUFFIXLESS\" to GeneralConstants"
+    "Added Outdated check to make sure that the outdated version is accurate",
+    "Added \"convertToInt\" to VersionConverts (SimpleVersion)",
+    "Added \"convertToIntArray\" to VersionConverts (SimpleVersion)"
   ]
 }

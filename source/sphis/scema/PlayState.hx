@@ -113,8 +113,22 @@ class PlayState extends GuiState
 		hearts.updateHealthIcons();
 
 		trace('Creating Pause Menu');
+		initPauseMenu();
+
+		togglePaused(true);
+
+		FlxG.camera.fade(FlxColor.BLACK, .25, true);
+
+		super.create();
+
+		slide_code.onCreate(getAdditionalVariables());
+	}
+
+	public function initPauseMenu()
+	{
 		paused_blackbg = new FlxSprite();
 		paused_blackbg.makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+		paused_blackbg.alpha = .5;
 		add(paused_blackbg);
 
 		paused_bg = new FlxSprite();
@@ -141,14 +155,6 @@ class PlayState extends GuiState
 		pausescreen_slide.code.start_variables = getAdditionalVariables();
 		pausescreen_slide.code.initVars();
 		pausescreen_slide.code.parseCode();
-
-		togglePaused(true);
-
-		FlxG.camera.fade(FlxColor.BLACK, .25, true);
-
-		super.create();
-
-		slide_code.onCreate(getAdditionalVariables());
 	}
 
 	override public function update(elapsed:Float)
@@ -184,17 +190,25 @@ class PlayState extends GuiState
 			instance.paused = !instance.paused;
 
 		#if windows
-		if (!instance.members.contains(instance.pausescreen_slide.props) && instance.paused)
-		{
-			instance.add(instance.paused_bg);
-			instance.add(instance.paused_blackbg);
-			instance.add(instance.pausescreen_slide.props);
-		}
-		else
+		if (instance.members.contains(instance.pausescreen_slide.props) && !instance.paused)
 		{
 			instance.remove(instance.paused_bg);
 			instance.remove(instance.paused_blackbg);
 			instance.remove(instance.pausescreen_slide.props);
+		}
+		else
+		{
+			instance.remove(instance.debugText);
+
+			if (instance.members.contains(instance.paused_bg))
+			{
+				instance.remove(instance.paused_bg);
+				instance.remove(instance.paused_blackbg);
+				instance.remove(instance.pausescreen_slide.props);
+			}
+
+			instance.initPauseMenu();
+			instance.add(instance.debugText);
 		}
 		#else
 		if (!instance.members.contains(instance.pausescreen_slide.props))
