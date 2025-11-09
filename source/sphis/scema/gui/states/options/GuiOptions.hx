@@ -46,7 +46,7 @@ class GuiOptions extends GuiState
 			},
 			{
 				text_content: "Volume: " + Save.getSaveData(VOLUME),
-				position: new FlxPoint(120, 80),
+				position: new FlxPoint(60 + (60 * 4), 80),
 				pressed_callback_code: data ->
 				{
 					var current_volume:Int = cast Save.getSaveData(VOLUME);
