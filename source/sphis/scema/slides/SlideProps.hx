@@ -595,11 +595,34 @@ class SlideProps extends FlxTypedGroup<FlxBasic>
 	{
 		var prop:GuiTextButton = getButtonProp(prop);
 
-		prop.script_runner_additional_variables.set(variable, value);
+		if (prop != null)
+			prop.script_runner_additional_variables.set(variable, value);
 	}
 
 	public function getProp(prop:String):FlxBasic
 	{
+		if (!propExists(prop))
+			return null;
+
 		return this.members[prop_id_to_index.get(prop)];
+	}
+
+	public function propExists(id:String):Bool
+	{
+		return prop_id_to_index.exists(id);
+	}
+
+	public function hideProp(id:String)
+	{
+		var prop = getProp(id);
+		if (prop != null)
+			prop.visible = false;
+	}
+
+	public function showProp(id:String)
+	{
+		var prop = getProp(id);
+		if (prop != null)
+			prop.visible = true;
 	}
 }
