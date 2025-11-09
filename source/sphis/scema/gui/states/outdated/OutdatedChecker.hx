@@ -37,6 +37,8 @@ class OutdatedChecker
 				{
 					http = null;
 
+					trace("OUTDATED");
+
 					GAVE_OUTDATED_WARNING = true;
 					return true;
 				}
