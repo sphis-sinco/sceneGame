@@ -32,6 +32,7 @@
 
 			    "pressed_callback": [
                     "trace(\"proceed\");",
+                    "FlxG.sound.play(Paths.getSoundFile(\"gameplay/intro/light-switch\"));",
                     "// switch_slide(\"game/intro/scene-1\");"
                 ],
 
@@ -58,10 +59,5 @@
                 "screencenter_position_offset": [0, -128]
             }
         }
-    ],
-    "code": {
-        "onCreate": [
-            "FlxG.sound.play(Paths.getSoundFile(\"gameplay/intro/light-switch\"));"
-        ]
-    }
+    ]
 }
