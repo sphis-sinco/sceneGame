@@ -105,12 +105,10 @@ class Save
 	{
 		trace("Saving...");
 
-		var fileSystem = new ZipFileSystem({});
-
 		#if sys
 		sys.io.File.saveContent(Paths.getDataFile(FILE_PATH), Json.stringify(DATA, "\t"));
 		#else
-		fileSystem.addFileBytes(Paths.getDataFile(FILE_PATH), Json.stringify(DATA, "\t"));
+		new ZipFileSystem({}).addFileBytes(Paths.getDataFile(FILE_PATH), Json.stringify(DATA, "\t"));
 		#end
 	}
 }
