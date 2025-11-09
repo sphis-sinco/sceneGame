@@ -85,7 +85,7 @@ class GuiState extends FlxState
 		}
 
 		if (Save.getSaveData(SIMPLE_VERSION))
-			info.scema = VersionConverts.convertToSingleLetters(info.scema);
+			info.scema = VersionConverts.convertToScema(info.scema);
 
 		if (script_files.getVariables().exists("script_info"))
 		{

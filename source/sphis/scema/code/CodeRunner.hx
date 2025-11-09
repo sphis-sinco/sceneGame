@@ -3,6 +3,7 @@ package sphis.scema.code;
 import flixel.FlxG;
 import flixel.util.FlxColor;
 import haxe.Log;
+import sphis.any.VersionConverts;
 import sphis.scema.gui.GuiConstants;
 import sphis.scema.gui.states.GuiMainMenu;
 import sphis.scema.gui.states.options.GuiOptions;
@@ -102,6 +103,8 @@ class CodeRunner
 		});
 
 		variables.set("Save", Save);
+
+		variables.set("VersionConverts", VersionConverts);
 
 		variables.set("null", null);
 		variables.set("true", true);

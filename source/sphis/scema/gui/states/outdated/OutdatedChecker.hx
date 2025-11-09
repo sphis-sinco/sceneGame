@@ -4,6 +4,7 @@ import haxe.Json;
 import sphis.scema.save.Save;
 
 using StringTools;
+using sphis.any.VersionConverts;
 
 class OutdatedChecker
 {
@@ -34,7 +35,7 @@ class OutdatedChecker
 				if (newVersion.version == null)
 					return;
 
-				if (newVersion.version != GeneralConstants.VERSION_SUFFIXLESS)
+				if (newVersion.version.convertToInt() > GeneralConstants.VERSION_SUFFIXLESS.convertToInt())
 				{
 					http = null;
 

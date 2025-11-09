@@ -4,6 +4,21 @@ using StringTools;
 
 class VersionConverts
 {
+	public static function convertToInt(version:String):Int
+	{
+		var int_version = convertToIntArray(version);
+		var int = 0;
+
+		var i = 1;
+		for (integer in int_version)
+		{
+			int += integer * i;
+			i += 1;
+		}
+
+		return int;
+	}
+
 	public static function convertToIntArray(version:String):Array<Int>
 	{
 		var int_version:Array<Int> = [];
@@ -17,7 +32,7 @@ class VersionConverts
 		return int_version;
 	}
 
-	public static function convertToSingleLetters(version:String):String
+	public static function convertToScema(version:String):String
 	{
 		var version_split = version.split(".");
 		var version_string = "";
