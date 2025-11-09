@@ -21,7 +21,7 @@ class GuiOptions extends GuiState
 
 	public var params:GuiOptionsData = {};
 
-	override public function new(params:GuiOptionsData)
+	override public function new(?params:GuiOptionsData)
 	{
 		super('options/');
 
