@@ -50,6 +50,9 @@ class InitState extends FlxState
 
 		switch (starting_state.toLowerCase())
 		{
+			case "gui_outdated", "outdated":
+				FlxG.switchState(() -> new GuiOutdated());
+
 			case "gui_options", "options", "settings":
 				FlxG.switchState(() -> new GuiOptions());
 
