@@ -1,4 +1,11 @@
 {
+    "components": [
+        {
+            "name": "hide_hearts",
+            "data": true
+        }
+    ],
+    
     "props": [
         {
             "id":"BG",

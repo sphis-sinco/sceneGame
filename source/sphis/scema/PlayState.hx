@@ -108,7 +108,8 @@ class PlayState extends GuiState
 
 		trace('Creating GUI');
 		hearts = new HeartsGroup(20, new FlxPoint(2, FlxG.height - (32 + 2)));
-		add(hearts);
+		if (SlideComponents.getComponent(slide_props.slide_data, 'hide_hearts') != true)
+			add(hearts);
 		hearts.updateHealthIcons();
 
 		trace('Creating Pause Menu');
