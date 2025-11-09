@@ -4,11 +4,11 @@ import flixel.FlxSprite;
 
 class GuiSlider extends FlxSprite
 {
-	public var percent:Float = 0.0;
+	public var percent:Int = 0;
 
-	override public function new()
+	override public function new(X:Float = 0, Y:Float = 0)
 	{
-		super();
+		super(X, Y);
 
 		loadGraphic(Paths.getImageFile('gui/slider'));
 		scale.set(GuiConstants.UI_SCALE_MULTIPLIER, GuiConstants.UI_SCALE_MULTIPLIER);
