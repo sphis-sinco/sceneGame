@@ -17,7 +17,7 @@ class OutdatedChecker
 
 		if (url == null || url.length == 0)
 			url = "https://raw.githubusercontent.com/sphis-sinco/sceneGame/main/.dev/.gitinfo";
-		if (Save.getSaveData(CHECK_OUTDATED))
+		if (Save.getSaveData(CHECK_OUTDATED) == true)
 		{
 			trace('checking for updates...');
 			var http = new haxe.Http(url);
