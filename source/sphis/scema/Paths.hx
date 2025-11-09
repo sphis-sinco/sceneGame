@@ -81,6 +81,7 @@ class Paths
 					if (file.endsWith(extension))
 					{
 						final path:String = ogdir + folder + endsplitter + file;
+						path.replace('//', '/');
 
 						// if (Defines.get('typeArray_dupeFilePrevention'))
 						if (false)
