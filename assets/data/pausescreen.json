@@ -37,7 +37,7 @@
 
 			    "pressed_callback": [
                     "PlayState.instance.pauseProps(PlayState.instance.pausescreen_slide.props);",
-                    "PlayState.instance.leave(new GuiOptions());"
+                    "PlayState.instance.leave(new GuiOptions({ in_gameplay: true, gameplay_slide: PlayState.instance.slide_path }));"
                 ]
             },
             "screencenter_settings": {

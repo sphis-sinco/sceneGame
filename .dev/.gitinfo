@@ -1,6 +1,7 @@
 {
   "version": "0.0.24",
   "changelog": [
+    "Changed GuiOptions so when you enter it from gameplay it will send you back to gameplay",
     "Added GuiOptions params",
     "Fixed Crash when the components field is null",
     "More slides added to gameplay",

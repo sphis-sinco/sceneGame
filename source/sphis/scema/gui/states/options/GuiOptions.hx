@@ -37,8 +37,8 @@ class GuiOptions extends GuiState
 				pressed_callback_code: data ->
 				{
 					Save.save();
-					if (this.params.in_gameplay)
-						FlxG.camera.fade(FlxColor.BLACK, .25, false, () -> FlxG.switchState(() -> new PlayState(this.params.gameplay_slide)));
+					if (this.params?.in_gameplay)
+						FlxG.camera.fade(FlxColor.BLACK, .25, false, () -> FlxG.switchState(() -> new PlayState(this.params?.gameplay_slide ?? "dummy/dummy")));
 					else
 						FlxG.camera.fade(FlxColor.BLACK, .25, false, () -> FlxG.switchState(() -> new GuiMainMenu()));
 				},
