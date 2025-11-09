@@ -74,6 +74,19 @@ class GuiOptions extends GuiState
 				width_scale_addition: 24,
 				height_scale_addition: 3
 			},
+			{
+				text_content: "Check Outdated: " + Save.getSaveData(CHECK_OUTDATED),
+				position: new FlxPoint(60 + (60 * 8), 80),
+				pressed_callback_code: data ->
+				{
+					var current_check_outdated:Bool = cast Save.getSaveData(CHECK_OUTDATED);
+					Save.setSaveData(CHECK_OUTDATED, !current_check_outdated);
+
+					reload();
+				},
+				width_scale_addition: 24,
+				height_scale_addition: 3
+			},
 		];
 	}
 
