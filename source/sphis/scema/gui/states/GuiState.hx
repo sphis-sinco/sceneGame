@@ -54,19 +54,23 @@ class GuiState extends FlxState
 		debugText.text_field.alignment = LEFT;
 		debugText.text_field.fieldWidth = FlxG.width;
 
-		add(debugText);
+		if (Save.getSaveData(DEBUG_TEXT))
+			add(debugText);
 	}
 
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
 
-		#if F3_MENU
-		if (FlxG.keys.anyPressed([getDebugKey()]))
-			debugText.text = getInfoString(getDebugInfo());
-		else
-		#end
-		debugText.text = getInfoString(getNonDebugInfo());
+		if (Save.getSaveData(DEBUG_TEXT))
+		{
+			#if F3_MENU
+			if (FlxG.keys.anyPressed([getDebugKey()]))
+				debugText.text = getInfoString(getDebugInfo());
+			else
+			#end
+			debugText.text = getInfoString(getNonDebugInfo());
+		}
 	}
 
 	public function getDebugKey():FlxKey

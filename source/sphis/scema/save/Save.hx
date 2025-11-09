@@ -71,6 +71,7 @@ class Save
 		setSaveData(VERSION, GeneralConstants.VERSION);
 		setSaveData(SIMPLE_VERSION, true);
 		setSaveData(VOLUME, 100);
+		setSaveData(DEBUG_TEXT, true);
 	}
 
 	public static function updateSave()
@@ -82,6 +83,9 @@ class Save
 
 			case "0.0.19":
 				setSaveData(VOLUME, 100);
+
+			case "0.0.21":
+				setSaveData(DEBUG_TEXT, true);
 
 			default:
 				trace("Save data version " + SimpleVersion.convertToSingleLetters(getSaveData(VERSION)) + " has no updateSave case");

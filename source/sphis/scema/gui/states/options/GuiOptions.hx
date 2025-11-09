@@ -60,7 +60,20 @@ class GuiOptions extends GuiState
 				},
 				width_scale_addition: 24,
 				height_scale_addition: 3
-			}
+			},
+			{
+				text_content: "Debug Text: " + Save.getSaveData(DEBUG_TEXT),
+				position: new FlxPoint(60 + (60 * 8), 80),
+				pressed_callback_code: data ->
+				{
+					var current_debug_text:Bool = cast Save.getSaveData(DEBUG_TEXT);
+					Save.setSaveData(DEBUG_TEXT, !current_debug_text);
+
+					reload();
+				},
+				width_scale_addition: 24,
+				height_scale_addition: 3
+			},
 		];
 	}
 
