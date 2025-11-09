@@ -43,6 +43,7 @@ class InitState extends FlxState
 		}, true, 1000);
 
 		var starting_state = DefineUtil.getDefineString("STARTING_STATE", null);
+		var outdated:Bool = OutdatedChecker.check();
 
 		switch (starting_state.toLowerCase())
 		{
@@ -53,7 +54,7 @@ class InitState extends FlxState
 				if (starting_state != null && starting_state != "")
 					trace(starting_state + " has no case");
 
-				if (OutdatedChecker.check())
+				if (outdated)
 					FlxG.switchState(() -> new GuiOutdated());
 				else
 					FlxG.switchState(() -> new GuiMainMenu());
