@@ -6,6 +6,7 @@ import polymod.util.DefineUtil;
 import sphis.scema.gui.states.GuiMainMenu;
 import sphis.scema.gui.states.GuiState;
 import sphis.scema.gui.states.options.GuiOptions;
+import sphis.scema.plugins.MouseSound;
 import sphis.scema.save.Save;
 
 class InitState extends GuiState
@@ -18,6 +19,8 @@ class InitState extends GuiState
 	override public function create()
 	{
 		super.create();
+
+		FlxG.plugins.addPlugin(new MouseSound());
 
 		Save.initalizeSave();
 		Application.current.onExit.add(l ->

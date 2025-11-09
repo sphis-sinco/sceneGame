@@ -41,4 +41,14 @@ class Paths
 
 		return Assets.getText(path);
 	}
+
+	public static function getSoundFile(soundFile:String):String
+	{
+		return 'assets/sounds/' + soundFile + ".wav";
+	}
+
+	public static function getMouseSoundFile(soundFile:String):String
+	{
+		return getSoundFile("mouse/" + soundFile);
+	}
 }
