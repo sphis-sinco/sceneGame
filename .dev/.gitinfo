@@ -1,6 +1,7 @@
 {
   "version": "0.0.23",
   "changelog": [
+    "Removed support for InitState Scripts",
     "Added Outdated Menu",
     "Added \"VERSION_SUFFIX\" define",
     "Added \"propExists\" function to SlideProps (Used to prevent uneeded checks)",

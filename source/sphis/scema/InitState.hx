@@ -1,6 +1,7 @@
 package sphis.scema;
 
 import flixel.FlxG;
+import flixel.FlxState;
 import flixel.system.debug.log.LogStyle;
 import lime.app.Application;
 import polymod.util.DefineUtil;
@@ -15,13 +16,8 @@ import sphis.scema.save.Save;
 
 using Reflect;
 
-class InitState extends GuiState
+class InitState extends FlxState
 {
-	override public function new()
-	{
-		super('initstate/');
-	}
-
 	override public function create()
 	{
 		super.create();
