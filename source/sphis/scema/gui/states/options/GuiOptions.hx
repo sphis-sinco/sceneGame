@@ -107,9 +107,9 @@ class GuiOptions extends GuiState
 
 	public function reload()
 	{
-		FlxG.switchState(() -> new GuiOptions({
-			fade: false
-		}));
+		this.params.fade = false;
+
+		FlxG.switchState(() -> new GuiOptions(this.params));
 	}
 
 	public var volume_slider:GuiSlider;
