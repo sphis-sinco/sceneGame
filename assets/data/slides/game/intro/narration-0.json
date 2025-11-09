@@ -31,7 +31,8 @@
                 "height_scale_addition": 8,
 
 			    "pressed_callback": [
-                    "trace(\"proceed\");"
+                    "trace(\"proceed\");",
+                    "switch_slide(\"game/intro/narration-1\");"
                 ],
 
                 "graphic": {
@@ -39,7 +40,8 @@
                 }
             },
             "screencenter_settings": {
-                "screencenter":true
+                "screencenter":true,
+                "screencenter_position_offset": [0, 255]
             }
         },
         {
@@ -56,19 +58,5 @@
                 "screencenter_position_offset": [0, -128]
             }
         }
-    ],
-    "code": {
-        "onCreate": [
-            "trace(\"run only once!\");",
-            "onCustomFunction([\"arg1\" => \"arg1_value\"]);"
-        ],
-        "onUpdate": [
-            "// trace(\"run always! (unless paused and not on_update_bypass_pause)\");"
-        ],
-        "onCustomFunction": [
-            "trace(\"run when called\");",
-            "trace(\"with args!\");",
-            "trace(arg1);"
-        ]
-    }
+    ]
 }

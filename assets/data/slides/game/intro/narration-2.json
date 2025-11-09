@@ -1,0 +1,67 @@
+{
+    "props": [
+        {
+            "id":"BG",
+            "z_index":0,
+            
+            "prop_type": "graphic",
+
+            "graphic_settings": {
+                "make_graphic": true,
+
+                "color": "000000",
+                
+                "width": 1280,
+                "height": 720
+            },
+            "screencenter_settings": {
+                "screencenter":true
+            }
+        },
+        {
+            "id":"Proceed",
+            "z_index":10,
+            
+            "prop_type": "button",
+
+            "button_settings": {
+                "text_content": "Proceed",
+
+                "width_scale_addition": 32,
+                "height_scale_addition": 8,
+
+			    "pressed_callback": [
+                    "trace(\"proceed\");",
+                    "// switch_slide(\"game/intro/scene-1\");"
+                ],
+
+                "graphic": {
+                    "image_path": "gui/button-shadow"
+                }
+            },
+            "screencenter_settings": {
+                "screencenter":true,
+                "screencenter_position_offset": [0, 255]
+            }
+        },
+        {
+            "id":"Text",
+            "z_index":0,
+            
+            "prop_type": "text",
+
+            "text_settings": {
+                "text_content": "!"
+            },
+            "screencenter_settings": {
+                "screencenter":true,
+                "screencenter_position_offset": [0, -128]
+            }
+        }
+    ],
+    "code": {
+        "onCreate": [
+            "FlxG.sound.play(Paths.getSoundFile(\"gameplay/intro/light-switch\"));"
+        ]
+    }
+}
