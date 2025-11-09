@@ -31,13 +31,8 @@ class Save
 	{
 		loadSave();
 
-		if (!emptySave())
-			trace("loaded save data: " + DATA);
-
 		handleEmptySave();
 		updateSave();
-
-		trace("updated save data: " + DATA);
 
 		save();
 
