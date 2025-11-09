@@ -27,7 +27,14 @@ class Postbuild
 			difference = current_time - previous_time;
 			difference = roundToTwoDecimals(difference);
 
-			trace("Compilation time: " + difference + "s");
+			var timeString:String = difference + "s";
+
+			if (difference > 60)
+				timeString = roundToTwoDecimals(difference / 60) + "m";
+			if (difference > (60 * 60))
+				timeString = roundToTwoDecimals(difference / (60 * 60)) + "h";
+
+			trace("Compilation time: " + timeString);
 		}
 		#end
 	}
