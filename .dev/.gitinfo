@@ -1,6 +1,7 @@
 {
   "version": "0.0.24",
   "changelog": [
+    "More slides added to gameplay",
     "Added Prebuild and Postbuild files",
     "Added \"gui_outdated\" and \"outdated\" starting_state options",
     "Fixed Position of \"Check Outdated\" option",
