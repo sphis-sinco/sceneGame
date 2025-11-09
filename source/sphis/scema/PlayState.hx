@@ -100,15 +100,18 @@ class PlayState extends GuiState
 
 	override public function create()
 	{
+		trace('Creating Slide');
 		slide_props = new SlideProps(slide_path, getAdditionalVariables());
 		add(slide_props);
 
 		slide_code = new SlideCode(slide_path, getAdditionalVariables());
 
+		trace('Creating GUI');
 		hearts = new HeartsGroup(20, new FlxPoint(2, FlxG.height - (32 + 2)));
 		add(hearts);
 		hearts.updateHealthIcons();
 
+		trace('Creating Pause Menu');
 		paused_blackbg = new FlxSprite();
 		paused_blackbg.makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		add(paused_blackbg);
