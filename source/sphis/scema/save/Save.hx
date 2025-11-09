@@ -88,11 +88,11 @@ class Save
 				setSaveData(DEBUG_TEXT, true);
 
 			default:
-				trace("Save data version " + SimpleVersion.convertToSingleLetters(getSaveData(VERSION)) + " has no updateSave case");
+				trace("Save data version " + getSaveData(VERSION) + " has no updateSave case");
 		}
 
 		setSaveData(VERSION, GeneralConstants.VERSION);
-		trace("Updated to version " + SimpleVersion.convertToSingleLetters(getSaveData(VERSION)));
+		trace("Updated to version " + getSaveData(VERSION));
 	}
 
 	public static function getSaveData(field:SaveFields):Dynamic

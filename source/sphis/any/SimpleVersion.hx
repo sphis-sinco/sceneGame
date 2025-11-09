@@ -10,22 +10,20 @@ class SimpleVersion
 		var i = 0;
 		for (entry in version_split)
 		{
-			var int_entry = (Std.parseInt(entry) ?? 0);
-
-			if (int_entry < 1)
+			if ((Std.parseInt(entry) ?? 0) < 1)
 			{
 				i++;
 				continue;
 			}
 
 			if (i == 0)
-				version_string += "x" + int_entry;
+				version_string += "x" + entry;
 			else if (i == 1)
-				version_string += "y" + int_entry;
+				version_string += "y" + entry;
 			else if (i == 2)
-				version_string += "z" + int_entry;
+				version_string += "z" + entry;
 			else
-				version_string += "-" + int_entry;
+				version_string += "-" + entry;
 
 			i++;
 		}
