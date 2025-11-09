@@ -22,7 +22,7 @@ class PlayState extends GuiState
 {
 	public var hearts:HeartsGroup;
 
-	public var slide_path:String = "dummy";
+	public var slide_path:String = "dummy/dummy";
 
 	public var slide_props:SlideProps;
 	public var slide_code:SlideCode;
@@ -38,7 +38,7 @@ class PlayState extends GuiState
 	public var checkPropAlphaShit = function(prop:FlxBasic, ?speed:Float, ?alpha:Float) {};
 	public var pauseProps = function(prop:FlxBasic) {};
 
-	override public function new(starting_slide_path:String = "dummy")
+	override public function new(starting_slide_path:String = "dummy/dummy")
 	{
 		if (instance != null)
 			instance = null;
@@ -79,7 +79,7 @@ class PlayState extends GuiState
 
 		super('playstate/');
 
-		this.slide_path = starting_slide_path ?? 'dummy';
+		this.slide_path = starting_slide_path ?? 'dummy/dummy';
 	}
 
 	override function getAdditionalVariables():Map<String, Dynamic>
