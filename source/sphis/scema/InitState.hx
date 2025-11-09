@@ -26,6 +26,8 @@ class InitState extends GuiState
 	{
 		super.create();
 
+		trace("Initalizing...");
+
 		FlxG.debugger.toggleKeys = [];
 
 		FlxG.sound.muteKeys = [];
