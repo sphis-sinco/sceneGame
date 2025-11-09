@@ -80,8 +80,8 @@ class Paths
 				for (extension in typeExtensions)
 					if (file.endsWith(extension))
 					{
-						final path:String = ogdir + folder + endsplitter + file;
-						path.replace('//', '/');
+						var path:String = ogdir + folder + endsplitter + file;
+						path = path.replace('//', '/');
 
 						// if (Defines.get('typeArray_dupeFilePrevention'))
 						if (false)
