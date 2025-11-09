@@ -1,6 +1,7 @@
 package sphis.scema;
 
 import flixel.FlxG;
+import flixel.system.debug.log.LogStyle;
 import lime.app.Application;
 import polymod.util.DefineUtil;
 import sphis.scema.gui.states.GuiMainMenu;
@@ -26,6 +27,11 @@ class InitState extends GuiState
 		FlxG.sound.muteKeys = [];
 		FlxG.sound.volumeUpKeys = [];
 		FlxG.sound.volumeDownKeys = [];
+
+		FlxG.log.redirectTraces = true;
+
+		LogStyle.ERROR.openConsole = false;
+		LogStyle.WARNING.openConsole = false;
 
 		FlxG.plugins.addPlugin(new MouseSound());
 		FlxG.plugins.addPlugin(new VolumeManager());
