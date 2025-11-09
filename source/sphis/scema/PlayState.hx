@@ -11,6 +11,7 @@ import flixel.util.FlxColor;
 import haxe.Json;
 import haxe.Log;
 import sphis.scema.gui.hearts.HeartsGroup;
+import sphis.scema.gui.states.GuiMainMenu;
 import sphis.scema.gui.states.GuiState;
 import sphis.scema.slides.SlideCode;
 import sphis.scema.slides.SlideProps;
@@ -112,8 +113,10 @@ class PlayState extends GuiState
 			add(hearts);
 		hearts.updateHealthIcons();
 
+		#if !windows
 		trace('Creating Pause Menu');
 		initPauseMenu();
+		#end
 
 		togglePaused(true);
 
@@ -168,7 +171,11 @@ class PlayState extends GuiState
 
 		if (FlxG.keys.justReleased.ENTER)
 		{
+			#if !windows
 			togglePaused();
+			#else
+			leave(new GuiMainMenu());
+			#end
 		}
 
 		if (!paused)

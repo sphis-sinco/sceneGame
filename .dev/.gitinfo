@@ -1,6 +1,7 @@
 {
   "version": "0.0.25",
   "changelog": [
+    "[WINDOWS] When attempting to toggle the pause screen it will instead send you to the main menu",
     "Added Outdated check to make sure that the outdated version is accurate",
     "Added \"convertToInt\" to VersionConverts (SimpleVersion)",
     "Added \"convertToIntArray\" to VersionConverts (SimpleVersion)"
