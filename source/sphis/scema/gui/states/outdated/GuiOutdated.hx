@@ -56,7 +56,7 @@ class GuiOutdated extends GuiState
 			+ "Your version is: "
 			+ GeneralConstants.VERSION_SUFFIXLESS
 			+ " and the current version is "
-			+ OutdatedChecker.VERSION});
+			+ OutdatedChecker.GIT_INFO_DATA.version});
 
 		prompt.text_field.screenCenter();
 		add(prompt);

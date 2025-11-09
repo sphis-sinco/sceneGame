@@ -8,7 +8,7 @@ using StringTools;
 class OutdatedChecker
 {
 	public static var GAVE_OUTDATED_WARNING:Bool;
-	public static var VERSION:String = "";
+	public static var GIT_INFO_DATA:GitInfoData = {version: null};
 
 	public static function check(url:String = null)
 	{
@@ -24,12 +24,15 @@ class OutdatedChecker
 			http.onData = function(data:String)
 			{
 				var newVersion:GitInfoData = Json.parse(data) ?? {
-					version: GeneralConstants.VERSION_SUFFIXLESS
+					version: null
 				};
-				VERSION = newVersion.version;
+				GIT_INFO_DATA = newVersion;
 
 				trace("Git Version: " + newVersion.version);
 				trace("Current Version: " + GeneralConstants.VERSION_SUFFIXLESS);
+
+				if (newVersion.version == null)
+					return;
 
 				if (newVersion.version != GeneralConstants.VERSION_SUFFIXLESS)
 				{
