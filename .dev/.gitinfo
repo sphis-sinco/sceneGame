@@ -1,7 +1,8 @@
 {
   "version": "0.0.23",
   "changelog": [
-    "Added \"VERSION_SUFFIX\" define (Set to Indev for debug builds)",
+    "Added Outdated Menu",
+    "Added \"VERSION_SUFFIX\" define",
     "Added \"propExists\" function to SlideProps (Used to prevent uneeded checks)",
     "Added null checks for slide prop \"z_index\""
   ]
