@@ -76,7 +76,7 @@ class GuiOptions extends GuiState
 			},
 			{
 				text_content: "Check Outdated: " + Save.getSaveData(CHECK_OUTDATED),
-				position: new FlxPoint(60 + (60 * 8), 80),
+				position: new FlxPoint(60 + (60 * 16), 80),
 				pressed_callback_code: data ->
 				{
 					var current_check_outdated:Bool = cast Save.getSaveData(CHECK_OUTDATED);
