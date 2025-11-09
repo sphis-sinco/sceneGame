@@ -7,15 +7,27 @@ import sphis.scema.save.Save;
 
 using Reflect;
 
+typedef GuiOptionsData =
+{
+	var ?fade:Bool;
+
+	var ?in_gameplay:Bool;
+	var ?gameplay_slide:String;
+}
+
 class GuiOptions extends GuiState
 {
 	public var button_params:Array<GuiOptionEntry> = [];
 
-	override public function new(fade:Bool = true)
+	public var params:GuiOptionsData = {};
+
+	override public function new(params:GuiOptionsData)
 	{
 		super('options/');
 
-		if (fade)
+		this.params = params;
+
+		if (this.params?.fade != null)
 			FlxG.camera.fade(FlxColor.BLACK, .25, true);
 
 		button_params = [
@@ -25,7 +37,10 @@ class GuiOptions extends GuiState
 				pressed_callback_code: data ->
 				{
 					Save.save();
-					FlxG.camera.fade(FlxColor.BLACK, .25, false, () -> FlxG.switchState(() -> new GuiMainMenu()));
+					if (this.params.in_gameplay)
+						FlxG.camera.fade(FlxColor.BLACK, .25, false, () -> FlxG.switchState(() -> new PlayState(this.params.gameplay_slide)));
+					else
+						FlxG.camera.fade(FlxColor.BLACK, .25, false, () -> FlxG.switchState(() -> new GuiMainMenu()));
 				},
 				width_scale_addition: 16,
 				height_scale_addition: 3,
@@ -92,7 +107,9 @@ class GuiOptions extends GuiState
 
 	public function reload()
 	{
-		FlxG.switchState(() -> new GuiOptions(false));
+		FlxG.switchState(() -> new GuiOptions({
+			fade: false
+		}));
 	}
 
 	public var volume_slider:GuiSlider;
