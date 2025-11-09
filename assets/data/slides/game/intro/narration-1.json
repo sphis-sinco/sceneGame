@@ -32,7 +32,7 @@
 
 			    "pressed_callback": [
                     "trace(\"proceed\");",
-                    "var random_bool = true; // FlxG.random.bool(1 / 255);",
+                    "var random_bool = FlxG.random.bool(1 / 255);",
                     "if (random_bool) switch_slide(\"game/intro/narration-1-easter-egg\");",
                     "if (!random_bool) switch_slide(\"game/intro/narration-2\");"
                 ],
