@@ -1,6 +1,7 @@
 {
   "version": "0.0.24",
   "changelog": [
+    "Added Version Changelog to GuiOutdated",
     "Added \"VERSION_SUFFIXLESS\" to GeneralConstants"
   ]
 }

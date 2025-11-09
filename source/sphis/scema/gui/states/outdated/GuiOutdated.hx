@@ -58,6 +58,14 @@ class GuiOutdated extends GuiState
 			+ " and the current version is "
 			+ OutdatedChecker.GIT_INFO_DATA.version});
 
+		if (OutdatedChecker.GIT_INFO_DATA.changelog.length > 0)
+		{
+			prompt.text += "\n\nVersion changelog:\n\n";
+
+			for (entry in OutdatedChecker.GIT_INFO_DATA.changelog)
+				prompt.text += entry + "\n";
+		}
+
 		prompt.text_field.screenCenter();
 		add(prompt);
 
