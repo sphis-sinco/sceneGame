@@ -5,13 +5,18 @@ import polymod.fs.ZipFileSystem;
 
 using StringTools;
 
+#if sys
+import sys.FileSystem;
+#end
+
 class CodeGroup
 {
 	public var members:Array<CodeFileRunner> = [];
 
 	public function new(?starting_path_addition:String)
 	{
-		for (file in new ZipFileSystem({}).readDirectoryRecursive('assets/scripts/' + starting_path_addition))
+		for (file in #if !sys new ZipFileSystem({}).readDirectoryRecursive #else FileSystem.readDirectory #end ('assets/scripts/' + starting_path_addition)
+	)
 		{
 			var new_script_file = new CodeFileRunner(Path.withoutExtension(file), starting_path_addition);
 			add(new_script_file);

@@ -2,9 +2,7 @@ package sphis.scema.gui.states.outdated;
 
 import flixel.FlxG;
 import flixel.math.FlxPoint;
-import flixel.text.FlxText;
 import flixel.util.FlxColor;
-import sphis.scema.gui.text.GuiText;
 
 class GuiOutdated extends GuiState
 {
