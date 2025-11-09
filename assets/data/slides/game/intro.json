@@ -1,0 +1,71 @@
+{
+    "props": [
+        {
+            "id":"BG",
+            "z_index":0,
+            
+            "prop_type": "graphic",
+
+            "graphic_settings": {
+                "make_graphic": true,
+
+                "color": "000000",
+                
+                "width": 1280,
+                "height": 720
+            },
+            "screencenter_settings": {
+                "screencenter":true
+            }
+        },
+        {
+            "id":"Proceed",
+            "z_index":10,
+            
+            "prop_type": "button",
+
+            "button_settings": {
+                "text_content": "Proceed",
+
+                "width_scale_addition": 32,
+                "height_scale_addition": 8,
+
+			    "pressed_callback": [
+                    "trace(\"Hola\");",
+                    "switch_slide(\"dummy-taigo\");"
+                ]
+            },
+            "screencenter_settings": {
+                "screencenter":true
+            }
+        },
+        {
+            "id":"Text",
+            "z_index":0,
+            
+            "prop_type": "text",
+
+            "text_settings": {
+                "text_content": "It's dark."
+            },
+            "screencenter_settings": {
+                "screencenter":true,
+                "screencenter_position_offset": [0, -128]
+            }
+        }
+    ],
+    "code": {
+        "onCreate": [
+            "trace(\"run only once!\");",
+            "onCustomFunction([\"arg1\" => \"arg1_value\"]);"
+        ],
+        "onUpdate": [
+            "// trace(\"run always! (unless paused and not on_update_bypass_pause)\");"
+        ],
+        "onCustomFunction": [
+            "trace(\"run when called\");",
+            "trace(\"with args!\");",
+            "trace(arg1);"
+        ]
+    }
+}

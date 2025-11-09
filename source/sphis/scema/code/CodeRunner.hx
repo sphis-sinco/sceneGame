@@ -110,7 +110,14 @@ class CodeRunner
 
 		variables.set("defines", {
 			debug: #if debug true #else false #end,
-			TAIGO: #if TAIGO true #else false #end
+			sys: #if sys true #else false #end,
+
+			TAIGO: #if TAIGO true #else false #end,
+			DUMMY_SLIDE: #if DUMMY_SLIDE true #else false #end,
+			HEART_RANDOM_KEY: #if HEART_RANDOM_KEY true #else false #end,
+			HEART_DEBUG_TRACES: #if HEART_DEBUG_TRACES true #else false #end,
+			FONT_BITEND_DEMO: #if FONT_BITEND_DEMO true #else false #end,
+			F3_MENU: #if F3_MENU true #else false #end,
 		});
 		variables.set("current_state", FlxG.state);
 	}
