@@ -189,28 +189,7 @@ class PlayState extends GuiState
 		if (!onStart)
 			instance.paused = !instance.paused;
 
-		#if windows
-		if (instance.members.contains(instance.pausescreen_slide.props) && !instance.paused)
-		{
-			instance.remove(instance.paused_bg);
-			instance.remove(instance.paused_blackbg);
-			instance.remove(instance.pausescreen_slide.props);
-		}
-		else
-		{
-			instance.remove(instance.debugText);
-
-			if (instance.members.contains(instance.paused_bg))
-			{
-				instance.remove(instance.paused_bg);
-				instance.remove(instance.paused_blackbg);
-				instance.remove(instance.pausescreen_slide.props);
-			}
-
-			instance.initPauseMenu();
-			instance.add(instance.debugText);
-		}
-		#else
+		#if !windows
 		if (!instance.members.contains(instance.pausescreen_slide.props))
 			instance.add(instance.pausescreen_slide.props);
 		#end
