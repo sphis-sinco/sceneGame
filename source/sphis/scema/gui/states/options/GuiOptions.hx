@@ -27,7 +27,7 @@ class GuiOptions extends GuiState
 
 		this.params = params;
 
-		if (this.params?.fade != null)
+		if (this.params?.fade != false)
 			FlxG.camera.fade(FlxColor.BLACK, .25, true);
 
 		button_params = [
