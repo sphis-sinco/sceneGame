@@ -89,7 +89,7 @@ class Save
 				trace("Save data version " + getSaveData(VERSION) + " has no updateSave case");
 		}
 
-		setSaveData(VERSION, GeneralConstants.VERSION);
+		setSaveData(VERSION, GeneralConstants.VERSION_SUFFIXLESS);
 		trace("Updated to version " + getSaveData(VERSION));
 	}
 
