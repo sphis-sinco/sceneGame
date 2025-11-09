@@ -32,7 +32,7 @@ class GuiOptions extends GuiState
 
 		button_params = [
 			{
-				text_content: "Leave",
+				text_content: (this.params?.in_gameplay) ? "Return" : "Leave",
 				position: new FlxPoint(0, FlxG.height * 0.425),
 				pressed_callback_code: data ->
 				{
