@@ -30,6 +30,9 @@ class SimpleVersion
 			i++;
 		}
 
+		if (version_string == "")
+			version_string = "_0";
+
 		return version_string;
 	}
 }
